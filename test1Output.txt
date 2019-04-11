@@ -1,0 +1,12 @@
+class testTypes
+{
+	int x;
+	int y;
+	int Excelsior(int x[])
+	{
+		char y;
+		Excelsior(y);
+		return 3;
+	}
+}
+java.lang.Exception: type mismatch expected: int[] got: char

@@ -1,0 +1,477 @@
+
+import java_cup.runtime.*;
+
+terminal CLASS;
+terminal AND;
+terminal ELSE;
+terminal IF;
+terminal WHILE;
+terminal READ;
+terminal PRINT;
+terminal PRINTLN;
+terminal RETURN;
+terminal OR;
+terminal TIMES;
+terminal PLUS;
+terminal PLUSPLUS;
+terminal MINUS;
+terminal MINUSMINUS;
+terminal PREFIXPLUS;
+terminal PREFIXMINUS;
+terminal DIVIDE;
+terminal SEMI;
+terminal LEFT_PAREN;
+terminal RT_PAREN;
+terminal LEFT_BRACE;
+terminal RT_BRACE;
+terminal LEFT_BRKT;
+terminal RT_BRKT;
+terminal EQ;
+terminal GTR;
+terminal LESS;
+terminal LESS_EQ;
+terminal GTR_EQ;
+terminal NOT_EQ;
+terminal NOT;
+terminal CONDITION;
+terminal COLON;
+terminal ASSMNT;
+terminal COMMA;
+terminal FINAL;
+terminal VOID;
+terminal TRUE;
+terminal FALSE;
+
+terminal String INT;
+terminal String FLOAT;
+terminal String BOOL;
+terminal String CHAR;
+
+terminal String ID;
+terminal int INTLIT;
+terminal double FLOATLIT;
+terminal String CHARLIT;
+terminal String STRINGLIT;
+
+non terminal Program 				program;
+non terminal MemberDecls 			memberDeclarations;
+non terminal FieldDecls 			fieldDeclarations;
+non terminal MethodDecls 			methodDeclarations;
+non terminal FieldDecl 				fieldDeclaration;
+non terminal FieldsNMethods			fieldsAndMethods;
+non terminal FieldStart				fieldStart;
+non terminal OptionalExpr 			optionalExpression;
+non terminal MethodDecl 			methodDeclaration;
+non terminal MethodStart 			methodStart;
+non terminal OptionalFinal 			optionalFinal;
+non terminal OptionalSemi 			optionalSemicolon;
+non terminal Type 					type;	
+non terminal ArgDecls 				argumentDeclarations;
+non terminal ArgDecl 				argumentDeclaration;
+non terminal Stmts 					statements;
+non terminal Stmt 					statement;
+non terminal NonIfStmt				nonIfStatement;
+non terminal NonWhileStmt			nonWhileStatement;
+non terminal WhileStmt 				whileStatement;
+non terminal WhileBase 				whileBase;
+non terminal WhileMatchedIf 		whileMatchedIf;
+non terminal NestedMatchedWhile 	nestedMatchedWhile;
+non terminal NestedMatchedWhileIf 	nestedMatchedWhileIf;
+non terminal IfStmt 				ifStatement;
+non terminal IfBase					ifBase;
+non terminal IfBackend				ifBackend;
+non terminal UnmatchedIf			unmatchedIf;
+non terminal MatchedIf				matchedIf;
+non terminal MatchedFinalIf			matchedFinalIf;
+non terminal FuncStmt				functionStatement;
+non terminal FuncExpr				functionExpression;
+non terminal Name 					name;
+non terminal Args 					arguments;
+non terminal ReadList 				readList;
+non terminal PrintList 				printList;
+non terminal PrintLnList			printLineList;
+non terminal Expr 					expression;
+non terminal ActionExpr 			actionExpression;
+non terminal TypeCastExpr 			typeCastExpression;
+non terminal TernaryExpr 			ternaryExpression;
+non terminal TypeLit				typeLit;
+
+precedence left COMMA;
+precedence right ASSMNT;
+precedence left OR;
+precedence left AND;
+precedence left EQ, NOT_EQ;
+precedence left GTR, LESS, LESS_EQ, GTR_EQ;
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+precedence left PREFIXPLUS, PREFIXMINUS, NOT;
+precedence right PLUSPLUS, MINUSMINUS;
+
+program ::= CLASS ID:i LEFT_BRACE memberDeclarations:m RT_BRACE
+		{: RESULT = new Program(i, m); :}
+		;
+
+memberDeclarations ::= fieldsAndMethods:f
+		{: RESULT = new MemberDecls(f); :}
+		;
+
+fieldsAndMethods ::= fieldDeclaration:f fieldsAndMethods:s
+		{: RESULT = new FieldsNMethods(f, s); :}
+		|
+		methodDeclaration:m methodDeclarations:s
+		{: RESULT = new FieldsNMethods(m, s); :}
+		|
+		{:  RESULT = null; :}
+		;
+
+fieldDeclarations ::= fieldDeclaration:f fieldDeclarations:s
+		{: RESULT = new FieldDecls(f, s); :}
+		|
+		{:  RESULT = null; :}
+		;
+
+methodDeclarations ::= methodDeclaration:m methodDeclarations:s
+		{: RESULT = new MethodDecls(m, s); :}
+		|
+		{:  RESULT = null; :}
+		;
+
+fieldDeclaration ::= optionalFinal:f fieldStart:s optionalExpression:e SEMI
+		{: RESULT = new FieldDeclSingle(f, s, e); :}
+		|
+		fieldStart:f optionalExpression:e SEMI
+		{: RESULT = new FieldDeclSingle(f, e); :}
+		|
+		fieldStart:f LEFT_BRKT INTLIT:n RT_BRKT SEMI
+		{: RESULT = new FieldDeclArray(f, n); :}
+		;
+
+fieldStart ::= type:t ID:i
+		{: RESULT = new FieldStart(t, i); :}
+		;
+
+optionalFinal ::= FINAL
+		{: RESULT = new OptionalFinal(); :}
+		;
+
+optionalExpression ::= ASSMNT expression:e
+		{: RESULT = new OptionalExpr(e); :}
+		|
+		{: RESULT = null; :}
+		;
+
+methodDeclaration ::= methodStart:m LEFT_PAREN argumentDeclarations:a RT_PAREN LEFT_BRACE fieldDeclarations:f statements:s RT_BRACE optionalSemicolon:o
+		{: RESULT = new MethodDecl(m, a, f, s, o); :}
+		|
+		methodStart:m LEFT_PAREN RT_PAREN LEFT_BRACE fieldDeclarations:f statements:s RT_BRACE optionalSemicolon:o
+		{: RESULT = new MethodDecl(m, f, s, o); :}
+		;
+
+methodStart ::= type:t ID:i
+		{: RESULT = new MethodStart(t, i); :}
+		|
+		VOID ID:i
+		{: RESULT = new MethodStart(new VoidType(), i); :}
+		;
+
+optionalSemicolon ::= SEMI
+	     {: RESULT = new OptionalSemi(); :}
+	     |
+	     {: RESULT = null; :}
+	     ;
+
+type ::= INT:i
+     {: RESULT = new IntType(); :}
+     |
+     CHAR:c
+     {: RESULT = new CharType(); :}
+     |
+     BOOL:b
+     {: RESULT = new BoolType(); :}
+     |
+     FLOAT:f
+     {: RESULT = new FloatType(); :}
+     ;
+
+argumentDeclarations ::= argumentDeclaration:a COMMA argumentDeclarations:s
+		     {: RESULT = new ArgDecls(a, s); :}
+		     | argumentDeclaration:a
+		     {: RESULT = new ArgDecls(a); :}
+		     ;
+
+argumentDeclaration ::= type:t ID:i
+		    {: RESULT = new ArgDeclSingle(t, i); :}
+		    |
+		    type:t ID:i LEFT_BRKT RT_BRKT
+		    {: RESULT = new ArgDeclArray(t, i); :}
+		    ;
+
+statements ::= statement:s statements:x
+	   {: RESULT = new Stmts(s, x); :}
+	   |
+	   {: RESULT = null; :}
+	   ;
+
+statement ::= ifStatement:i
+	  {: RESULT = i; :}
+	  |
+	  nonIfStatement:n
+	  {: RESULT = n; :}
+	  ;
+
+ifStatement ::= ifBase:i ifBackend:b
+	{: RESULT = new IfStmt(i, b); :}
+	;
+
+ifBase ::= IF LEFT_PAREN expression:e RT_PAREN
+	{: RESULT = new IfBase(e); :}
+	;
+
+ifBackend ::= unmatchedIf:u
+	{: RESULT = u; :}
+	|
+	matchedIf:m ELSE statement:s
+	{: RESULT = new MatchedIfBase(m, s); :}
+	;
+
+unmatchedIf ::= nonIfStatement:n
+	{: RESULT = new IfBackendStmt(n); :}
+	|
+	ifStatement:i
+	{: RESULT = new NestedIf(i); :}
+	;
+
+matchedIf ::= ifBase:i matchedIf:m ELSE matchedIf:s
+	{: RESULT = new MatchedInnerIf(i, m, s); :}
+	|
+	matchedFinalIf:m
+	{: RESULT = m; :}
+	;
+
+matchedFinalIf ::= nonWhileStatement:n
+	{: RESULT = new MatchedFinalIf(n); :}
+	|
+	whileMatchedIf:w
+	{: RESULT = new MatchedFinalIf(w); :}
+	;
+
+nonIfStatement ::= whileStatement:w
+	{: RESULT = w; :}
+	|
+	nonWhileStatement:n
+	{: RESULT = n; :}
+	;
+
+nonWhileStatement ::= name:n ASSMNT expression:e SEMI
+	{: RESULT = new AssmntStmt(n, e); :}
+	|
+	READ LEFT_PAREN readList:r RT_PAREN SEMI
+	{: RESULT = new ReadStmt(r); :}
+	|
+	PRINT LEFT_PAREN printList:p RT_PAREN SEMI
+	{: RESULT = new PrintStmt(p); :}
+	|
+	PRINTLN LEFT_PAREN printLineList:p RT_PAREN SEMI
+	{: RESULT = new PrintLnStmt(p); :}
+	|
+	functionStatement:f
+	{: RESULT = f; :}
+	|
+	RETURN SEMI
+	{: RESULT = new VoidReturn(); :}
+	|
+	RETURN expression:e SEMI
+	{: RESULT = new ValueReturn(e); :}
+	|
+	name:n PLUSPLUS
+	{: RESULT = new UnaryStmt(n, "++"); :}
+	|
+	name:n MINUSMINUS
+	{: RESULT = new UnaryStmt(n, "--"); :}
+	|
+	LEFT_BRACE fieldDeclarations:f statements:s RT_BRACE optionalSemicolon:o
+	{: RESULT = new ScopeStmt(f, s, o); :}
+	;
+
+whileStatement ::=  whileBase:w nonWhileStatement:n
+	{: RESULT = new WhileNonWhile(w, n); :}
+	|
+	whileBase:w ifStatement:i
+	{: RESULT = new WhileIf(w, i); :}
+	|
+	whileBase:w whileStatement:n
+	{: RESULT = new NestedWhile(w, n); :}
+	;
+
+
+whileMatchedIf ::= nestedMatchedWhile:w
+	{: RESULT = w; :}
+	|
+	whileBase:w ifBase:i matchedIf:m ELSE matchedIf:s
+	{: RESULT = new WhileMatchedIfEnd(w, i, m, s); :}
+	|
+	whileBase:w nestedMatchedWhileIf:n
+	{: RESULT = new NestedIfWhiles(w, n); :}
+	;
+
+nestedMatchedWhile ::= whileBase:w nestedMatchedWhile:n
+	{: RESULT = new NestedMatchedWhile(w, n); :}
+	|
+	whileBase:w nonWhileStatement:n
+	{: RESULT = new NestedWhileEnd(w, n); :}
+	;
+
+nestedMatchedWhileIf ::= whileBase:w nestedMatchedWhileIf:n
+	{: RESULT = new NestedWhileIf(w, n); :}
+	|
+	whileBase:w ifBase:i matchedIf:m ELSE matchedIf:s
+	{: RESULT = new NestedWhileEndIf(w, i, m, s); :}
+	;
+
+whileBase ::= WHILE LEFT_PAREN expression:e RT_PAREN
+	{: RESULT = new WhileBase(e); :}
+	;
+
+functionStatement ::= ID:i LEFT_PAREN RT_PAREN SEMI
+	{: RESULT = new VoidFuncStmt(i); :}
+	|
+	ID:i LEFT_PAREN arguments:a RT_PAREN SEMI
+	{: RESULT = new ArgFuncStmt(i, a); :}
+	;
+
+name ::= ID:i 
+     {: RESULT = new Name(i); :}
+     |
+     ID:i LEFT_BRKT expression:e RT_BRKT
+     {: RESULT = new NameArray(i, e); :}
+     ;
+
+arguments ::= expression:e COMMA arguments:a
+	  {: RESULT = new Args(e, a); :}
+	  |
+	  expression:e
+	  {: RESULT = new Args(e); :}
+	  ;
+
+readList ::= name:n COMMA readList:r
+	 {: RESULT = new ReadList(n, r); :}
+	 |
+	 name:n
+	 {: RESULT = new ReadList(n); :}
+	 ;
+
+printList ::= expression:e COMMA printList:p
+	  {: RESULT = new PrintList(e, p); :}
+	  |
+	  expression:e
+	  {: RESULT = new PrintList(e); :}
+	  ;
+
+printLineList ::=
+	      {: RESULT = new PrintLnList(); :}
+	      ;
+
+expression ::= name:n
+		{: RESULT = n; :}
+		|
+		functionExpression:f
+		{: RESULT = f; :}
+		|
+		typeLit:t
+		{: RESULT = t; :}
+		|
+		LEFT_PAREN expression:e RT_PAREN
+		{: RESULT = new ParenExpr(e); :}
+		|
+		actionExpression:a
+		{: RESULT = a; :}
+		|
+		ternaryExpression:t
+		{: RESULT = t; :}
+		;
+
+actionExpression ::= NOT expression:e
+		{: RESULT = new UnaryExpr("~", e); :}
+		|
+		MINUS expression:e 
+		{: RESULT = new UnaryExpr("-", e); :} %prec PREFIXMINUS
+		|
+		PLUS expression:e 
+		{: RESULT = new UnaryExpr("+", e); :} %prec PREFIXPLUS
+		|
+		expression:l TIMES expression:r
+		{: RESULT = new BinaryExpr(l, "*", r); :}
+		|
+		expression:l DIVIDE expression:r
+		{: RESULT = new BinaryExpr(l, "/", r); :}
+		|
+		expression:l PLUS expression:r
+		{: RESULT = new BinaryExpr(l, "+", r); :}
+		|
+		expression:l MINUS expression:r
+		{: RESULT = new BinaryExpr(l, "-", r); :}
+		|
+		expression:l LESS expression:r
+		{: RESULT = new BinaryExpr(l, "<", r); :}
+		|
+		expression:l GTR expression:r
+		{: RESULT = new BinaryExpr(l, ">", r); :}
+		|
+		expression:l LESS_EQ expression:r
+		{: RESULT = new BinaryExpr(l, "<=", r); :}
+		|
+		expression:l GTR_EQ expression:r
+		{: RESULT = new BinaryExpr(l, ">=", r); :}
+		|
+		expression:l EQ expression:r
+		{: RESULT = new BinaryExpr(l, "==", r); :}
+		|
+		expression:l NOT_EQ expression:r
+		{: RESULT = new BinaryExpr(l, "<>", r); :}
+		|
+		expression:l OR expression:r
+		{: RESULT = new BinaryExpr(l, "||", r); :}
+		|
+		expression:l AND expression:r
+		{: RESULT = new BinaryExpr(l, "&&", r); :}
+		|
+		typeCastExpression:t
+		{: RESULT = t; :}
+		;
+
+typeCastExpression ::= LEFT_PAREN type:t RT_PAREN expression:e
+	   {: RESULT = new TypeCastExpr(t, e); :}
+	   ;
+
+ternaryExpression ::= LEFT_PAREN expression:a CONDITION expression:b COLON expression:c RT_PAREN
+	   {: RESULT = new TernaryExpr(a, b, c); :}
+	   ;
+
+functionExpression ::= ID:i LEFT_PAREN RT_PAREN
+	{: RESULT = new VoidFuncExpr(i); :}
+	|
+	ID:i LEFT_PAREN arguments:a RT_PAREN
+	{: RESULT = new ArgFuncExpr(i, a); :}
+	;
+
+typeLit ::= INTLIT:i
+	   {: RESULT = new IntLit(i); :}
+	   |
+	   CHARLIT:c
+	   {: RESULT = new CharLit(c); :}
+	   |
+	   STRINGLIT:s
+	   {: RESULT = new StrLit(s); :}
+	   |
+	   FLOATLIT:f
+	   {: RESULT = new FloatLit(f); :}
+	   |
+	   TRUE
+	   {: RESULT = new BoolLit("true"); :}
+	   |
+	   FALSE
+	   {: RESULT = new BoolLit("false"); :}
+	   ;
+
+
+		

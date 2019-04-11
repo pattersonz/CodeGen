@@ -1,0 +1,11 @@
+Script started on 2019-03-26 15:48:55-0500
+patte720@kave:~/cs5641/lab2$ make dumop[K[Ko[Kp
+(java -jar ./java-cup-11b.jar -interface -dump < BaseGrammar-tokens.cup
+/bin/sh: 1: Syntax error: end of file unexpected (expecting ")")
+Makefile:66: recipe for target 'parserD.java' failed
+make: *** [parserD.java] Error 2
+patte720@kave:~/cs5641/lab2$ ^C
+patte720@kave:~/cs5641/lab2$ exit
+exit
+
+Script done on 2019-03-26 15:49:10-0500
