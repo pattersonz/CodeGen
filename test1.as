@@ -2,7 +2,11 @@ class testTypes
 {
 
     final int i = 3;
-
+    int funct(int x[])
+    {
+        funct(x);
+    }
+\*
     void otherExprs()
     {
         int i;
@@ -24,7 +28,7 @@ class testTypes
         i = (float)c;
         i = otherExprs();
     }\\*\
-
+\*
     void binaryExprCheck()
     {
         int i;
@@ -55,7 +59,7 @@ class testTypes
         b = "test" || "test";
         b = "test" + "char";
     }\\*\
-
+\*
     bool UnaryCheck()
     {
 	    int i;
@@ -101,7 +105,7 @@ class testTypes
         c = ~b;
         return i;
     }\\*\
-
+\*
 	float assignmentCheck(int x[])
 	{
 	    int i = i;

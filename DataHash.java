@@ -111,6 +111,7 @@ class DataHash
 
     FullType lookup(String id, FullType[] args) throws BaseGrammarException
     {
+    	FullType in = new FullType(new IntType(), false, false), bo = new FullType(new BoolType(), false, false), fl = new FullType(new FloatType(), false, false);
 	int spot = hashFunction(id);
 	int endLoc = spot;
 	boolean found = false;
@@ -135,7 +136,10 @@ class DataHash
 					{
 					    for (int i = 0; i < listArgs.length; i++)
 						{
-						    if (listArgs[i].getType().toString(0) == args[i].getType().toString(0) || listArgs[i].getArray() != args[i].getArray())
+						    if (! (listArgs[i].getType().equals(args[i].getType()) ||
+									(  args[i].getType().equals(bo) && listArgs[i].equals(in)) ||
+									(  args[i].getType().equals(fl) && listArgs[i].equals(in))
+									))
 							throw new BaseGrammarException("type mismatch expected: " +
 								listArgs[i].toString(0) + " got: " + args[i].toString(0));
 						}
