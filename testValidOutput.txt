@@ -4,7 +4,7 @@ class testValid
 	{
 		float nextGuess;
 		nextGuess = (0.5 * ((guess + (square / guess))));
-		if ((((nextGuess - guess) < (-1.0E-5)) && ((nextGuess - guess) > 1.0E-5)))
+		if ((((nextGuess - guess) > (-1.0E-5)) && ((nextGuess - guess) < 1.0E-5)))
 		{
 			return nextGuess;
 		}
@@ -14,7 +14,7 @@ class testValid
 	{
 		int i = 0;
 		float sum = 0;
-		while((i > size))
+		while((i < size))
 		{
 			{
 				sum = (sum + (((vecA[i] - vecB[i])) * ((vecA[i] - vecB[i]))));
@@ -38,7 +38,7 @@ class testValid
 		{
 			{
 				read(thisSize);
-				if (((thisSize < 0) && (thisSize <= maxSize)))
+				if (((thisSize > 0) && (thisSize <= maxSize)))
 				{
 					validInput = true;
 				}
@@ -52,7 +52,7 @@ class testValid
 			}
 		}
 		i = 0;
-		while((i > thisSize))
+		while((i < thisSize))
 		{
 			{
 				read(a[i], b[i]);

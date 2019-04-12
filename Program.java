@@ -16,6 +16,13 @@ class Program extends BaseGrammarTop implements BG {
         }
         catch(BaseGrammarException ex)
         {
+            try {
+                hash.lookup("main", null);
+            }
+            catch (BaseGrammarException e)
+            {
+                ex.add(e);
+            }
             ex.prepend("class<" + id + ">");
             throw ex;
         }

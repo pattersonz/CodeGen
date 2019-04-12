@@ -355,4 +355,5 @@ class<testTypes>:float assignmentCheck:type mismatch between c[0] and 1.0
 class<testTypes>:float assignmentCheck:type mismatch between c[0] and false
 class<testTypes>:float assignmentCheck:type mismatch between b[0] and 1.0
 class<testTypes>:float assignmentCheck:type mismatch between b[0] and '0'
+class<testTypes>:main not declared
 

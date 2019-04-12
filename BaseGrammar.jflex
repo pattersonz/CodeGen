@@ -102,8 +102,8 @@ return		{ return newSym(sym.RETURN); }
 "["             { return newSym(sym.LEFT_BRKT); }
 "]"             { return newSym(sym.RT_BRKT); }
 "=="            { return newSym(sym.EQ); }
-"<"             { return newSym(sym.GTR); }
-">"             { return newSym(sym.LESS); }
+">"             { return newSym(sym.GTR); }
+"<"             { return newSym(sym.LESS); }
 "<="            { return newSym(sym.LESS_EQ); }
 ">="            { return newSym(sym.GTR_EQ); }
 "<>"            { return newSym(sym.NOT_EQ); }
