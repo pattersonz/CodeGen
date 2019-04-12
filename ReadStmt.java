@@ -5,10 +5,10 @@ class ReadStmt extends NonWhileStmt implements BG {
     readList = r;
   }
 
-  public boolean analysis(int scope, ReturnType rt) throws Exception
+  public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
   if (readList == null)
-      throw new Exception("Read command cannot be null");
+      throw new BaseGrammarException("Read command cannot be null");
   readList.analysis();
   return false;
   }

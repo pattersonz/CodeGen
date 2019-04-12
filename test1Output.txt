@@ -1,12 +1,241 @@
 class testTypes
 {
-	int x;
-	int y;
-	int Excelsior(int x[])
+	final int i = 3;
+	void otherExprs()
 	{
-		char y;
-		Excelsior(y);
-		return 3;
+		int i;
+		char c;
+		float f;
+		bool b;
+		i = (true ? 3 : 2);
+		b = (b ? i : b);
+		i = (b ? i : b);
+		b = (i ? i : i);
+		c = (b ? c : c);
+		f = (b ? f : f);
+		f = (b ? i : i);
+		f = (b ? f : i);
+		f = (b ? i : f);
+		f = (c ? i : i);
+		f = ((float)c);
+		f = ((int)b);
+		i = ((float)c);
+		i = otherExprs();
+	}
+	void binaryExprCheck()
+	{
+		int i;
+		char c;
+		bool b;
+		float f;
+		i = (i + i);
+		c = (c + c);
+		b = (b + b);
+		f = (f + f);
+		i = (i + f);
+		f = (i + f);
+		f = (f + i);
+		c = (i + i);
+		b = (i + i);
+		b = (i || i);
+		b = (i || b);
+		b = (b || b);
+		i = (i || b);
+		f = (i || b);
+		c = (i || b);
+		b = (c || c);
+		b = (f || f);
+		print(("test" + "concat"));
+		print(("addToI" + i));
+		print(("subI" - i));
+		i = ("test" + i);
+		b = ("test" || "test");
+		b = ("test" + "char");
+	}
+	bool UnaryCheck()
+	{
+		int i;
+		float f;
+		char c;
+		bool b;
+		int ia[1];
+		float fa[1];
+		char ca[1];
+		bool ba[1];
+		i++
+		b++
+		c++
+		f++
+		ia++
+		ba++
+		ca++
+		fa++
+		ia[0]++
+		ba[0]++
+		ca[0]++
+		fa[0]++
+		i = (+i);
+		i = (-i);
+		i = (+f);
+		i = (-f);
+		b = (+i);
+		b = (-c);
+		b = (+f);
+		b = (-b);
+		c = (+c);
+		c = (-i);
+		c = (+b);
+		c = (-f);
+		f = (+i);
+		f = (-i);
+		f = (+f);
+		f = (-f);
+		i = (~i);
+		b = (~i);
+		b = (~b);
+		c = (~f);
+		c = (~b);
+		return i;
+	}
+	float assignmentCheck(int x[])
+	{
+		int i = i;
+		float f;
+		char c;
+		bool b;
+		i = 1;
+		i = 1.0;
+		i = false;
+		i = '0';
+		f = 1;
+		f = 1.0;
+		f = false;
+		f = '0';
+		c = 1;
+		c = 1.0;
+		c = false;
+		c = '0';
+		b = 1;
+		b = 1.0;
+		b = false;
+		b = '0';
+		{
+			int i[1];
+			float f[1];
+			char c[1];
+			bool b[1];
+			i = 1;
+			i = 1.0;
+			i = false;
+			i = '0';
+			f = 1;
+			f = 1.0;
+			f = false;
+			f = '0';
+			c = 1;
+			c = 1.0;
+			c = false;
+			c = '0';
+			b = 1;
+			b = 1.0;
+			b = false;
+			b = '0';
+			i = x;
+			f = x;
+			i[0] = 1;
+			i[0] = 1.0;
+			i[0] = false;
+			i[0] = '0';
+			f[0] = 1;
+			f[0] = 1.0;
+			f[0] = false;
+			f[0] = '0';
+			c[0] = 1;
+			c[0] = 1.0;
+			c[0] = false;
+			c[0] = '0';
+			b[0] = 1;
+			b[0] = 1.0;
+			b[0] = false;
+			b[0] = '0';
+		};
+		return i;
 	}
 }
-java.lang.Exception: type mismatch expected: int[] got: char
+class<testTypes>:void otherExprs:type mismatch between i and (b ? i : b)
+class<testTypes>:void otherExprs:invalid conditonal statement in ternary expression: (c ? i : i)
+class<testTypes>:void otherExprs:type mismatch between i and ((float)c)
+class<testTypes>:void otherExprs:type mismatch between i and otherExprs()
+class<testTypes>:void binaryExprCheck:Operands of binary expression are incompatible (c + c)
+class<testTypes>:void binaryExprCheck:Operands of binary expression are incompatible (b + b)
+class<testTypes>:void binaryExprCheck:type mismatch between i and (i + f)
+class<testTypes>:void binaryExprCheck:type mismatch between c and (i + i)
+class<testTypes>:void binaryExprCheck:type mismatch between i and (i || b)
+class<testTypes>:void binaryExprCheck:type mismatch between f and (i || b)
+class<testTypes>:void binaryExprCheck:type mismatch between c and (i || b)
+class<testTypes>:void binaryExprCheck:invalid operation with strings ("subI" - i)
+class<testTypes>:void binaryExprCheck:type mismatch between i and ("test" + i)
+class<testTypes>:void binaryExprCheck:invalid operation with strings ("test" || "test")
+class<testTypes>:void binaryExprCheck:type mismatch between b and ("test" + "char")
+class<testTypes>:bool UnaryCheck:Cannot increment/decrement variable of type: bool line: b++
+class<testTypes>:bool UnaryCheck:Cannot increment/decrement variable of type: char line: c++
+class<testTypes>:bool UnaryCheck:cannot increment/decrement array variables: ia++
+
+class<testTypes>:bool UnaryCheck:cannot increment/decrement array variables: ba++
+
+class<testTypes>:bool UnaryCheck:cannot increment/decrement array variables: ca++
+
+class<testTypes>:bool UnaryCheck:cannot increment/decrement array variables: fa++
+
+class<testTypes>:bool UnaryCheck:Cannot increment/decrement variable of type: bool line: ba[0]++
+class<testTypes>:bool UnaryCheck:Cannot increment/decrement variable of type: char line: ca[0]++
+class<testTypes>:bool UnaryCheck:type mismatch between i and (+f)
+class<testTypes>:bool UnaryCheck:type mismatch between i and (-f)
+class<testTypes>:bool UnaryCheck:Type char cannot be incremented/decremented
+class<testTypes>:bool UnaryCheck:type mismatch between b and (+f)
+class<testTypes>:bool UnaryCheck:Type bool cannot be incremented/decremented
+class<testTypes>:bool UnaryCheck:Type char cannot be incremented/decremented
+class<testTypes>:bool UnaryCheck:type mismatch between c and (-i)
+class<testTypes>:bool UnaryCheck:Type bool cannot be incremented/decremented
+class<testTypes>:bool UnaryCheck:type mismatch between c and (-f)
+class<testTypes>:bool UnaryCheck:type mismatch between i and (~i)
+class<testTypes>:bool UnaryCheck:Type float cannot be negated
+class<testTypes>:bool UnaryCheck:type mismatch between c and (~b)
+class<testTypes>:float assignmentCheck:type mismatch between i and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between i and false
+class<testTypes>:float assignmentCheck:type mismatch between i and '0'
+class<testTypes>:float assignmentCheck:type mismatch between f and false
+class<testTypes>:float assignmentCheck:type mismatch between f and '0'
+class<testTypes>:float assignmentCheck:type mismatch between c and 1
+class<testTypes>:float assignmentCheck:type mismatch between c and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between c and false
+class<testTypes>:float assignmentCheck:type mismatch between b and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between b and '0'
+class<testTypes>:float assignmentCheck:type mismatch between i and 1
+class<testTypes>:float assignmentCheck:type mismatch between i and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between i and false
+class<testTypes>:float assignmentCheck:type mismatch between i and '0'
+class<testTypes>:float assignmentCheck:type mismatch between f and 1
+class<testTypes>:float assignmentCheck:type mismatch between f and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between f and false
+class<testTypes>:float assignmentCheck:type mismatch between f and '0'
+class<testTypes>:float assignmentCheck:type mismatch between c and 1
+class<testTypes>:float assignmentCheck:type mismatch between c and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between c and false
+class<testTypes>:float assignmentCheck:type mismatch between c and '0'
+class<testTypes>:float assignmentCheck:type mismatch between b and 1
+class<testTypes>:float assignmentCheck:type mismatch between b and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between b and false
+class<testTypes>:float assignmentCheck:type mismatch between b and '0'
+class<testTypes>:float assignmentCheck:type mismatch between f and x
+class<testTypes>:float assignmentCheck:type mismatch between i[0] and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between i[0] and false
+class<testTypes>:float assignmentCheck:type mismatch between i[0] and '0'
+class<testTypes>:float assignmentCheck:type mismatch between f[0] and false
+class<testTypes>:float assignmentCheck:type mismatch between f[0] and '0'
+class<testTypes>:float assignmentCheck:type mismatch between c[0] and 1
+class<testTypes>:float assignmentCheck:type mismatch between c[0] and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between c[0] and false
+class<testTypes>:float assignmentCheck:type mismatch between b[0] and 1.0
+class<testTypes>:float assignmentCheck:type mismatch between b[0] and '0'
+

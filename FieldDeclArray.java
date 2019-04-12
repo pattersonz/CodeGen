@@ -7,10 +7,10 @@ class FieldDeclArray extends FieldDecl implements BG {
 		intlit = n;
 	}
 
-    public void addVar(int scope) throws Exception
+    public void addVar(int scope) throws BaseGrammarException
     {
 	if (intlit <= 0)
-	    throw new Exception("invalid array size: " + this.toString(0));
+	    throw new BaseGrammarException("invalid array size: " + this.toString(0));
 	FullType ft = new FullType(fieldStart.type, true, false);
 	hash.insert(fieldStart.id, ft, scope);
     }

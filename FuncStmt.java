@@ -5,5 +5,5 @@ abstract class FuncStmt extends NonWhileStmt implements BG{
 		id = i;
 	}
 
-	abstract public boolean analysis(int scope, ReturnType rt) throws Exception;
+	abstract public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException;
 }

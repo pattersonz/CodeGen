@@ -16,19 +16,21 @@ class FieldDeclSingle extends FieldDecl implements BG {
 		expression = e;
 	}
 
-    public void addVar(int scope) throws Exception
+    public void addVar(int scope) throws BaseGrammarException
     {
 	FullType ft = new FullType(fieldStart.type, false, isFinal);
-	hash.insert(fieldStart.id, ft, scope);
 	if (expression != null)
 	    {	
-		if (expression.getType().toString(0) == fieldStart.type.toString(0))
-		    throw new Exception("declaration expression type mismatch for " + fieldStart.type.toString(0) + " " + fieldStart.id);
+		if (! (ft.equals(expression.getType()) ||
+				(ft.equals(new FullType(new BoolType(), false, false)) && expression.getType().equals(new FullType(new IntType(), false, false))) ||
+				(ft.equals(new FullType(new FloatType(), false, false)) && expression.getType().equals(new FullType(new IntType(), false, false)))  ))
+		    throw new BaseGrammarException("declaration expression type mismatch for " + this.toString(0).replace("\n",""));
 	    }
 	else if (isFinal)
 	    {
-		throw new Exception("Final variable must have expression value: " + this.toString(0));
+		throw new BaseGrammarException("Final variable must have expression value: " + this.toString(0));
 	    }
+		hash.insert(fieldStart.id, ft, scope);
     }
     
 	public String toString(int t)

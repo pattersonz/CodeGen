@@ -13,7 +13,7 @@ class ArgDecls extends BaseGrammarTop implements BG {
     argumentDeclarations = null;
   }
 
-  public FullType[] getTypes() throws Exception
+  public FullType[] getTypes() throws BaseGrammarException
   {
     FullType[] args;
     if (argumentDeclarations == null)
@@ -32,7 +32,7 @@ class ArgDecls extends BaseGrammarTop implements BG {
     return args;
   }
 
-  public void addVars(int scope) throws Exception
+  public void addVars(int scope) throws BaseGrammarException
   {
     argumentDeclaration.addVar(scope);
     if (argumentDeclarations != null)

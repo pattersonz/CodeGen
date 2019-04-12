@@ -10,7 +10,7 @@ class MemberDecls extends BaseGrammarTop implements BG {
   	return (fieldsAndMethods != null ? fieldsAndMethods.toString(t) : "");
   }
 
-    public void analysis() throws Exception
+    public void analysis() throws BaseGrammarException
     {
       fieldsAndMethods.analysis();
     }

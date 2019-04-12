@@ -14,7 +14,7 @@ class MethodStart extends BaseGrammarTop implements BG
     	return( returnType.toString(t) + " " + id);
 	}
 
-	public ReturnType getType() throws Exception
+	public ReturnType getType() throws BaseGrammarException
 	{
 		return returnType;
 	}

@@ -31,4 +31,11 @@ class FullType
 	{
 		return (isFinal ? "final " : "") + type.toString(i) + (isArray ? "[]" : "");
 	}
+
+	public String typeStr() { return type.toString(0) + (isArray ? "[]" : ""); }
+
+	public boolean equals(FullType f)
+	{
+		return isArray == f.getArray() && type.toString(0).equals(f.getType().toString(0));
+	}
 }

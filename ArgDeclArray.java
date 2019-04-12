@@ -10,7 +10,7 @@ class ArgDeclArray extends ArgDecl implements BG {
   	return (super.toString(t) + "[]");
   }
 
-  public FullType getType()throws Exception
+  public FullType getType()throws BaseGrammarException
   {
   	return new FullType(type, true, false);
   }

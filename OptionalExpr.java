@@ -6,11 +6,11 @@ class OptionalExpr extends BaseGrammarTop implements BG {
 		expression = e;
 	}
 
-	public ReturnType getType() throws Exception
+	public FullType getType() throws BaseGrammarException
 	{
 		FullType ft;
 		ft = expression.getType();
-		return ft.getType();
+		return ft;
 	}
 
 	public String toString(int t)

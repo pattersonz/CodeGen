@@ -13,14 +13,14 @@ class ReadList extends BaseGrammarTop implements BG {
     readList = r;
   }
 
-    public void analysis() throws Exception
+    public void analysis() throws BaseGrammarException
     {
 	name.analysis();
 	FullType f = name.getType();
 	if (f.getArray())
-	    throw new Exception("Can\'t read un-dereferenced array: " +  this.toString(0));
+	    throw new BaseGrammarException("Can\'t read un-dereferenced array: " +  this.toString(0));
 	if (f.getFinal())
-	    throw new Exception("Can\'t assign new value to final variable: " + this.toString(0));
+	    throw new BaseGrammarException("Can\'t assign new value to final variable: " + this.toString(0));
 	if (readList != null)
 	    readList.analysis();
     }

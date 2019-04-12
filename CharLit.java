@@ -9,7 +9,7 @@ class CharLit extends TypeLit implements BG {
   {
   	return character;
   }
-  	public FullType getType() throws Exception
+  	public FullType getType() throws BaseGrammarException
 	{
 		return new FullType( new CharType(), false, true);
 	}

@@ -5,12 +5,12 @@ class ParenExpr extends Expr implements BG {
     expression = e;
   }
 
-  public void analysis() throws Exception
+  public void analysis() throws BaseGrammarException
   {
   	expression.analysis();
   }
 
-  public FullType getType() throws Exception
+  public FullType getType() throws BaseGrammarException
   {
   	return expression.getType();
   }

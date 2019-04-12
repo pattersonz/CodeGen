@@ -7,7 +7,7 @@ class MatchedIfBase extends IfBackend implements BG {
     statement = s;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	boolean ifP = matchedIf.analysis( scope + 1, rt);
   hash.leaveScope(scope + 1);

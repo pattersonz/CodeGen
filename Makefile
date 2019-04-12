@@ -46,7 +46,7 @@ FILE=	BaseGrammarLexer.java      parser.java    sym.java \
 		NestedMatchedWhileIf.java BaseGrammarTop.java IntType.java FloatType.java \
 		CharType.java BoolType.java NonTypeCastExpr.java ActionExpr.java \
 		Data.java DataList.java DataHash.java FullType.java VarData.java FunctionData.java\
-		StrType.java\
+		StrType.java BaseGrammarException.java NameSingle.java\
 	BaseGrammarLexerTest.java
 
 dump: parserD.java $(FILE:java=class)

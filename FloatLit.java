@@ -10,7 +10,7 @@ class FloatLit extends TypeLit implements BG {
   	return Double.toString(floatingPoint);
   }
 
-  	public FullType getType() throws Exception
+  	public FullType getType() throws BaseGrammarException
 	{
 		return new FullType(new FloatType(), false, true);
 	}

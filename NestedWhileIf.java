@@ -7,12 +7,20 @@ class NestedWhileIf extends NestedMatchedWhileIf implements BG{
 		nestedMatchedWhile = n;
 	}
 
-	public boolean analysis(int scope, ReturnType rt) throws Exception
+	public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
 	{
 		whileBase.analysis();
-		nestedMatchedWhile.analysis(scope + 1, rt);
-		hash.leaveScope(scope + 1);
-		return false;
+		try {
+			nestedMatchedWhile.analysis(scope + 1, rt);
+			hash.leaveScope(scope + 1);
+			return false;
+		}
+		catch(BaseGrammarException ex)
+		{
+			hash.leaveScope(scope);
+			ex.prepend(whileBase.toString(0).replace("\n",""));
+			throw ex;
+		}
 	}
 
  	public String toString(int t)

@@ -24,30 +24,35 @@ class MethodDecl extends BaseGrammarTop implements BG{
 		hasSemicolon = o != null;
 	}
 
-	public void addMethod() throws Exception
+	public void addMethod() throws BaseGrammarException
 	{
 		FullType[] argTypes = null;
-		
-		if (argumentDeclarations != null)
-		{
-			argTypes = argumentDeclarations.getTypes();
+		try {
+			if (argumentDeclarations != null) {
+				argTypes = argumentDeclarations.getTypes();
+			}
+			hash.insert(methodStart.id, methodStart.returnType, argTypes, 0);
+			if (argumentDeclarations != null)
+				argumentDeclarations.addVars(1);
+
+
+			if (fieldDeclarations != null)
+				fieldDeclarations.addVars(2);
+
+
+			boolean alwaysRets = false;
+			if (statements != null)
+				alwaysRets = statements.analysis(2, methodStart.getType());
+
+			if (methodStart.getType().toString(0) == "void" && !alwaysRets)
+				throw new BaseGrammarException("A path exists in method where a value is not returned in function");
+			hash.leaveScope(1);
 		}
-		hash.insert(methodStart.id, methodStart.returnType, argTypes, 0);
-		if (argumentDeclarations != null)
-			argumentDeclarations.addVars(1);
-
-
-		if (fieldDeclarations != null)
-			fieldDeclarations.addVars(2);
-		
-		boolean alwaysRets = false;
-		if (statements != null)
-			alwaysRets = statements.analysis(2, methodStart.getType());
-		
-		if (methodStart.getType().toString(0) == "void" && !alwaysRets)
-			throw new Exception("Error! A path exists in method where a value is not returned in function " + methodStart.id);
-		
-		hash.leaveScope(1);
+		catch(BaseGrammarException ex) {
+			hash.leaveScope(1);
+			ex.prepend(methodStart.toString(0));
+			throw ex;
+		}
 
 	}
 

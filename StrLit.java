@@ -10,7 +10,7 @@ class StrLit extends TypeLit implements BG {
   	return string;
   }
 
-  	public FullType getType() throws Exception
+  	public FullType getType() throws BaseGrammarException
 	{
 		return new FullType(new StrType(), false, true);
 	}

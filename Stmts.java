@@ -12,16 +12,34 @@ class Stmts extends BaseGrammarTop implements BG {
   	return (statement.toString(t) + (statements != null ? statements.toString(t) : ""));
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
-  	boolean temp = statement.analysis(scope, rt);
-  	if (statements != null)
+      boolean temp = false;
+     try {
+        temp = statement.analysis(scope, rt);
+     }
+     catch(BaseGrammarException b)
+     {
+        try{
+          if (statements != null) {
+            if (temp)
+              throw new BaseGrammarException("Error statements are unreachable");
+            statements.analysis(scope, rt);
+          }
+        }
+        catch(BaseGrammarException b2)
         {
-        if (temp)
-          throw new Exception("Error statements are unreachable");
+          b.add(b2);
+        }
+        hash.leaveScope(scope);
+        throw b;
+     }
+       if (statements != null) {
+         if (temp)
+           throw new BaseGrammarException("Error statements are unreachable");
          return statements.analysis(scope, rt);
-      }
-      return temp;
+       }
+       return temp;
     }
 }
 

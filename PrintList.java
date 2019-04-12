@@ -13,9 +13,9 @@ class PrintList extends BaseGrammarTop implements BG {
     printList = p;
   }
 
-    public void analysis() throws Exception
+    public void analysis() throws BaseGrammarException
     {
-	expression.analysis();
+	expression.getType();
 	if (printList != null)
 	    printList.analysis();
     }

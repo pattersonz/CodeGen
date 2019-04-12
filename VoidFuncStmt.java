@@ -9,7 +9,7 @@ class VoidFuncStmt extends FuncStmt implements BG {
   	return(T(t) + id + "();\n");
   }
 
-  public boolean analysis(int scope, ReturnType rt) throws Exception
+  public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
   	hash.lookup(id, null);
     return false;

@@ -3,10 +3,10 @@ class VoidReturn extends NonWhileStmt implements BG {
   {
   }
 
-public boolean analysis(int scope, ReturnType rt) throws Exception
+public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
   	if (rt.toString(0) == "void")
-  		throw new Exception("no return type specified for non void function");
+  		throw new BaseGrammarException("no return type specified for non void function");
     return true;
   }
 

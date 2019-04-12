@@ -7,19 +7,19 @@ class AssmntStmt extends NonWhileStmt implements BG {
     expression = e;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	expression.analysis();
 	name.analysis();
-	FullType typeGot = hash.lookup(name.id);
-	if (typeGot.getType().toString(0) != expression.getType().getType().toString(0))
-	    throw new Exception("type mismatch between " + name.toString(0) + " and "
+	FullType ft = name.getType();
+        if (! (ft.equals(expression.getType()) ||
+                (ft.equals(new FullType(new BoolType(), false, false)) && expression.getType().equals(new FullType(new IntType(), false, false))) ||
+                (ft.equals(new FullType(new FloatType(), false, false)) && expression.getType().equals(new FullType(new IntType(), false, false)))  ))
+	    throw new BaseGrammarException("type mismatch between " + name.toString(0) + " and "
 				+ expression.toString(0));
-	if (typeGot.getFinal())
-	    throw new Exception("Final type value can not be reassigned! " + this.toString(0));
+	if (ft.getFinal())
+	    throw new BaseGrammarException("Final type value can not be reassigned! " + this.toString(0));
 
-	if (typeGot.getArray() != name.wasDeref())
-	    throw new Exception("invalid array access: " + this.toString(0));
     return false;
     }
     

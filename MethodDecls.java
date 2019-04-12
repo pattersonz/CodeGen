@@ -14,11 +14,25 @@ class MethodDecls extends BaseGrammarTop implements BG {
     methodDeclarations = null;
   }
 
-  public void addMethods() throws Exception
+  public void addMethods() throws BaseGrammarException
   {
-    methodDeclaration.addMethod();
-    if (methodDeclarations != null)
-      methodDeclarations.addMethods();
+      try {
+          methodDeclaration.addMethod();
+      }
+      catch(BaseGrammarException b)
+      {
+          try {
+              if (methodDeclarations != null)
+                  methodDeclarations.addMethods();
+          }
+          catch(BaseGrammarException b2)
+          {
+              b.add(b2);
+          }
+          throw b;
+      }
+      if (methodDeclarations != null)
+          methodDeclarations.addMethods();
   }
 
   public String toString(int t)

@@ -5,7 +5,7 @@ class NestedIf extends UnmatchedIf implements BG {
     ifStatement = i;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	   ifStatement.analysis(scope + 1, rt);
      hash.leaveScope(scope + 1);

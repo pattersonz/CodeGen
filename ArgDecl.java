@@ -7,9 +7,9 @@ abstract class ArgDecl extends BaseGrammarTop implements BG {
     id = i;
   }
 
-  abstract public FullType getType() throws Exception;
+  abstract public FullType getType() throws BaseGrammarException;
 
-  public void addVar(int scope) throws Exception
+  public void addVar(int scope) throws BaseGrammarException
   {
     FullType t = getType();
     hash.insert(id, t, scope);

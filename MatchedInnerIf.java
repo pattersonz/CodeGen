@@ -9,14 +9,29 @@ class MatchedInnerIf extends MatchedIf implements BG {
     exteriorMatchedIf = s;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	ifBase.analysis();
-	boolean ifP = matchedIf.analysis(scope + 1, rt);
-  hash.leaveScope(scope + 1);
-	boolean ifE = exteriorMatchedIf.analysis(scope + 1, rt);
-  hash.leaveScope(scope + 1);
-  return ifP && ifE;
+	try {
+      boolean ifP = matchedIf.analysis(scope + 1, rt);
+      hash.leaveScope(scope + 1);
+      try {
+        boolean ifE = exteriorMatchedIf.analysis(scope + 1, rt);
+        hash.leaveScope(scope + 1);
+        return ifP && ifE;
+      }
+      catch(BaseGrammarException e1)
+      {
+        e1.prepend("else");
+        throw e1;
+      }
+    }
+	catch(BaseGrammarException ex)
+    {
+      hash.leaveScope(scope + 1);
+      ex.prepend(ifBase.toString(0).replace("\n",""));
+      throw ex;
+    }
     }
     
   public String toString(int t)

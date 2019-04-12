@@ -11,7 +11,7 @@ class ArgFuncStmt extends FuncStmt implements BG {
   	return(T(t) + id + "(" + arguments.toString(t) + ");\n");
   }
 
-  public boolean analysis(int scope, ReturnType rt) throws Exception
+  public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
     FullType[] args = arguments.getTypes(); 
     hash.lookup(id, args);

@@ -9,7 +9,7 @@ class BoolLit extends TypeLit implements BG {
   {
   	return bool;
   }
-  	public FullType getType() throws Exception
+  	public FullType getType() throws BaseGrammarException
 	{
 		return new FullType( new BoolType(), false, true);
 	}

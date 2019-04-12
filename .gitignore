@@ -1,4 +1,5 @@
 *.class
+.idea
 sym.java
 parser.java
 BaseGrammarLexer.java

@@ -5,7 +5,7 @@ class PrintLnStmt extends NonWhileStmt implements BG {
     printLineList = p;
   }
 
-  public boolean analysis(int scope, ReturnType rt) throws Exception
+  public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
   	return false;
   }

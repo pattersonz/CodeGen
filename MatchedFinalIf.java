@@ -6,7 +6,7 @@ class MatchedFinalIf extends MatchedIf implements BG {
     nonIfStatement = n;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	   return nonIfStatement.analysis(scope, rt);
     }

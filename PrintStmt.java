@@ -5,12 +5,12 @@ class PrintStmt extends NonWhileStmt implements BG {
     printList = p;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	if (printList != null)
 	    printList.analysis();
 	else
-	    throw new Exception("Can\'t have empty printList");
+	    throw new BaseGrammarException("Can\'t have empty printList");
     return false;
     }
     

@@ -10,7 +10,7 @@ class IntLit extends TypeLit implements BG {
   	return Integer.toString(integer);
   }
 
-		public FullType getType() throws Exception
+		public FullType getType() throws BaseGrammarException
 	{
 		return new FullType(new IntType(), false, true);
 	}

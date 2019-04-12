@@ -1,34 +1,20 @@
-class Name extends Expr implements BG {
+abstract class Name extends Expr implements BG {
   String id;
   public Name(String i)
   {
     id = i;
   }
 
-  public String toString(int t)
-  {
-  	return(id);
-  }
+  abstract public String toString(int t);
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
-    {
-	     return false;
-    }
+  abstract public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException;
 
-    public void analysis() throws Exception
-    {
-      return;
-    }
+  abstract  public void analysis() throws BaseGrammarException;
 
-    public FullType getType() throws Exception
-    {
-	   FullType ft = hash.lookup(id);
-	   return ft;
-       
-    }
 
-    public boolean wasDeref()
-    {
-	   return false;
-    }
+  abstract public FullType getType() throws BaseGrammarException;
+
+
+  abstract public boolean wasDeref();
+
 }

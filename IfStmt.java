@@ -7,11 +7,19 @@ class IfStmt extends Stmt implements BG {
     ifBackend = b;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	   ifBase.analysis();
-	   boolean ret = ifBackend.analysis(scope, rt);
-     hash.leaveScope(scope);
+	   boolean ret = false;
+	   try {
+         ret = ifBackend.analysis(scope, rt);
+       }
+	   catch(BaseGrammarException ex)
+       {
+          ex.prepend(ifBase.toString(0).replace("\n",""));
+          hash.leaveScope(scope + 1);
+          throw ex;
+       }
      return ret;
     }
 

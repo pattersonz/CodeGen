@@ -10,12 +10,12 @@ class WhileBase extends BaseGrammarTop implements BG {
   	return(T(t) + "while(" + expression.toString(t) + ")\n");
   }
 
-  public void analysis() throws Exception
+  public void analysis() throws BaseGrammarException
   {
   	expression.analysis();
   	FullType ft = expression.getType();
-  	if (ft.getType().toString(0) == "bool" && ft.getType().toString(0) == "int" && !ft.getArray())
-  		throw new Exception("Invalid type in while condition: " + this.toString(0));
+  	if (ft.getType().toString(0) != "bool" && ft.getType().toString(0) != "int" && !ft.getArray())
+  		throw new BaseGrammarException("Invalid type in while condition: " + this.toString(0));
   }
 }
 

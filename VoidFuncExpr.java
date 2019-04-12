@@ -9,12 +9,12 @@ class VoidFuncExpr extends FuncExpr implements BG {
   	return(id + "()");
   }
 
-  public void analysis() throws Exception
+  public void analysis() throws BaseGrammarException
   {
   	return;
   }
 
-  public FullType getType() throws Exception
+  public FullType getType() throws BaseGrammarException
   {
   	return hash.lookup(id, null);
   }

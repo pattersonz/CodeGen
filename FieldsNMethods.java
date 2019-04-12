@@ -21,19 +21,49 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 		methodDeclarations = s;
 	}
 
-    public void analysis() throws Exception
+    public void analysis() throws BaseGrammarException
     {
 	if (fieldDeclaration != null)
 	    {
-		fieldDeclaration.addVar(0);
-		if (fieldsAndMethods != null)
-		    fieldsAndMethods.analysis();
+	    	try {
+				fieldDeclaration.addVar(0);
+			}
+	    	catch(BaseGrammarException b) {
+				String rest = "";
+				try {
+					if (fieldsAndMethods != null)
+						fieldsAndMethods.analysis();
+				}
+				catch(BaseGrammarException b2)
+				{
+					b.add(b2);
+				}
+
+				throw b;
+			}
+			if (fieldsAndMethods != null)
+				fieldsAndMethods.analysis();
 	    }
 	else
 	    {
-		methodDeclaration.addMethod();
-		if (methodDeclarations != null)
-			methodDeclarations.addMethods();
+	    	try {
+				methodDeclaration.addMethod();
+			}
+	    	catch(BaseGrammarException b)
+			{
+				String rest = "";
+				try {
+					if (methodDeclarations != null)
+						methodDeclarations.addMethods();
+				}
+				catch(BaseGrammarException b2)
+				{
+					b.add(b2);
+				}
+				throw b;
+			}
+			if (methodDeclarations != null)
+				methodDeclarations.addMethods();
 	    }
     }
     

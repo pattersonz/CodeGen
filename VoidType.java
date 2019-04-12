@@ -10,7 +10,7 @@ class VoidType extends ReturnType implements BG
 		return "void";
 	}
 
-	public FullType getType() throws Exception
+	public FullType getType() throws BaseGrammarException
 	{
 		return new FullType(this, false, true);
 	}

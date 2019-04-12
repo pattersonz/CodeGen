@@ -19,14 +19,36 @@ class NestedWhileEndIf extends NestedMatchedWhileIf implements BG{
 			T(t + 1) + "}\n" + T(t) + "}\n");
 	}
 
-  public boolean analysis(int scope, ReturnType rt) throws Exception
+  public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
     whileBase.analysis();
-    ifBase.analysis();
-    interiorIf.analysis(scope + 1, rt);
-    hash.leaveScope(scope + 1);
-    otherSideOfElse.analysis(scope + 1, rt);
-    hash.leaveScope(scope + 1);
+    try {
+		ifBase.analysis();
+		try {
+			interiorIf.analysis(scope + 1, rt);
+			hash.leaveScope(scope + 1);
+			try {
+				otherSideOfElse.analysis(scope + 1, rt);
+				hash.leaveScope(scope + 1);
+				return false;
+			}
+			catch(BaseGrammarException e2)
+			{
+				e2.prepend("else");
+			}
+		}
+		catch(BaseGrammarException e1)
+		{
+			e1.prepend(ifBase.toString(0).replace("\n",""));
+			throw e1;
+		}
+	}
+    catch(BaseGrammarException ex)
+	{
+		hash.leaveScope(scope);
+		ex.prepend(whileBase.toString(0).replace("\n",""));
+		throw ex;
+	}
     return false;
   }
 }

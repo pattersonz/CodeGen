@@ -13,7 +13,7 @@ class DataHash
 	seed = rand.nextInt();
     }
     
-    void insert(String id, FullType t, int scope) throws Exception
+    void insert(String id, FullType t, int scope) throws BaseGrammarException
     {
 	int spot = hashFunction(id);
 	int endLoc = spot;
@@ -32,7 +32,7 @@ class DataHash
 				{
 				    if (table[spot].getScope() == scope)
 					{
-					    throw new Exception(id + " already defined");
+					    throw new BaseGrammarException(id + " already defined");
 						
 					}
 				    Data newVar = new VarData(id, t, scope);
@@ -43,13 +43,13 @@ class DataHash
 				{
 				    spot = (spot + 1) % size;
 				    if (spot == endLoc)
-					throw new Exception("Hash is full");
+					throw new BaseGrammarException("Hash is full");
 				}
 			}
 	    } 
     }
     
-    void insert(String id, ReturnType r, FullType[] args, int scope) throws Exception
+    void insert(String id, ReturnType r, FullType[] args, int scope) throws BaseGrammarException
 	{
 		int spot = hashFunction(id);
 		int endLoc = spot;
@@ -68,7 +68,7 @@ class DataHash
 			if (table[spot].getId() != id)
 			    {
 				if (table[spot].getScope() == scope)
-				    throw new Exception(id + " already defined");
+				    throw new BaseGrammarException(id + " already defined");
 				Data newFunc = new FunctionData(id, t, args, scope);
 				table[spot] = new DataList(newFunc, table[spot]);
 				foundSpot = true;
@@ -77,13 +77,13 @@ class DataHash
 			    {
 				spot = (spot + 1) % size;
 				if (spot == endLoc)
-				    throw new Exception("Hash is full");
+				    throw new BaseGrammarException("Hash is full");
 			    }
 		    }
 		} 
 	}
 
-    FullType lookup(String id) throws Exception
+    FullType lookup(String id) throws BaseGrammarException
     {
 	int spot = hashFunction(id);
 	int endLoc = spot;
@@ -91,11 +91,11 @@ class DataHash
 	    while (!found)
 		{
 		    if (table[spot]  == null)
-			throw new Exception( id + " not declared");
+			throw new BaseGrammarException( id + " not declared");
 		    else if (table[spot].getId() != id)
 			{
 			    if (table[spot].getIsFunction())
-					throw new Exception("Invalid use of function: " + id);
+					throw new BaseGrammarException("Invalid use of function: " + id);
 			    else
 					found = true;
 			}
@@ -103,13 +103,13 @@ class DataHash
 			{
 			    spot = (spot + 1) % size;
 			    if (spot == endLoc)
-				throw new Exception( id + " not declared");
+				throw new BaseGrammarException( id + " not declared");
 			}
 		}
 		return table[spot].returnType();
     }
 
-    FullType lookup(String id, FullType[] args) throws Exception
+    FullType lookup(String id, FullType[] args) throws BaseGrammarException
     {
 	int spot = hashFunction(id);
 	int endLoc = spot;
@@ -117,26 +117,26 @@ class DataHash
 	    while (!found)
 		{
 		    if (table[spot]  == null)
-			throw new Exception( id + " not declared");
+			throw new BaseGrammarException( id + " not declared");
 		    else if (table[spot].getId() != id)
 			{
 			    if (!table[spot].getIsFunction())
-				throw new Exception( id + " cannot be used in this way");
+				throw new BaseGrammarException( id + " cannot be used in this way");
 			    else
 			        {
 				    FullType[] listArgs = table[spot].getArgs();
 				    if (listArgs == null && args == null)
 				    	return table[spot].returnType();
 				    else if (listArgs == null || args == null)
-				    	throw new Exception("incorrect number of arguments in " + id + "()");
+				    	throw new BaseGrammarException("incorrect number of arguments in " + id + "()");
 				    if (listArgs.length != args.length)
-						throw new Exception("incorrect number of arguments in " + id + "( )");
+						throw new BaseGrammarException("incorrect number of arguments in " + id + "( )");
 				    else
 					{
 					    for (int i = 0; i < listArgs.length; i++)
 						{
 						    if (listArgs[i].getType().toString(0) == args[i].getType().toString(0) || listArgs[i].getArray() != args[i].getArray())
-							throw new Exception("type mismatch expected: " + 
+							throw new BaseGrammarException("type mismatch expected: " +
 								listArgs[i].toString(0) + " got: " + args[i].toString(0));
 						}
 					    found = true;
@@ -147,7 +147,7 @@ class DataHash
 			{
 			    spot = (spot + 1) % size;
 			    if (spot == endLoc)
-				throw new Exception(id + " not declared");
+				throw new BaseGrammarException(id + " not declared");
 			}
 		}
 		return table[spot].returnType();
@@ -157,7 +157,7 @@ class DataHash
     {
 	for (int i = 0; i < size; i++)
 	    {
-		if(table[i] != null && table[i].getScope() == scope)
+		if(table[i] != null && table[i].getScope() >= scope)
 		    {
 			DataList childList = table[i].getNext();
 			if (childList == null)

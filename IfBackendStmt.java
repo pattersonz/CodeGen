@@ -5,7 +5,7 @@ class IfBackendStmt extends UnmatchedIf implements BG {
     nonIfStatement = n;
   }
 
-    public boolean analysis(int scope, ReturnType rt) throws Exception
+    public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
     {
 	   nonIfStatement.analysis(scope + 1, rt);
      hash.leaveScope(scope + 1);

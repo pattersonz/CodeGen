@@ -6,7 +6,7 @@ abstract class FieldDecl extends BaseGrammarTop implements BG {
   	fieldStart = f;
   }
 
-    abstract public void addVar(int scope) throws Exception;
+    abstract public void addVar(int scope) throws BaseGrammarException;
     
   public String toString(int t)
   {

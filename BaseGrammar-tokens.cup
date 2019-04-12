@@ -340,7 +340,7 @@ functionStatement ::= ID:i LEFT_PAREN RT_PAREN SEMI
 	;
 
 name ::= ID:i 
-     {: RESULT = new Name(i); :}
+     {: RESULT = new NameSingle(i); :}
      |
      ID:i LEFT_BRKT expression:e RT_BRKT
      {: RESULT = new NameArray(i, e); :}

@@ -14,7 +14,7 @@ class FieldDecls extends BaseGrammarTop implements BG {
     fieldDeclarations = null;
   }
 
-  public void addVars(int scope) throws Exception
+  public void addVars(int scope) throws BaseGrammarException
   {
     fieldDeclaration.addVar(scope);
     if (fieldDeclarations != null)

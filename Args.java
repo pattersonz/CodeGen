@@ -13,7 +13,7 @@ class Args extends BaseGrammarTop implements BG {
     arguments = null;
   }
 
-  public FullType[] getTypes() throws Exception
+  public FullType[] getTypes() throws BaseGrammarException
   {
     FullType[] f;
     if (arguments != null)

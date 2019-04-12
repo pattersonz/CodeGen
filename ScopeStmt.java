@@ -9,7 +9,7 @@ class ScopeStmt extends NonWhileStmt implements BG {
     hasSemicolon = o != null;
   }
 
-  public boolean analysis(int scope, ReturnType rt) throws Exception
+  public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
     boolean ret = false;
     if (fieldDeclarations != null)

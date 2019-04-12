@@ -8,9 +8,16 @@ class Program extends BaseGrammarTop implements BG {
 	hash = new DataHash();
   }
 
-    public void analysis() throws Exception
+    public void analysis() throws BaseGrammarException
     {
-	memberDeclarations.analysis();
+        try {
+            memberDeclarations.analysis();
+        }
+        catch(BaseGrammarException ex)
+        {
+            ex.prepend("class<" + id + ">");
+            throw ex;
+        }
     }
 
   public String toString(int t)

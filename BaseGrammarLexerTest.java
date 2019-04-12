@@ -18,7 +18,7 @@ import java_cup.runtime.*;
 
 public class BaseGrammarLexerTest {
 
-  public static void main(String [] args) throws Exception {
+  public static void main(String [] args) throws BaseGrammarException {
     Reader reader = null;
     
     if (args.length == 1) {
@@ -26,7 +26,13 @@ public class BaseGrammarLexerTest {
       if (!input.canRead()) {
         System.out.println("Error: could not read ["+input+"]");
       }
-      reader = new FileReader(input);
+      try {
+        reader = new FileReader(input);
+      }
+      catch(Exception ex)
+      {
+        System.out.println(ex);
+      }
     }
     else {  
      reader = new InputStreamReader(System.in);
@@ -40,7 +46,7 @@ public class BaseGrammarLexerTest {
     try { 
       program = (Program) parser.parse().value;  // parse
     }    
-    catch (Exception e) { 
+    catch (Exception e) {
       e.printStackTrace(); 
     }
     System.out.print(program.toString(0));
@@ -48,9 +54,15 @@ public class BaseGrammarLexerTest {
     try
     {
     program.analysis();
+    System.out.println("Analysis success");
+    }
+    catch(BaseGrammarException ex)
+    {
+      System.out.println(ex.toString());
     }
     catch(Exception ex)
     {
+      System.out.println("ERROR:");
       System.out.println(ex);
     }
   }
