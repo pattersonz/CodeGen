@@ -12,6 +12,7 @@ class Program extends BaseGrammarTop implements BG {
     {
         try {
             memberDeclarations.analysis();
+            FullType rt = hash.lookup("main", null);
         }
         catch(BaseGrammarException ex)
         {

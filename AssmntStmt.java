@@ -18,7 +18,7 @@ class AssmntStmt extends NonWhileStmt implements BG {
 	    throw new BaseGrammarException("type mismatch between " + name.toString(0) + " and "
 				+ expression.toString(0));
 	if (ft.getFinal())
-	    throw new BaseGrammarException("Final type value can not be reassigned! " + this.toString(0));
+	    throw new BaseGrammarException("Final type value can not be reassigned! " + this.toString(0).replace("\n",""));
 
     return false;
     }

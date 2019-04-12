@@ -28,7 +28,7 @@ class DataHash
 		    }
 		    else
 			{
-			    if (table[spot].getId() != id)
+			    if (table[spot].getId().equals(id))
 				{
 				    if (table[spot].getScope() == scope)
 					{
@@ -65,7 +65,7 @@ class DataHash
 		    }
 		    else
 		    {
-			if (table[spot].getId() != id)
+			if ( table[spot].getId().equals(id) )
 			    {
 				if (table[spot].getScope() == scope)
 				    throw new BaseGrammarException(id + " already defined");
@@ -92,7 +92,7 @@ class DataHash
 		{
 		    if (table[spot]  == null)
 			throw new BaseGrammarException( id + " not declared");
-		    else if (table[spot].getId() != id)
+		    else if (table[spot].getId().equals(id))
 			{
 			    if (table[spot].getIsFunction())
 					throw new BaseGrammarException("Invalid use of function: " + id);
@@ -119,7 +119,7 @@ class DataHash
 		{
 		    if (table[spot]  == null)
 			throw new BaseGrammarException( id + " not declared");
-		    else if (table[spot].getId() != id)
+		    else if (table[spot].getId().equals(id))
 			{
 			    if (!table[spot].getIsFunction())
 				throw new BaseGrammarException( id + " cannot be used in this way");
@@ -136,11 +136,11 @@ class DataHash
 					{
 					    for (int i = 0; i < listArgs.length; i++)
 						{
-						    if (! (listArgs[i].getType().equals(args[i].getType()) ||
-									(  args[i].getType().equals(bo) && listArgs[i].equals(in)) ||
-									(  args[i].getType().equals(fl) && listArgs[i].equals(in))
+							if (! (listArgs[i].equals(args[i]) ||
+									(  args[i].equals(in) && listArgs[i].equals(bo)) ||
+									(  args[i].equals(in) && listArgs[i].equals(fl))
 									))
-							throw new BaseGrammarException("type mismatch expected: " +
+							throw new BaseGrammarException("function argument type mismatch expected: " +
 								listArgs[i].toString(0) + " got: " + args[i].toString(0));
 						}
 					    found = true;
@@ -184,7 +184,7 @@ class DataHash
 			if (j + i*4 < key.length())
 			    rep[j] = (int)key.charAt(i*4 + j);
 			else
-			    rep[j] = (int)'5';
+			    rep[j] = (int)'+';
 		    }
 		charRep = (rep[2] << 24) + (rep[3] << 16)  + (rep[0] << 8) + rep[1];
 		int charRepL, charRepR;

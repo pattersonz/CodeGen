@@ -12,7 +12,7 @@ class UnaryStmt extends NonWhileStmt implements BG {
     name.analysis();
     FullType t = name.getType();
       if(t.getArray())
-      throw new BaseGrammarException("cannot increment/decrement array variables: " + this.toString(0));
+      throw new BaseGrammarException("cannot increment/decrement array variables: " + this.toString(0).replace("\n",""));
       if (!t.equals(new FullType(new FloatType(), false, false)) && !t.equals(new FullType(new IntType(), false, false)))
       throw new BaseGrammarException("Cannot increment/decrement variable of type: " + t.getType().toString(0) + " line: " +  this.toString(0).replace("\n",""));
     return false;

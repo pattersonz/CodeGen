@@ -2,11 +2,120 @@ class testTypes
 {
 
     final int i = 3;
-    int funct(int x[])
+    int x;
+\\\*
+    void manyArgs(int x, int z, float y, char c, int u[])
     {
-        funct(x);
+
     }
-\*
+
+    void argRedec(int x, int x)
+    {
+    }
+
+    void coercFunc(bool x)
+    {
+
+    }
+
+    void coercFunc2(float x)
+    {
+
+    }
+
+    void coercFuncAr(int x[])
+    {
+
+    }
+
+    void coercFuncAr2(float x[])
+    {
+
+    }
+
+    void coercFuncAr3(bool x[])
+    {
+
+    }
+
+    void testCoerc()
+    {
+        int i[1];
+        bool b[1];
+        char c[1];
+        float f[1];
+        coercFunc(true);
+        coercFunc(1);
+        coercFunc(1.0);
+        coercFunc('0');
+        coercFunc2(true);
+        coercFunc2(1);
+        coercFunc2(1.0);
+        coercFunc2('0');
+        coercFuncAr(i);
+        coercFuncAr(b);
+        coercFuncAr(c);
+        coercFuncAr(f);
+        coercFuncAr2(i);
+        coercFuncAr2(b);
+        coercFuncAr2(c);
+        coercFuncAr2(f);
+        coercFuncAr3(i);
+        coercFuncAr3(b);
+        coercFuncAr3(c);
+        coercFuncAr3(f);
+        manyArgs(3, 3, 3, '0', i);
+        doesntexit(3);
+    } \\*\
+\\\*
+    int funct(int x)
+    {
+
+    }
+
+    int funct2()
+    {
+        return '6';
+        i = 3;
+    }
+
+    int funct3()
+    {
+        int x = 3;
+        if (x)
+            return 3;
+    }
+
+    int funct4()
+    {
+        int x = 3;
+        if (x)
+            x = 5;
+        else
+            return x;
+    }
+
+    int funct5()
+    {
+        int x = 2;
+        if (x)
+            return x + 2;
+        else
+            return x + 4;
+    }
+
+    int funct6 (int x[])
+    {
+        int x = x[3];
+        funct(x);
+
+    }
+
+    void funct3(int x)
+    {
+
+    }\\*\
+\\\*
     void otherExprs()
     {
         int i;
@@ -28,7 +137,7 @@ class testTypes
         i = (float)c;
         i = otherExprs();
     }\\*\
-\*
+\\\*
     void binaryExprCheck()
     {
         int i;
@@ -59,7 +168,7 @@ class testTypes
         b = "test" || "test";
         b = "test" + "char";
     }\\*\
-\*
+\\\*
     bool UnaryCheck()
     {
 	    int i;
@@ -105,7 +214,7 @@ class testTypes
         c = ~b;
         return i;
     }\\*\
-\*
+\\\*
 	float assignmentCheck(int x[])
 	{
 	    int i = i;

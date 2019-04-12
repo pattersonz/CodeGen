@@ -33,7 +33,7 @@ class NestedMatchedWhile extends WhileMatchedIf implements BG {
     }
     catch(BaseGrammarException ex)
     {
-      hash.leaveScope(scope);
+      hash.leaveScope(scope + 1);
       ex.prepend(whileBase.toString(0).replace("\n",""));
       throw ex;
     }

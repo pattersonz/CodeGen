@@ -44,7 +44,7 @@ class MethodDecl extends BaseGrammarTop implements BG{
 			if (statements != null)
 				alwaysRets = statements.analysis(2, methodStart.getType());
 
-			if (methodStart.getType().toString(0) == "void" && !alwaysRets)
+			if ( !(methodStart.getType().toString(0) == "void") && !alwaysRets)
 				throw new BaseGrammarException("A path exists in method where a value is not returned in function");
 			hash.leaveScope(1);
 		}

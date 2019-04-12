@@ -17,7 +17,7 @@ class ValueReturn extends NonWhileStmt implements BG {
       if (! (ft.equals(expression.getType()) ||
               (ft.equals(new FullType(new BoolType(), false, false)) && expression.getType().equals(new FullType(new IntType(), false, false))) ||
               (ft.equals(new FullType(new FloatType(), false, false)) && expression.getType().equals(new FullType(new IntType(), false, false)))  ))
-  		throw new BaseGrammarException("invalid type return: " +  this.toString(0));
+  		throw new BaseGrammarException("invalid type return: " +  this.toString(0).replace("\n",""));
     return true;
   }
 }

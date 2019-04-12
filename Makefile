@@ -51,11 +51,16 @@ FILE=	BaseGrammarLexer.java      parser.java    sym.java \
 
 dump: parserD.java $(FILE:java=class)
 
-run: test1Output.txt 
+run: test1Output.txt testValidOutput.txt
 
 test1Output.txt: all
 	$(JAVA) -cp $(CP) BaseGrammarLexerTest < test1.as > test1Output.txt
 	cat -n test1Output.txt
+
+testValidOutput.txt: all
+	$(JAVA) -cp $(CP) BaseGrammarLexerTest < testValid.as > testValidOutput.txt
+	cat -n testValidOutput.txt
+
 
 all: BaseGrammarLexer.java parser.java $(FILE:java=class)
 
