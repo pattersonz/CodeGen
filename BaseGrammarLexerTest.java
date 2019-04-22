@@ -48,13 +48,14 @@ public class BaseGrammarLexerTest {
     }    
     catch (Exception e) {
       e.printStackTrace(); 
-    }
+    }  
     System.out.print(program.toString(0));
-
+    boolean genCode  false;
     try
     {
     program.analysis();
     System.out.println("Analysis success");
+    genCode  true;
     }
     catch(BaseGrammarException ex)
     {
@@ -65,6 +66,13 @@ public class BaseGrammarLexerTest {
       System.out.println("ERROR:");
       System.out.println(ex);
     }
+    try{
+	program.gen();
+	System.out.println("Code generated!");
+    }   
+    catch (Exception e) {
+      e.printStackTrace(); 
+    } 
   }
 
   public static void error(String s) { 

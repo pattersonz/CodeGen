@@ -1,0 +1,3 @@
+/terraForce/coding/snes/CodeGen/tileMapper/build/CMakeFiles/rebuild_cache.dir
+/terraForce/coding/snes/CodeGen/tileMapper/build/CMakeFiles/TileMapper.dir
+/terraForce/coding/snes/CodeGen/tileMapper/build/CMakeFiles/edit_cache.dir
