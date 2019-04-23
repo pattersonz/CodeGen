@@ -16,7 +16,7 @@
 import java.io.*;
 import java_cup.runtime.*;
 
-public class BaseGrammarLexerTest {
+public class BaseGrammarCompiler {
 
   public static void main(String [] args) throws BaseGrammarException {
     Reader reader = null;
@@ -50,12 +50,12 @@ public class BaseGrammarLexerTest {
       e.printStackTrace(); 
     }  
     System.out.print(program.toString(0));
-    boolean genCode  false;
+    boolean genCode = false;
     try
     {
     program.analysis();
     System.out.println("Analysis success");
-    genCode  true;
+    genCode = true;
     }
     catch(BaseGrammarException ex)
     {
@@ -71,6 +71,7 @@ public class BaseGrammarLexerTest {
 	System.out.println("Code generated!");
     }   
     catch (Exception e) {
+	System.out.println("Error writing to file");
       e.printStackTrace(); 
     } 
   }

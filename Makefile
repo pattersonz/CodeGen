@@ -47,18 +47,18 @@ FILE=	BaseGrammarLexer.java      parser.java    sym.java \
 		CharType.java BoolType.java NonTypeCastExpr.java ActionExpr.java \
 		Data.java DataList.java DataHash.java FullType.java VarData.java FunctionData.java\
 		StrType.java BaseGrammarException.java NameSingle.java\
-	BaseGrammarLexerTest.java
+	BaseGrammarCompiler.java
 
 dump: parserD.java $(FILE:java=class)
 
 run: test1Output.txt testValidOutput.txt
 
 test1Output.txt: all
-	$(JAVA) -cp $(CP) BaseGrammarLexerTest < test1.as > test1Output.txt
+	$(JAVA) -cp $(CP) BaseGrammarCompiler < test1.as > test1Output.txt
 	cat -n test1Output.txt
 
 testValidOutput.txt: all
-	$(JAVA) -cp $(CP) BaseGrammarLexerTest < testValid.as > testValidOutput.txt
+	$(JAVA) -cp $(CP) BaseGrammarCompiler < testValid.as > testValidOutput.txt
 	cat -n testValidOutput.txt
 
 

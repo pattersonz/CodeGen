@@ -63,3 +63,4 @@ class testValid
 	}
 }
 Analysis success
+Code generated!

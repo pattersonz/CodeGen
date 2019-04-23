@@ -1,3 +1,6 @@
+import java.io.IOException;
+import java.io.File;
+import java.io.FileWriter;
 class Program extends BaseGrammarTop implements BG {
 	String id;
 	MemberDecls memberDeclarations;
@@ -26,6 +29,18 @@ class Program extends BaseGrammarTop implements BG {
             ex.prepend("class<" + id + ">");
             throw ex;
         }
+    }
+
+    public void gen() throws Exception
+    {
+	file = new File("snes/main.asm");
+	writer = new FileWriter(file);
+	writer.write("");
+	writer.flush();
+	writer.append(".incude\"setup.inc\"\n");
+	memberDeclarations.gen();
+	writer.append(".ENDS\n");
+	writer.close();
     }
 
   public String toString(int t)

@@ -65,5 +65,37 @@ class MethodDecl extends BaseGrammarTop implements BG{
 			+ (statements != null ? statements.toString(t + 1) : "")
 			+ T(t) + "}" + (hasSemicolon ? ";\n" : "\n") );
 	}
+    
+    public void gen() throws Exception
+    {
+	FullType[] argTypes = null;
+	writer.append("method_" + methodStart.id + ":\n");
+	store();
+	Integer maxVars = 0;
+	if (argumentDeclarations != null)
+	    maxVars += argumentDeclarations.dataSpace();
+	if (fieldDeclarations != null)
+	    maxVars += fieldDeclarations.dataSpace();
+	if (statements != null)
+	    maxVars += statements.dataSpace();
+	writer.append("rep $#20\ntsc\nsbc #" + maxVars.toString() +
+		      "\ntcs");
+	
+	if (argumentDeclarations != null) 
+	    argTypes = argumentDeclarations.getTypes();
 
+	hash.insert(methodStart.id, methodStart.returnType, argTypes, 0);
+
+	if (argumentDeclarations != null)
+	    argumentDeclarations.addVars(1);
+
+	
+	if (fieldDeclarations != null)
+	    fieldDeclarations.addVars(2);
+	
+	if (statements != null)
+	    alwaysRets = statements.analysis(2, methodStart.getType());
+	hash.leaveScope(1);
+	load();
+    }
 }

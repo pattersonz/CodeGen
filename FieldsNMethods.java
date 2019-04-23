@@ -73,4 +73,20 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 			return (methodDeclaration.toString(t) + (methodDeclarations != null ? methodDeclarations.toString(t) : "" ));
     	return( fieldDeclaration.toString(t) + (fieldsAndMethods != null ? fieldsAndMethods.toString(t) : "") );
 	}
+
+    public void gen() throws Exception
+    {
+	if (methodDeclaration != null)
+	    {
+		methodDeclaration.gen();
+		if (methodDeclarations != null)
+		    methodDeclarations.gen();
+	    }
+	else
+	    {
+		fieldDeclaration.gen();
+		if (fieldsAndMethods != null)
+		    fieldsAndMethods.gen();
+	    }
+    }
 }

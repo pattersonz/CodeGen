@@ -12,7 +12,14 @@ class MemberDecls extends BaseGrammarTop implements BG {
 
     public void analysis() throws BaseGrammarException
     {
+	if (fieldsAndMethods != null)
       fieldsAndMethods.analysis();
+    }
+
+    public void gen() throws Exception
+    {
+	if (fieldsAndMethods != null)
+	    fieldsAndMethods.gen();
     }
 }
 
