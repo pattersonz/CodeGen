@@ -14,6 +14,37 @@ main:
 	sep #$20
 	plx
 	stx $2118
+	rep #$20
+	ldx #$05
+	phx
+	phx
+	phx
+	sep #$20
+	stx $2118
+
+	
+	
+	sep #$20
+	ldx #$04
+	stx $2118
+	sty $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
+	stx $2118
 forever:
 	jmp forever
 	.ENDS

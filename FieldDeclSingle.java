@@ -39,6 +39,24 @@ class FieldDeclSingle extends FieldDecl implements BG {
 			(expression != null ? expression.toString(t) : "") + ";\n");
 	}
 
+    public int dataSize()
+    {
+	return 2;
+    }
+
+    public void gen(int sizeBelow)
+    {
+	if (expression != null)
+	    expression.gen();
+	//this is interesting because instead of generating an expression, pulling the value and then
+	//assigning it, we can simply just leave the last value on the stack.
+	else
+	    writer.append("ldx #$00\nphx\n");
+	
+    }
+		    
+	
+
 }
 
 

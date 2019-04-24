@@ -20,5 +20,14 @@ class FieldDeclArray extends FieldDecl implements BG {
 	{
 		return( T(t) + super.toString(t) + "[" + intlit + "];\n");
 	}
+    
+    public int dataSize()
+    {
+	return 2 + intlit * 2; //address of start + 2 bytes for each int
+    }
+
+    public void gen(int sizeBelow)
+    {
+    }
 
 }

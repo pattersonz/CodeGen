@@ -84,9 +84,21 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 	    }
 	else
 	    {
-		fieldDeclaration.gen();
+		
+		int varsBelow = fieldsAndMethods.getVarsBelow();
+		fieldDeclaration.gen(varBelow);
 		if (fieldsAndMethods != null)
 		    fieldsAndMethods.gen();
 	    }
+    }
+
+    public int getVarsBelow()
+    {
+	if (methodDeclaration == null)
+	    return 0;
+	int size = 0;
+	if (fieldsAndMethods != null)
+	    size += fieldsAndMethods.getVarsBelow();
+	size += fieldDeclaration.dataSize();
     }
 }

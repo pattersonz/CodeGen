@@ -13,5 +13,8 @@ abstract class FieldDecl extends BaseGrammarTop implements BG {
     return fieldStart.toString(t);
   }
 
+    abstract public int dataSize();
+
+    abstract public void gen(int varsBelow);
 }
 

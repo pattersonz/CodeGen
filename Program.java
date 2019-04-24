@@ -33,6 +33,7 @@ class Program extends BaseGrammarTop implements BG {
 
     public void gen() throws Exception
     {
+	hash = new StackHash();
 	file = new File("snes/main.asm");
 	writer = new FileWriter(file);
 	writer.write("");
