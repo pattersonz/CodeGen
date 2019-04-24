@@ -78,13 +78,13 @@ class FieldsNMethods extends BaseGrammarTop implements BG
     {
 	if (methodDeclaration != null)
 	    {
+		writer.append("rts\n");
 		methodDeclaration.gen();
 		if (methodDeclarations != null)
 		    methodDeclarations.gen();
 	    }
 	else
 	    {
-		
 		int varsBelow = fieldsAndMethods.getVarsBelow();
 		fieldDeclaration.gen(varBelow);
 		if (fieldsAndMethods != null)
@@ -92,7 +92,7 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 	    }
     }
 
-    public int getVarsBelow()
+    public int globalSize()
     {
 	if (methodDeclaration == null)
 	    return 0;

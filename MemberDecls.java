@@ -19,7 +19,13 @@ class MemberDecls extends BaseGrammarTop implements BG {
     public void gen() throws Exception
     {
 	if (fieldsAndMethods != null)
-	    fieldsAndMethods.gen();
+	    {
+		int top = fieldsAndMethods.globalSize();
+		writer.append("fieldDecls:\nrep $#20\ntsc\nsbc #" + top.toString() +
+			      "\ntcs\n"); // set aside space for all global vars
+		writer.append("tsc\ntax\nphx\n"); //set the global pointer
+		fieldsAndMethods.gen(top);
+	    }
     }
 }
 
