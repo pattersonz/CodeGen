@@ -357,4 +357,4 @@ class<testTypes>:float assignmentCheck:type mismatch between b[0] and 1.0
 class<testTypes>:float assignmentCheck:type mismatch between b[0] and '0'
 class<testTypes>:main not declared
 
-Code generated!
+Error writing to file

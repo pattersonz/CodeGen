@@ -44,5 +44,15 @@ class ArgDecls extends BaseGrammarTop implements BG {
   	return(argumentDeclaration.toString(t) + (argumentDeclarations != null ? ", " + 
       argumentDeclarations.toString(t) : "") );
   }
+
+    public Integer gen(Integer sizeBelow) throws Exception
+    {
+	argumentDeclaration.gen(sizeBelow);
+	if (argumentDeclarations != null)
+	    {
+		return argumentDeclarations.gen(sizeBelow + 2);
+	    }
+	return sizeBelow + 2;
+    }
 }
 

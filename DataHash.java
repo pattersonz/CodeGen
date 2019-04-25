@@ -197,6 +197,35 @@ class DataHash
 	    	location *= -1;
 	return location % size;
     }
-
-    
+    //------------------------------------
+    //code generation section  starts here
+    //------------------------------------
+    void insert(String id, FullType t, int scope, Integer sizeBelow)
+    {
+	int spot = hashFunction(id);
+	int endLoc = spot;
+	boolean foundSpot = false;
+	while (!foundSpot)
+	    {
+		if (table[spot] == null)
+		    {
+			Data newVar = new VarData(id, t, scope, sizeBelow);
+			table[spot] = new DataList(newVar, null);
+			foundSpot = true;
+		    }
+		    else
+			{
+			    if (table[spot].getId().equals(id))
+				{
+				    Data newVar = new VarData(id, t, scope, sizeBelow);
+				    table[spot] = new DataList(newVar, table[spot]);
+				    foundSpot = true;
+				}
+			    else
+				{
+				    spot = (spot + 1) % size;
+				}
+			}
+	    } 
+    }
 }

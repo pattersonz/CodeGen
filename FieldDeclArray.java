@@ -23,11 +23,15 @@ class FieldDeclArray extends FieldDecl implements BG {
     
     public int dataSize()
     {
-	return 2 + intlit * 2; //address of start + 2 bytes for each int
+	return 2 + intlit * 2;
     }
 
-    public void gen(int sizeBelow)
+    public void gen(int scope, Integer sizeBelow) throws Exception
     {
+	FullType ft = new FullType(fieldStart.type, true, false);
+	hash.insert(fieldStart.id, ft, scope, sizeBelow);
+	writer.append("sta #" + Integer.toString(sizeBelow + 2) + "\nstx #" + sizeBelow.toString() + "\nsta 0, x\n");
+	
     }
 
 }

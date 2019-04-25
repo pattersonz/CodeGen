@@ -41,5 +41,10 @@ class Stmts extends BaseGrammarTop implements BG {
        }
        return temp;
     }
+
+    public void gen(int scope, Integer sizeBelow) throws Exception
+    {
+	return;
+    }
 }
 

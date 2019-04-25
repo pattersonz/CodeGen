@@ -40,5 +40,10 @@ class MethodDecls extends BaseGrammarTop implements BG {
   	return(methodDeclaration.toString(t) + 
       (methodDeclarations != null ? methodDeclarations.toString(t) : "") );
   }
+
+    public void gen() throws Exception
+    {
+	return;
+    }
 }
 

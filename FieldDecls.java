@@ -25,5 +25,16 @@ class FieldDecls extends BaseGrammarTop implements BG {
   {
   	return(fieldDeclaration.toString(t) + (fieldDeclarations != null ? fieldDeclarations.toString(t) : "") );
   }
+
+    public Integer gen(int scope, Integer sizeBelow) throws Exception
+    {
+	fieldDeclaration.gen(scope, sizeBelow);
+	sizeBelow += fieldDeclaration.dataSize();
+	if (fieldDeclarations != null)
+	    {
+		sizeBelow = fieldDeclarations.gen(scope, sizeBelow);
+	    }
+	return sizeBelow;
+    }
 }
 

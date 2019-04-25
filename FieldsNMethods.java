@@ -74,32 +74,24 @@ class FieldsNMethods extends BaseGrammarTop implements BG
     	return( fieldDeclaration.toString(t) + (fieldsAndMethods != null ? fieldsAndMethods.toString(t) : "") );
 	}
 
-    public void gen(int top) throws Exception
+    public void gen(Integer top) throws Exception
     {
 	if (methodDeclaration != null)
 	    {
-		writer.append("rts\n");
+		
+		writer.append("lda #" + top.toString() + "\nsta $0000\ntcd\njsr method_main\ninfinite:\njmp infinite\n");
 		methodDeclaration.gen();
 		if (methodDeclarations != null)
 		    methodDeclarations.gen();
 	    }
 	else
 	    {
-		int varsBelow = fieldsAndMethods.getVarsBelow();
-		fieldDeclaration.gen(varBelow);
+		fieldDeclaration.gen(0, top);
+		top += fieldDeclaration.dataSize();
 		if (fieldsAndMethods != null)
-		    fieldsAndMethods.gen();
+		    fieldsAndMethods.gen(top);
 	    }
     }
 
-    public int globalSize()
-    {
-	if (methodDeclaration == null)
-	    return 0;
-	int size = 0;
-	if (fieldsAndMethods != null)
-	    size += fieldsAndMethods.getVarsBelow();
-	size += fieldDeclaration.dataSize();
-	return size;
-    }
+
 }

@@ -18,4 +18,9 @@ class OptionalExpr extends BaseGrammarTop implements BG {
 		return( " = " + expression.toString(t));
 	}
 
+    public void gen() throws Exception
+    {
+	expression.gen();
+    }
+
 }

@@ -29,6 +29,7 @@ class Program extends BaseGrammarTop implements BG {
             ex.prepend("class<" + id + ">");
             throw ex;
         }
+	hash.leaveScope(0);
     }
 
     public void gen() throws Exception
@@ -41,6 +42,7 @@ class Program extends BaseGrammarTop implements BG {
 	memberDeclarations.gen();
 	writer.append(".ENDS\n");
 	writer.close();
+	hash.leaveScope(0);
     }
 
   public String toString(int t)

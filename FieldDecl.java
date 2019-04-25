@@ -15,6 +15,6 @@ abstract class FieldDecl extends BaseGrammarTop implements BG {
 
     abstract public int dataSize();
 
-    abstract public void gen(int varsBelow);
+    abstract public void gen(int scope, Integer sizeBelow) throws Exception;
 }
 

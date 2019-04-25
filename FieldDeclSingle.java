@@ -44,19 +44,16 @@ class FieldDeclSingle extends FieldDecl implements BG {
 	return 2;
     }
 
-    public void gen(int scope, int sizeBelow)
+    public void gen(int scope, Integer sizeBelow) throws Exception
     {
 	FullType ft = new FullType(fieldStart.type, false, isFinal);
 	hash.insert(fieldStart.id, ft, scope, sizeBelow);
 	if (expression != null)
 	    {
-		int x = expression.gen();
+		expression.gen();
+		writer.append("pla\nstx #" + sizeBelow.toString() + "\nsta 0, x\n");
 		
-	//this is interesting because instead of generating an expression, pulling the value and then
-	//assigning it, we can simply just leave the last value on the stack.
-	    }
-	else
-	    writer.append("ldx #$00\nphx\n");
+	    }	    
 	
     }
 		    

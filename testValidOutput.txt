@@ -1,5 +1,7 @@
 class testValid
 {
+	int x = 3;
+	int y = (3 + 4);
 	float sqrt(float square, float guess)
 	{
 		float nextGuess;

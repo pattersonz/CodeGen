@@ -1,54 +1,25 @@
-.include "setup.inc"
-main:	
-	ldx #$0002
-	stx $2118
-	phx
-	inx
-	stx $2118
-	phx
-	inx
-	stx $2118
-	phx
-	inx
-	stx $2118
-	phx
-	inx
-	phx
-	stx $2118
-	ldx #$000a
-	stx $0000
-	ldx #$0007
-	stx $0002
-	stx $0004
-	stx $0006
-	stx $0008
-	stx $000a
-	stx $000c
-	stx $000e
-	stx $0010
-	stx $0012
-	stx $0014
-	stx $0016
-	inx
-	stx $2118
-	phd
-	
-	rep #$20
-	lda #$0004
-	tcd
-	ldy #$0000
-	lda $00, y
-	sta $2118
-	ldx #10
-	stx $2118
-	ldy #$02
-	lda $00, y
-	pld
-	ldx #$07
-	stx $2118
-	tax
-	stx $2118
-
-forever:
-	jmp forever
-	.ENDS
+.incude"setup.inc"
+main:
+rep #$30
+ldx #$0004
+stx $0002
+lda #$0000
+tcd
+pla
+stx #2052
+sta 0, x
+pla
+stx #2054
+sta 0, x
+lda #2056
+sta $0000
+tcd
+jsr method_main
+infinite:
+jmp infinite
+method_sqrt:
+lda $0000
+adc #6
+sta $0000
+rts
+.ENDS

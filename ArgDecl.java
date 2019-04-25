@@ -19,5 +19,11 @@ abstract class ArgDecl extends BaseGrammarTop implements BG {
   {
   	return( type.toString(t) + " " + id);
   }
+
+    public void gen(Integer sizeBelow) throws Exception
+    {
+	FullType t = getType();
+	hash.insert(id, t, 1, sizeBelow);	
+    }
 }
 
