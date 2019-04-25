@@ -20,10 +20,12 @@ class MemberDecls extends BaseGrammarTop implements BG {
     {
 	if (fieldsAndMethods != null)
 	    {
-		int top = fieldsAndMethods.globalSize();
-		writer.append("fieldDecls:\nrep $#20\ntsc\nsbc #" + top.toString() +
-			      "\ntcs\n"); // set aside space for all global vars
-		writer.append("tsc\ntax\nphx\n"); //set the global pointer
+		fieldsAndMethods.globalSize();
+		//create stack top pointer at $0000
+		//tileMap adr at $0002
+		//tiles at $0004 through $0804 (2 * 32 * 32)
+		top += 4 + (2*32*32) + 2; //plus 2 for the next free space
+		writer.append("");
 		fieldsAndMethods.gen(top);
 	    }
     }

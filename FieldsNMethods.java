@@ -74,7 +74,7 @@ class FieldsNMethods extends BaseGrammarTop implements BG
     	return( fieldDeclaration.toString(t) + (fieldsAndMethods != null ? fieldsAndMethods.toString(t) : "") );
 	}
 
-    public void gen() throws Exception
+    public void gen(int top) throws Exception
     {
 	if (methodDeclaration != null)
 	    {
@@ -100,5 +100,6 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 	if (fieldsAndMethods != null)
 	    size += fieldsAndMethods.getVarsBelow();
 	size += fieldDeclaration.dataSize();
+	return size;
     }
 }
