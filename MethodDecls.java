@@ -43,7 +43,9 @@ class MethodDecls extends BaseGrammarTop implements BG {
 
     public void gen() throws Exception
     {
-	return;
+	methodDeclaration.gen();
+	if (methodDeclarations != null)
+	    methodDeclarations.gen();
     }
 }
 
