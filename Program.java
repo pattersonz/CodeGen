@@ -9,6 +9,8 @@ class Program extends BaseGrammarTop implements BG {
   	id = i;
   	memberDeclarations = m;
 	hash = new DataHash();
+	ifCount = 0;
+	whileCount = 0;
   }
 
     public void analysis() throws BaseGrammarException
@@ -38,7 +40,7 @@ class Program extends BaseGrammarTop implements BG {
 	writer = new FileWriter(file);
 	writer.write("");
 	writer.flush();
-	writer.append(".incude\"setup.inc\"\n");
+	writer.append(".include \"setup.inc\"\n");
 	memberDeclarations.gen();
 	writer.append(".ENDS\n");
 	writer.close();

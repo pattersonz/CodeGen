@@ -6,6 +6,8 @@ abstract class BaseGrammarTop implements BG{
   protected static DataHash hash;
     protected static File file;
     protected static FileWriter writer;
+    protected static int ifCount;
+    protected static int whileCount;
   public String T(int t)
   {
   	String tabs = "";
@@ -27,6 +29,13 @@ abstract class BaseGrammarTop implements BG{
     public void load() throws Exception
     {
 	writer.append("ply\nplx\npla\n");
+    }
+    public String hex(int val)
+    {
+	String output = Integer.toHexString(val);
+	if (output.length() % 2 == 1)
+	    output = "0" + output;
+	return output;
     }
 
 }

@@ -228,4 +228,26 @@ class DataHash
 			}
 	    } 
     }
+
+    public VarData getVar() throws Exception
+	{
+	    int spot = hashFunction(id);
+	    int endLoc = spot;
+	    boolean found = false;
+	    while (!found)
+		{
+		    if (table[spot].getId().equals(id))
+			{
+			    found = true;
+			}
+		    else
+			{
+			    spot = (spot + 1) % size;
+			}
+		}
+	    if (!( table[spot] instanceof VarData))
+		throw new Exception("Hash broke");
+	    return (VarData)table[spot];
+    }
+
 }

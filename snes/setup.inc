@@ -167,3 +167,38 @@ DMAPalette:
 
     plp
     rts         ; return from subroutine
+
+;============================================================================
+
+;============================================================================
+; SetTiles -- Sets all the tile values in the designated mem space to
+; the screen
+;----------------------------------------------------------------------------
+; In: None
+;----------------------------------------------------------------------------
+; Out: None
+;----------------------------------------------------------------------------
+; Modifies: none
+;----------------------------------------------------------------------------
+SetTiles:
+	php
+	phx
+	phy
+	phd
+
+	lda #$0004
+	tcd		;set data book to bottom of tiles
+	ldx #$0000
+	.rept 32	;loop through all 32 rows...
+	      .rept 32 	;and all 32 cols....
+	      	    lda 0, x
+		    sta $2118
+		    inx
+		    inx
+	      .endr
+	.endr
+	pld
+	ply
+	plx
+	plp
+	rts

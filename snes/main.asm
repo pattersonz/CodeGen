@@ -1,4 +1,4 @@
-.incude"setup.inc"
+.include "setup.inc"
 main:
 rep #$30
 ldx #$0004
@@ -6,12 +6,12 @@ stx $0002
 lda #$0000
 tcd
 pla
-stx #2052
+ldx #$0804
 sta 0, x
 pla
-stx #2054
+ldx #$0806
 sta 0, x
-lda #2056
+lda #$0808
 sta $0000
 tcd
 jsr method_main
@@ -24,24 +24,26 @@ sta $0000
 rts
 method_getDistance:
 pla
-stx #6
+ldx #$06
 sta 0, x
 pla
-stx #8
+ldx #$08
 sta 0, x
 lda $0000
 adc #10
 sta $0000
 rts
 method_main:
-sta #2
-stx #0
+tdc
+adc #$02
+ldx #$00
 sta 0, x
-sta #24
-stx #22
+tdc
+adc #$18
+ldx #$16
 sta 0, x
 pla
-stx #44
+ldx #$2c
 sta 0, x
 lda $0000
 adc #52

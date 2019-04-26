@@ -17,5 +17,13 @@ class WhileBase extends BaseGrammarTop implements BG {
   	if (ft.getType().toString(0) != "bool" && ft.getType().toString(0) != "int" && !ft.getArray())
   		throw new BaseGrammarException("Invalid type in while condition: " + this.toString(0));
   }
+
+    public void gen(int thisWhile)
+    {
+	expression.gen();
+        writer.append("pla\ncpa #$0000\nbeq elihw_" + Integer.toString(thisWhile) + "\n");
+    }
+
+    
 }
 

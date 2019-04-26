@@ -79,7 +79,7 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 	if (methodDeclaration != null)
 	    {
 		
-		writer.append("lda #" + top.toString() + "\nsta $0000\ntcd\njsr method_main\ninfinite:\njmp infinite\n");
+		writer.append("lda #$" + hex(top) + "\nsta $0000\ntcd\njsr method_main\ninfinite:\njmp infinite\n");
 		methodDeclaration.gen();
 		if (methodDeclarations != null)
 		    methodDeclarations.gen();

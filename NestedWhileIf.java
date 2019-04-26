@@ -27,4 +27,18 @@ class NestedWhileIf extends NestedMatchedWhileIf implements BG{
 	{
 		return( super.toString(t) + T(t) + "{\n" + nestedMatchedWhile.toString(t + 1) + T(t) + "}\n");
 	}
+
+    public void gen(int scope, Integer sizeBelow) throws Exception
+    {
+	int thisWhile = whileCount;
+	whileCount++;
+	writer.append("while_" + Integer.toString(thisWhile) + ":\n");
+	whileBase.gen(thisWhile);
+	nestedMatchedWhile.gen(scope + 1, sizeBelow);
+	hash.leaveScope(scope + 1);
+	writer.append("jmp while_" + Integer.toString(thisWhile) + "\n" +
+		      "elihw_" + Integer.toString(thisWhile) + ":\n");
+    }
+
+    
 }

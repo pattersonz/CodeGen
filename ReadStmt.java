@@ -17,5 +17,10 @@ class ReadStmt extends NonWhileStmt implements BG {
   {
   	return(T(t) + "read(" + readList.toString(t) + ");\n");
   }
+
+        public void gen(int scope, Integer sizeBelow) throws Exception
+    {
+	return;
+    }
 }
 

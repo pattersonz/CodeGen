@@ -39,5 +39,20 @@ class MatchedInnerIf extends MatchedIf implements BG {
   	return (T(t) + ifBase.toString(t) + T(t) + "{\n" + matchedIf.toString(t + 1) + T(t) + "}\n" +
       T(t) + "else\n" + T(t) + "{\n" + exteriorMatchedIf.toString(t + 1) + T(t) + "}\n");
   }
+
+            public void gen(int scope, Integer sizeBelow) throws Exception
+    {
+	int thisIf = ifCount;
+	ifCount++;
+	ifBase.gen(thisIf);
+	writer.append("if_" + Integer.toString(thisIf) + ":\n");
+	matchedIf.gen(scope + 1, sizeBelow);
+	hash.leaveScope(scope + 1);
+	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
+		      "else_" + Integer.toString(thisIf) + ":\n");
+	matchedIf.gen(scope + 1, sizeBelow);
+	hash.leaveScope(scope + 1);
+	writer.append("fi_" + Integer.toString(thisIf) + ":\n");
+    }
 }
 

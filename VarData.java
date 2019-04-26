@@ -17,4 +17,9 @@ class VarData extends Data
     {
 	return null;
     }
+
+    public Integer getOffset()
+    {
+	return varOffset;
+    }
 }

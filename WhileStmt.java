@@ -9,5 +9,7 @@ abstract class WhileStmt extends NonIfStmt implements BG {
   {
   	return whileBase.toString(t);
   }
+    abstract public void(int scope, Integer sizeBelow) throws Exception;
+    
 }
 

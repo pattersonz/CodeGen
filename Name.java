@@ -17,4 +17,5 @@ abstract class Name extends Expr implements BG {
 
   abstract public boolean wasDeref();
 
+    abstract public void asnValue();
 }

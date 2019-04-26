@@ -51,7 +51,7 @@ class FieldDeclSingle extends FieldDecl implements BG {
 	if (expression != null)
 	    {
 		expression.gen();
-		writer.append("pla\nstx #" + sizeBelow.toString() + "\nsta 0, x\n");
+		writer.append("pla\nldx #$" + hex(sizeBelow) + "\nsta 0, x\n");
 		
 	    }	    
 	

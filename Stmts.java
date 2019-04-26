@@ -44,7 +44,9 @@ class Stmts extends BaseGrammarTop implements BG {
 
     public void gen(int scope, Integer sizeBelow) throws Exception
     {
-	return;
+	statement.gen(scope, sizeBelow);
+	if (statements != null)
+	    statements.gen(scope, sizeBelow);
     }
 }
 

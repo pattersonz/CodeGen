@@ -16,5 +16,15 @@ class IfBackendStmt extends UnmatchedIf implements BG {
   {
   	return nonIfStatement.toString(t);
   }
+
+    public void gen(int scope, Integer sizeBelow, int thisIf) throws Exception
+    {
+	writer.append("if_" + Integer.toString(thisIf) + ":\n");
+	nonIfStatement.gen(scope + 1, sizeBelow);
+	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
+		      "else_" + Integer.toString(thisIf) + ":\n" +
+		      "fi_" + Integer.toString(thisIf) + ":\n");
+	hash.leaveScope(scope + 1);
+    }
 }
 

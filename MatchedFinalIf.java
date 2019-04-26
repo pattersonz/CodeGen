@@ -15,5 +15,10 @@ class MatchedFinalIf extends MatchedIf implements BG {
   {
   	return nonIfStatement.toString(t);
   }
+
+    public void gen(int scope, Integer sizeBelow) throws Exception
+    {
+	nonIfStatement.gen(scope, sizeBelow);
+    }
 }
 
