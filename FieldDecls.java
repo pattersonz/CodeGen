@@ -29,7 +29,9 @@ class FieldDecls extends BaseGrammarTop implements BG {
     public Integer gen(int scope, Integer sizeBelow) throws Exception
     {
 	fieldDeclaration.gen(scope, sizeBelow);
-	sizeBelow += fieldDeclaration.dataSize();
+	int addition = fieldDeclaration.dataSize();
+	writer.append("lda $0000\nadc #$" + hex(addition) + "\nsta");
+	sizeBelow += addition;
 	if (fieldDeclarations != null)
 	    {
 		sizeBelow = fieldDeclarations.gen(scope, sizeBelow);

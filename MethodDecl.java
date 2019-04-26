@@ -81,9 +81,6 @@ class MethodDecl extends BaseGrammarTop implements BG{
 	
 	if (fieldDeclarations != null)
 	    sizeBelow = fieldDeclarations.gen(2, sizeBelow);
-
-	if (sizeBelow > 0)
-	    writer.append("lda $0000\nadc #" + sizeBelow.toString() + "\nsta $0000\n");
 	
 	if (statements != null)
 	    statements.gen(2, sizeBelow);

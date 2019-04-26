@@ -51,8 +51,8 @@ class NameArray extends Name implements BG {
 		      "ply\nplx\n" + 
 		      //push data bank
 		      "phd\n" +
-		      //push index, value to set
-		      "phy\nphx\n");
+		      //push value to set then index
+		      "phx\nphy\n");
 	if (var.getScope() == 0)
 	    {
 		writer.append(
@@ -66,10 +66,12 @@ class NameArray extends Name implements BG {
 			  "lda 0, x\n" +
 			  //set databank address to acc
 			  "tcd\n" +
-			  //pull value to set to acc, index to y
-			  "pla\nply\n" +
+			  //pull index to acc, then double it, then move to y
+			  "pla\nasl a\ntay\n" +
+			  //pull value to store into accumulator
+			  "pla\n" +
 			  //store acc to databank offset to y
-			  "sta 0, y\n"
+			  "sta 0, y\n" +
 			  //restore databank
 			  "phd\n";
 			  );
