@@ -42,38 +42,46 @@ class NameArray extends Name implements BG {
 	return true;
     }
 
-    public void asnValue()
+    public void asnValue() throws Exception
     {
 	VarData var = hash.getVar(id);
 	expression.gen();
-	writer.append(
-		      //pull index and value to set
-		      "ply\nplx\n" + 
-		      //push data bank
-		      "phd\n" +
-		      //push value to set then index
-		      "phx\nphy\n");
-	if (var.getScope() == 0)
-	    {
-		writer.append(
-		//set data bank to 0
-			      "lda #$0000\ntcd\n");
-	    }
-	    writer.append(
-			  //load address of pointer to a
-			  "ldx #$" + hex(var.getOffset()) + "\n" +
-			  //load address [0] to acc
-			  "lda 0, x\n" +
-			  //set databank address to acc
-			  "tcd\n" +
-			  //pull index to acc, then double it, then move to y
-			  "pla\nasl a\ntay\n" +
-			  //pull value to store into accumulator
-			  "pla\n" +
-			  //store acc to databank offset to y
-			  "sta 0, y\n" +
-			  //restore databank
-			  "phd\n";
-			  );
+	//back up stack top
+	    writer.append(";asn val\nplx\nply\nlda $0000\npha\nphy\nphx\n");
+	    if (var.getScope() == 0)
+		{
+		    writer.append("ldx #$0000\n");
+		}
+	    else
+		{
+		    writer.append("ldx $0002\n");
+		}
+	    writer.append("lda $" + hex(var.getOffset()) + ", x\n" +
+			  //get index double it, add original offset move into x
+			  "sta $0000\npla\nasl a\nclc\nadc $0000\ntax\n" +
+			  //grab val to asign, store it at offset, restore $0
+			  "pla\nsta $0000, x\nplx\nstx $0000\n");
     }
+    
+    public void getValue() throws Exception
+    {
+	VarData var = hash.getVar(id);
+	expression.gen();
+	//back up stack top
+	    writer.append(";getVal\nply\nlda $0000\npha\nphy\n");
+	    if (var.getScope() == 0)
+		{
+		    writer.append("ldx #$0000\n");
+		}
+	    else
+		{
+		    writer.append("ldx $0002\n");
+		}
+	    writer.append("lda $" + hex(var.getOffset()) + ", x\n" +
+			  //get index double it, add original offset move into x
+			  "sta $0000\npla\nasl a\nclc\nadc $0000\ntax\n" +
+			  //grab value at index point, restore $0 push val out
+			  "lda $0000, x\nplx\nstx $0000\npha\n");
+    }
+    
 }

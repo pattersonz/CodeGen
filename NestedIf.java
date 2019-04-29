@@ -18,10 +18,10 @@ class NestedIf extends UnmatchedIf implements BG {
   }
 
     
-        public void gen(int scope, Integer sizeBelow, int thisIf) throws Exception
+    public void gen(int scope, Integer sizeBelow, int thisIf, String method) throws Exception
     {
 	writer.append("if_" + Integer.toString(thisIf) + ":\n");
-	ifStatement.gen(scope + 1, sizeBelow);
+	ifStatement.gen(scope + 1, sizeBelow, method);
 	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
 		      "else_" + Integer.toString(thisIf) + ":\n" +
 		      "fi_" + Integer.toString(thisIf) + ":\n");

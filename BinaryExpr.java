@@ -56,5 +56,108 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
   {
   	return ("(" + leftHandSide.toString(t) + " " + operator + " " + rightHandSide.toString(t) + ")");
   }
+
+    public void gen() throws Exception
+    {
+	
+	//these may not evaluate both sides
+	if (operator.equals("||"))
+	    {
+		int cc = compareCount;
+		compareCount++;
+		leftHandSide.gen();
+		writer.append("plx\ncpx #$0000\nbne compare" + hex(cc) +"\n");
+		rightHandSide.gen();
+		writer.append("plx\ncpx #$0000\nbne compare" + hex(cc) +"\n");
+		writer.append("ldx #$0000\njmp erapmoc" + hex(cc) + "\ncompare" + hex(cc) +
+			      ":\nldx #$0001\n\nerapmoc" + hex(cc) + ":\nphx\n");	
+	    }
+	else if (operator.equals("&&"))
+	    {
+		//very similar to || but conditions are flipped
+		int cc = compareCount;
+		compareCount++;
+		leftHandSide.gen();
+		writer.append("plx\ncpx #$0000\nbeq compare" + hex(cc) +"\n");
+		rightHandSide.gen();
+		writer.append("plx\ncpx #$0000\nbeq compare" + hex(cc) +"\n");
+		writer.append("ldx #$0001\njmp erapmoc" + hex(cc) + "\ncompare" + hex(cc) +
+			      ":\nldx #$0000\nerapmoc" + hex(cc) + ":\nphx\n");	
+	    }
+	else
+	    {
+		leftHandSide.gen();
+		rightHandSide.gen();
+		//these always will
+		if (operator.equals("+"))
+		    writer.append("plx\nply\nlda $0000\npha\nstx $0000\ntya\nclc\nadc $0000\nplx\nstx $0000\npha\n");
+		else if (operator.equals("-"))
+		   writer.append("ply\nplx\nlda $0000\npha\nsty $0000\ntxa\nsec\nsbc $0000\nplx\nstx $0000\npha\n");
+		else if (operator.equals("*"))
+		    writer.append("plx\nply\nlda $0000\npha\nstx $0000\ntya\nclc\nadc $0000\nplx\nstx $0000\npha\n");
+		else if (operator.equals("/"))
+		   writer.append("plx\nply\nlda $0000\npha\nsty $0000\ntxa\nsec\nsbc $0000\nplx\nstx $0000\npha\n");
+		else if (operator.equals("<"))
+		    {
+			int cc = compareCount;
+			compareCount++;
+			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
+				      Integer.toString(cc) + "\nlda #$0001\njmp erapmoc" +
+				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
+				      ":\nlda #$0000\nerapmoc" + Integer.toString(cc) +
+				      ":\nstx $0000\npha\n");
+		    }
+		else if (operator.equals(">"))
+		    {
+			int cc = compareCount;
+			compareCount++;
+			writer.append("pla\nply\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
+				      Integer.toString(cc) + "\nlda #$0001\njmp erapmoc" +
+				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
+				      ":\nlda #$0000\nerapmoc" + Integer.toString(cc) +
+				      ":\nstx $0000\npha\n");
+		    }
+		else if (operator.equals("<="))
+		    {
+			int cc = compareCount;
+			compareCount++;
+			writer.append("pla\nply\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
+				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
+				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
+				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      ":\nstx $0000\npha\n");
+		    }
+		else if (operator.equals(">="))
+		    {
+			int cc = compareCount;
+			compareCount++;
+			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
+				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
+				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
+				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      ":\nstx $0000\npha\n");
+		    }
+		else if (operator.equals("=="))
+		    {
+			int cc = compareCount;
+			compareCount++;
+			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbeq compare" +
+				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
+				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
+				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      ":\nstx $0000\npha\n");
+		    }
+		else if (operator.equals("<>"))
+		    {
+			int cc = compareCount;
+			compareCount++;
+			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbne compare" +
+				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
+				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
+				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      ":\nstx $0000\npha\n");
+		    }
+	    }
+    }
 }
 

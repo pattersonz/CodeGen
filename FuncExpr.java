@@ -4,4 +4,6 @@ abstract class FuncExpr extends Expr implements BG{
 	{
 		id = i;
 	}
+
+    abstract public void gen() throws Exception;
 }

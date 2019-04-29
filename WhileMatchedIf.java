@@ -5,6 +5,6 @@ abstract class WhileMatchedIf extends WhileStmt implements BG {
     super(w);
   }
 
-    abstract public void gen(int scope, Integer sizeBelow);
+    abstract public void gen(int scope, Integer sizeBelow, String method) throws Exception;
 }
 

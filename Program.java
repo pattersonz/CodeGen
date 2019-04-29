@@ -11,6 +11,7 @@ class Program extends BaseGrammarTop implements BG {
 	hash = new DataHash();
 	ifCount = 0;
 	whileCount = 0;
+	compareCount = 0;
   }
 
     public void analysis() throws BaseGrammarException

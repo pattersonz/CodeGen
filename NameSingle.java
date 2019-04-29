@@ -31,18 +31,26 @@ class NameSingle extends Name implements BG {
         return false;
     }
 
-    public void asnValue()
+    public void asnValue() throws Exception
     {
 	VarData var = hash.getVar(id);
 	if (var.getScope() == 0)
 	    {
-		writer.append("plx\nphd\nlda #$0000\ntcd\nldy $" +
-			      hex(var.getOffset()) + "\ntxa\nsta 0, y\npld\n");
+		writer.append("plx\nstx $" + hex(var.getOffset()) + "\n");
 	    }
 	else
 	    {
-		writer.append("plx\nldy $" +
-			      hex(var.getOffset()) + "\ntxa\nsta 0, y\n");
+		writer.append("pla\nldy $0002\nsta $" +
+			      hex(var.getOffset()) + ", y\n");
 	    }
+    }
+
+    public void getValue() throws Exception
+    {
+	VarData var = hash.getVar(id);
+	if (var.getScope() == 0)
+	    writer.append("ldy $" + hex(var.getOffset()) + "\nphy\n");
+	else
+	    writer.append("ldx $0002\nlda $" + hex(var.getOffset()) + ", x\npha\n");
     }
 }

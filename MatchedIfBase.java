@@ -22,14 +22,14 @@ class MatchedIfBase extends IfBackend implements BG {
       "else\n" + T(t - 1) + "{\n" + statement.toString(t));
   }
 
-        public void gen(int scope, Integer sizeBelow, int thisIf) throws Exception
+    public void gen(int scope, Integer sizeBelow, int thisIf, String method) throws Exception
     {
 	writer.append("if_" + Integer.toString(thisIf) + ":\n");
-	matchedIf.gen(scope + 1, sizeBelow);
+	matchedIf.gen(scope + 1, sizeBelow, method);
 	hash.leaveScope(scope + 1);
 	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
 		      "else_" + Integer.toString(thisIf) + ":\n");
-	statement.gen(scope + 1, sizeBelow);
+	statement.gen(scope + 1, sizeBelow, method);
 	hash.leaveScope(scope + 1);
 	writer.append("fi_" + Integer.toString(thisIf) + ":\n");
     }

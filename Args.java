@@ -42,4 +42,12 @@ class Args extends BaseGrammarTop implements BG {
   	return(expression.toString(t) +
 	       (arguments != null ? ", " + arguments.toString(t) : "") );
   }
+
+    public void gen(int offset) throws Exception
+    {
+	expression.gen();
+	writer.append("ldx $0002\npla\nsta $" + hex(offset) + ", x\ninc $0000\ninc $0000\n");
+	if (arguments != null)
+	    arguments.gen(offset + 2);
+    }
 }

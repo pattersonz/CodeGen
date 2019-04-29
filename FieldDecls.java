@@ -30,7 +30,7 @@ class FieldDecls extends BaseGrammarTop implements BG {
     {
 	fieldDeclaration.gen(scope, sizeBelow);
 	int addition = fieldDeclaration.dataSize();
-	writer.append("lda $0000\nadc #$" + hex(addition) + "\nsta");
+	writer.append("lda $0000\nclc\nadc #$" + hex(addition) + "\nsta $0000\n");
 	sizeBelow += addition;
 	if (fieldDeclarations != null)
 	    {

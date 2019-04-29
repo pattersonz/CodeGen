@@ -40,17 +40,17 @@ class MatchedInnerIf extends MatchedIf implements BG {
       T(t) + "else\n" + T(t) + "{\n" + exteriorMatchedIf.toString(t + 1) + T(t) + "}\n");
   }
 
-            public void gen(int scope, Integer sizeBelow) throws Exception
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
 	int thisIf = ifCount;
 	ifCount++;
 	ifBase.gen(thisIf);
 	writer.append("if_" + Integer.toString(thisIf) + ":\n");
-	matchedIf.gen(scope + 1, sizeBelow);
+	matchedIf.gen(scope + 1, sizeBelow, method);
 	hash.leaveScope(scope + 1);
 	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
 		      "else_" + Integer.toString(thisIf) + ":\n");
-	matchedIf.gen(scope + 1, sizeBelow);
+	matchedIf.gen(scope + 1, sizeBelow, method);
 	hash.leaveScope(scope + 1);
 	writer.append("fi_" + Integer.toString(thisIf) + ":\n");
     }

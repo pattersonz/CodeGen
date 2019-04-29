@@ -45,4 +45,9 @@ class DataList
     {
 	return data.getIsFunction();
     }
+
+    Data getData()
+    {
+	return data;
+    }
 }

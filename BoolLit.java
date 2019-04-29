@@ -13,5 +13,9 @@ class BoolLit extends TypeLit implements BG {
 	{
 		return new FullType( new BoolType(), false, true);
 	}
+    public void gen() throws Exception
+    {
+	writer.append("ldx #$" + hex( (bool.equals("true")) ? 1 : 0 ) + "\nphx\n");
+    }
 }
 

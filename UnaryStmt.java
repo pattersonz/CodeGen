@@ -22,5 +22,18 @@ class UnaryStmt extends NonWhileStmt implements BG {
   {
   	return(T(t) + name.toString(t) + operator + "\n");
   }
+
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
+    {
+	name.getValue();
+	writer.append("plx\n");
+	if (operator.equals("++"))
+	    writer.append("inx\n");
+	else
+	    writer.append("dex\n");
+	writer.append("phx\n");
+	name.asnValue();
+	    
+    }
 }
 

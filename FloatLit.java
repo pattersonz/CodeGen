@@ -14,5 +14,9 @@ class FloatLit extends TypeLit implements BG {
 	{
 		return new FullType(new FloatType(), false, true);
 	}
+    public void gen() throws Exception
+    {
+	writer.append("ldx #$" + hex((int)(floatingPoint)) + "\nphx\n");
+    }
 }
 

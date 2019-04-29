@@ -14,5 +14,10 @@ public boolean analysis(int scope, ReturnType rt) throws BaseGrammarException
   {
   	return(T(t) + "return;\n");
   }
+
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
+    {
+	writer.append("jmp method_" + method + "_end\n");
+    }
 }
 

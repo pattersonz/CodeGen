@@ -41,6 +41,8 @@ terminal FINAL;
 terminal VOID;
 terminal TRUE;
 terminal FALSE;
+terminal TILE;
+terminal DISPLAY;
 
 terminal String INT;
 terminal String FLOAT;
@@ -291,6 +293,12 @@ nonWhileStatement ::= name:n ASSMNT expression:e SEMI
 	|
 	LEFT_BRACE fieldDeclarations:f statements:s RT_BRACE optionalSemicolon:o
 	{: RESULT = new ScopeStmt(f, s, o); :}
+	|
+	TILE LEFT_PAREN expression:a COMMA expression:b COMMA expression:c RT_PAREN SEMI
+	{: RESULT = new Tile(a, b, c); :}
+	|
+	DISPLAY LEFT_PAREN RT_PAREN SEMI
+	{: RESULT = new Display(); :}\
 	;
 
 whileStatement ::=  whileBase:w nonWhileStatement:n

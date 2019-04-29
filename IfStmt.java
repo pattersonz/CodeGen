@@ -27,12 +27,12 @@ class IfStmt extends Stmt implements BG {
   {
   	return ( T(t) + ifBase.toString(t) + T(t) + "{\n" + ifBackend.toString(t + 1) + T(t) + "}\n");
   }
-    public void gen(int scope, Integer sizeBelow) throws Exception
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
 	int thisIf = ifCount;
 	ifCount++;
-	ifBase.gen(thisif);
-	ifBackend.gen(scope, sizeBelow, thisIf);
+	ifBase.gen(thisIf);
+	ifBackend.gen(scope, sizeBelow, thisIf, method);
 	
     }
 }

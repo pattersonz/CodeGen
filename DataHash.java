@@ -229,7 +229,7 @@ class DataHash
 	    } 
     }
 
-    public VarData getVar() throws Exception
+    public VarData getVar(String id) throws Exception
 	{
 	    int spot = hashFunction(id);
 	    int endLoc = spot;
@@ -245,9 +245,9 @@ class DataHash
 			    spot = (spot + 1) % size;
 			}
 		}
-	    if (!( table[spot] instanceof VarData))
+	    if (!( table[spot].getData() instanceof VarData))
 		throw new Exception("Hash broke");
-	    return (VarData)table[spot];
+	    return (VarData)table[spot].getData();
     }
 
 }

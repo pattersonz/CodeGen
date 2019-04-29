@@ -18,10 +18,11 @@ class WhileBase extends BaseGrammarTop implements BG {
   		throw new BaseGrammarException("Invalid type in while condition: " + this.toString(0));
   }
 
-    public void gen(int thisWhile)
+    public void gen(int thisWhile) throws Exception
     {
 	expression.gen();
-        writer.append("pla\ncpa #$0000\nbeq elihw_" + Integer.toString(thisWhile) + "\n");
+        writer.append("pla\ncmp #$0000\nbeq elihwb_" + Integer.toString(thisWhile) + "\n"+
+		      "jmp whileS_" + Integer.toString(thisWhile) + "\nelihwb_" + Integer.toString(thisWhile) + ":\njmp elihw_" + Integer.toString(thisWhile) + "\nwhileS_" + Integer.toString(thisWhile) + ":\n");
     }
 
     

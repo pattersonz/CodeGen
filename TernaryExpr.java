@@ -41,5 +41,25 @@ class TernaryExpr extends Expr implements BG {
       return f;
     return a;
   }
+    public void gen() throws Exception
+    {
+	int cc = compareCount;
+	compareCount++;
+	//eval a
+	condition.gen();
+	//branch if a is 0
+	writer.append("plx\ncpx #$0000\nbeq ternaryb" + hex(cc) + "\njmp ternaryS" + hex(cc) +
+		      "\nternaryb" + hex(cc) + ":\njmp ternary"+hex(cc)+"\nternaryS" + hex(cc) +
+		      ":\n");
+	//b
+	whenTrue.gen();
+	//jmp to end
+	writer.append("jmp yranret" + hex(cc) + "\nternary"+hex(cc)+":\n");
+	//c
+	whenFalse.gen();
+	writer.append("yranret"+hex(cc)+":\n");
+	//since the value is pushed, and the next action is pulled off the stack there isn't a need to do any further actions
+		      
+    }
 }
 

@@ -14,8 +14,14 @@ abstract class Name extends Expr implements BG {
 
   abstract public FullType getType() throws BaseGrammarException;
 
+    public void gen() throws Exception
+    {
+	getValue();
+    }
 
   abstract public boolean wasDeref();
 
-    abstract public void asnValue();
+    abstract public void asnValue() throws Exception;
+
+    abstract public void getValue() throws Exception;
 }

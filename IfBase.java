@@ -18,10 +18,11 @@ class IfBase extends BaseGrammarTop implements BG {
   	return ("if (" + expression.toString(t) + ")\n");
   }
 
-    public void gen(int thisIf)
+    public void gen(int thisIf) throws Exception
     {
 	expression.gen();
-	writer.append("pla\ncpa #$0000\nbeq else_" + Integer.toString(thisIf) + "\n");
+	writer.append("pla\ncmp #$0000\nbeq elseb_" + Integer.toString(thisIf) + "\n"+
+		      "jmp ifS_" + Integer.toString(thisIf) + "\nelseb_" + Integer.toString(thisIf) + ":\njmp else_" + Integer.toString(thisIf) + "\nifS_" + Integer.toString(thisIf) + ":\n");
     }
 }
 

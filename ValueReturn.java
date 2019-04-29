@@ -20,5 +20,10 @@ class ValueReturn extends NonWhileStmt implements BG {
   		throw new BaseGrammarException("invalid type return: " +  this.toString(0).replace("\n",""));
     return true;
   }
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
+    {
+	expression.gen();
+	writer.append("plx\njmp method_" + method + "_end\n");
+    }
 }
 

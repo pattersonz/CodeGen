@@ -27,5 +27,18 @@ class ScopeStmt extends NonWhileStmt implements BG {
       (statements != null ? statements.toString(t + 1) : "") + 
       T(t) + "}" + (hasSemicolon ? ";\n" : "\n"));
   }
+
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
+    {
+	writer.append("ldx $0000\nphx\n");
+	if (fieldDeclarations != null)
+	    sizeBelow = fieldDeclarations.gen(scope + 1, sizeBelow);
+	if (statements != null)
+	    statements.gen(scope + 1, sizeBelow, method);
+	hash.leaveScope(scope + 1);
+	writer.append("plx\nstx $0000\n");
+    }
+
+    
 }
 

@@ -46,21 +46,20 @@ FILE=	BaseGrammarLexer.java      parser.java    sym.java \
 		NestedMatchedWhileIf.java BaseGrammarTop.java IntType.java FloatType.java \
 		CharType.java BoolType.java NonTypeCastExpr.java ActionExpr.java \
 		Data.java DataList.java DataHash.java FullType.java VarData.java FunctionData.java\
-		StrType.java BaseGrammarException.java NameSingle.java\
+		StrType.java BaseGrammarException.java NameSingle.java Display.java Tile.java\
 	BaseGrammarCompiler.java
 
 dump: parserD.java $(FILE:java=class)
 
-run: test1Output.txt testValidOutput.txt
+run: testCodeGen.txt
 
-test1Output.txt: all
-	$(JAVA) -cp $(CP) BaseGrammarCompiler < test1.as > test1Output.txt
-	cat -n test1Output.txt
+testCodeGen.txt: all
+	$(JAVA) -cp $(CP) BaseGrammarCompiler < testCodeGen.as > testCodeGen.txt
+	cat -n testCodeGen.txt
 
-testValidOutput.txt: all
-	$(JAVA) -cp $(CP) BaseGrammarCompiler < testValid.as > testValidOutput.txt
-	cat -n testValidOutput.txt
-
+testBasic.txt: all
+	$(JAVA) -cp $(CP) BaseGrammarCompiler < testBasic.as > testBasic.txt
+	cat -n testBasic.txt
 
 all: BaseGrammarLexer.java parser.java $(FILE:java=class)
 

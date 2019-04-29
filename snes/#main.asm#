@@ -1,0 +1,5 @@
+.include "setup.inc"
+main:
+rep #$30
+
+.ENDS

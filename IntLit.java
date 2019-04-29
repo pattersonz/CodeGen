@@ -14,5 +14,10 @@ class IntLit extends TypeLit implements BG {
 	{
 		return new FullType(new IntType(), false, true);
 	}
+
+    public void gen() throws Exception
+    {
+	writer.append("ldx #$" + hex(integer) + "\nphx\n");
+    }
 }
 

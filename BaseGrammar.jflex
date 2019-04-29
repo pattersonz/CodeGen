@@ -120,6 +120,8 @@ bool		{ return newSym(sym.BOOL); }
 char		{ return newSym(sym.CHAR); }
 true		{ return newSym(sym.TRUE); }
 false		{ return newSym(sym.FALSE); }
+_tile		{ return newSym(sym.TILE); }
+_display 	{ return newSym(sym.DISPLAY); }
 {id}    	{ return newSym(sym.ID, yytext()); }
 {intlit}        { return newSym(sym.INTLIT, new Integer(yytext())); }
 {floatlit}      { return newSym(sym.FLOATLIT, new Double(yytext())); }

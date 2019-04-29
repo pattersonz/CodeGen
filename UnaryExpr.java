@@ -31,5 +31,13 @@ class UnaryExpr extends NonTypeCastExpr implements BG {
   {
   	return("(" + operator + expression.toString(t) + ")");
   }
+
+    public void gen() throws Exception
+    {
+	expression.gen();
+	if (operator.equals("~"))
+	//pull the value, compare with zero, move processor to ac and mask all but zero flag push value
+	writer.append("plx\ncpx #$0000\nphp\nsep #$20\npla\nand #$02\nlsr a\ntax\nrep #$20\nphx\n");
+    }
 }
 

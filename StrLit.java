@@ -14,5 +14,10 @@ class StrLit extends TypeLit implements BG {
 	{
 		return new FullType(new StrType(), false, true);
 	}
+
+    public void gen() throws Exception
+    {
+	writer.append("ldx #$0000\nphx\n");
+    }
 }
 

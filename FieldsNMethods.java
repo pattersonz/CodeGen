@@ -87,6 +87,8 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 	else
 	    {
 		fieldDeclaration.gen(0, top);
+		int addition = fieldDeclaration.dataSize();
+		writer.append("lda $0000\nclc\nadc #$" + hex(addition) + "\nsta $0000\n");
 		top += fieldDeclaration.dataSize();
 		if (fieldsAndMethods != null)
 		    fieldsAndMethods.gen(top);

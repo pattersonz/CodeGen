@@ -28,7 +28,7 @@ class AssmntStmt extends NonWhileStmt implements BG {
   	return(T(t) + name.toString(t) + " = " + expression.toString(t) + ";\n");
   }
     
-    public void gen(int scope, Integer sizeBelow) throws Exception
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
 	expression.gen();
 	name.asnValue();

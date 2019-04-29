@@ -13,5 +13,9 @@ class CharLit extends TypeLit implements BG {
 	{
 		return new FullType( new CharType(), false, true);
 	}
+    public void gen() throws Exception
+    {
+	writer.append("ldx #$" + hex(0) + "\nphx\n");
+    }
 }
 

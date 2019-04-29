@@ -186,12 +186,12 @@ SetTiles:
 	phy
 	phd
 
-	lda #$0004
-	tcd		;set data book to bottom of tiles
+
+	rep #$20
 	ldx #$0000
 	.rept 32	;loop through all 32 rows...
 	      .rept 32 	;and all 32 cols....
-	      	    lda 0, x
+	      	    lda $04, x
 		    sta $2118
 		    inx
 		    inx

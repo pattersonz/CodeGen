@@ -70,9 +70,13 @@ class MethodDecl extends BaseGrammarTop implements BG{
     {
 	FullType[] argTypes = null;
 	writer.append("method_" + methodStart.id + ":\n");
+	//place current $2 at (first in activation record)
+	writer.append("lda $0002\nldx $0000\nsta 0,x\n");
+	//top is currently at x, move to a, store in $2, then add 2 for activation and restore in $0
+	writer.append("txa\nsta $0002\ninc a\ninc a\nsta $0000\n");
   
 	hash.insert(methodStart.id, methodStart.returnType, argTypes, 0);
-	Integer sizeBelow = 0;
+	Integer sizeBelow = 2;
 	
 	if (argumentDeclarations != null)
 	    {
@@ -83,8 +87,9 @@ class MethodDecl extends BaseGrammarTop implements BG{
 	    sizeBelow = fieldDeclarations.gen(2, sizeBelow);
 	
 	if (statements != null)
-	    statements.gen(2, sizeBelow);
+	    statements.gen(2, sizeBelow, methodStart.id);
 	hash.leaveScope(1);
+	writer.append("method_" + methodStart.id + "_end:\nldy $0002\nlda $0000, y\nsta $0002\nsty $0000\n");
 	writer.append("rts\n");
     }
 }

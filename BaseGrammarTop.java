@@ -8,6 +8,7 @@ abstract class BaseGrammarTop implements BG{
     protected static FileWriter writer;
     protected static int ifCount;
     protected static int whileCount;
+    protected static int compareCount;
   public String T(int t)
   {
   	String tabs = "";

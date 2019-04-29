@@ -63,11 +63,11 @@ class WhileMatchedIfEnd extends WhileMatchedIf implements BG {
 	ifCount++;
 	ifBase.gen(thisIf);
 	writer.append("if_" + Integer.toString(thisIf) + ":\n");
-	matchedIf.gen(scope + 1, sizeBelow);
+	interiorIf.gen(scope + 1, sizeBelow);
 	hash.leaveScope(scope + 1);
 	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
 		      "else_" + Integer.toString(thisIf) + ":\n");
-	matchedIf.gen(scope + 1, sizeBelow);
+	otherSideOfElse.gen(scope + 1, sizeBelow);
 	hash.leaveScope(scope + 1);
 	writer.append("fi_" + Integer.toString(thisIf) + ":\n");
 	writer.append("jmp while_" + Integer.toString(thisWhile) + "\n" +
