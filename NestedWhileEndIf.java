@@ -53,7 +53,7 @@ class NestedWhileEndIf extends NestedMatchedWhileIf implements BG{
   }
 
     
-    public void gen(int scope, Integer sizeBelow) throws Exception
+    public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
 	int thisWhile = whileCount;
 	whileCount++;
@@ -64,11 +64,11 @@ class NestedWhileEndIf extends NestedMatchedWhileIf implements BG{
 	ifCount++;
 	ifBase.gen(thisIf);
 	writer.append("if_" + Integer.toString(thisIf) + ":\n");
-	interiorIf.gen(scope + 1, sizeBelow);
+	interiorIf.gen(scope + 1, sizeBelow, method);
 	hash.leaveScope(scope + 1);
 	writer.append("jmp fi_" + Integer.toString(thisIf) + "\n" +
 		      "else_" + Integer.toString(thisIf) + ":\n");
-	otherSideOfElse.gen(scope + 1, sizeBelow);
+	otherSideOfElse.gen(scope + 1, sizeBelow, method);
 	hash.leaveScope(scope + 1);
 	writer.append("fi_" + Integer.toString(thisIf) + ":\n");
 	writer.append("jmp while_" + Integer.toString(thisWhile) + "\n" +

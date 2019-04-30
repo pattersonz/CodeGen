@@ -22,12 +22,23 @@ class ArgFuncExpr extends FuncExpr implements BG {
     return hash.lookup(id, args);
   }
 
-    public void gen() throws Exception
+    public void gen(int extra) throws Exception
     {
-	writer.append("lda $0002\nldx $0000\nsta $0000,x\nstx $0002\ntxa\nclc\nadc #$0002\nsta $0000\n");
-	arguments.gen(2);
-	writer.append("lda $0002\nldx $0000\nsta $0000,x\nstx $0002\njsr method_" + id + "\n");
-	writer.append("phx\n");
+        //push current ar
+	writer.append( "ldx $0002\nphx\n");
+	int count = arguments.gen(extra);
+	//set top + extra as current ar
+	writer.append("lda $0000\nclc\nadc #$" + hex(extra) + "\nsta $0002\n");
+	//increment top to be at the top of arg decls
+	writer.append("lda $0000\nclc\nadc #$" + hex(count) + "\n");
+	//jmp
+	writer.append("jsr method_" + id + "\n" +
+		      //set old ar as top minus the extra (to restore)
+		      "lda $0002\n\nsec\nsbc #$" + hex(extra) + "\nsta $0000\n"+
+		      //pull current ar
+		      "ply\nsty $0002\n" +
+		      //push x for val return
+		      "phx\n");
     }
 }
 

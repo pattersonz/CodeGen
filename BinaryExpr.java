@@ -57,7 +57,7 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
   	return ("(" + leftHandSide.toString(t) + " " + operator + " " + rightHandSide.toString(t) + ")");
   }
 
-    public void gen() throws Exception
+    public void gen(int extra) throws Exception
     {
 	
 	//these may not evaluate both sides
@@ -65,9 +65,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 	    {
 		int cc = compareCount;
 		compareCount++;
-		leftHandSide.gen();
+		leftHandSide.gen(extra);
 		writer.append("plx\ncpx #$0000\nbne compare" + hex(cc) +"\n");
-		rightHandSide.gen();
+		rightHandSide.gen(extra);
 		writer.append("plx\ncpx #$0000\nbne compare" + hex(cc) +"\n");
 		writer.append("ldx #$0000\njmp erapmoc" + hex(cc) + "\ncompare" + hex(cc) +
 			      ":\nldx #$0001\n\nerapmoc" + hex(cc) + ":\nphx\n");	
@@ -77,17 +77,17 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 		//very similar to || but conditions are flipped
 		int cc = compareCount;
 		compareCount++;
-		leftHandSide.gen();
+		leftHandSide.gen(extra);
 		writer.append("plx\ncpx #$0000\nbeq compare" + hex(cc) +"\n");
-		rightHandSide.gen();
+		rightHandSide.gen(extra);
 		writer.append("plx\ncpx #$0000\nbeq compare" + hex(cc) +"\n");
 		writer.append("ldx #$0001\njmp erapmoc" + hex(cc) + "\ncompare" + hex(cc) +
 			      ":\nldx #$0000\nerapmoc" + hex(cc) + ":\nphx\n");	
 	    }
 	else
 	    {
-		leftHandSide.gen();
-		rightHandSide.gen();
+		leftHandSide.gen(extra);
+		rightHandSide.gen(extra);
 		//these always will
 		if (operator.equals("+"))
 		    writer.append("plx\nply\nlda $0000\npha\nstx $0000\ntya\nclc\nadc $0000\nplx\nstx $0000\npha\n");

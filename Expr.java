@@ -4,6 +4,10 @@ abstract class Expr extends BaseGrammarTop implements BG {
 
     abstract public void analysis() throws BaseGrammarException;
 
-    abstract public void gen() throws Exception;
+    public void gen() throws Exception
+    {
+	gen(0);
+    }
+    abstract public void gen(int extra) throws Exception;
 	
 }

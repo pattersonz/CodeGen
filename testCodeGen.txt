@@ -21,14 +21,29 @@ class testCodeGen
 	final int plusBlue = 19;
 	final int minusBlue = 20;
 	final int select = 21;
-	void func1(int a)
+	void draw(int row, int col, int symbol)
 	{
-		_tile( 10, 0, a);
+		_tile( row, col, symbol);
+	}
+	int getVal(int a, int index)
+	{
+		return (a + index);
+	}
+	int grabValAt(int a[], int index)
+	{
+		return a[index];
+	}
+	int changeVal(int ptr[])
+	{
+		ptr[0]++
+		return ptr[0];
 	}
 	void main()
 	{
-		int a[10];
 		int i = 1;
+		int a[10];
+		int temp;
+		int ptr[1];
 		a[0] = zero;
 		b[0] = minus;
 		while((i < 10))
@@ -43,14 +58,23 @@ class testCodeGen
 		while((i < 10))
 		{
 			{
-				_tile( i, 0, (i + zero));
-				_tile( i, 1, a[i]);
-				_tile( i, 2, b[i]);
+				draw(i, 0, getVal(a[i], 1));
+				draw(i, 1, getVal(b[i], 1));
 				i++
 			}
 		}
-		func1(bar);
-		_tile( 11, 0, select);
+		i = 0;
+		while((i < 10))
+		{
+			{
+				draw(i, 2, (grabValAt(a, i) + 1));
+				draw(i, 3, (grabValAt(b, i) + 1));
+				i++
+			}
+		}
+		ptr[0] = zero;
+		changeVal(ptr);
+		draw(12, 0, ptr[0]);
 		_display();
  	}
 }

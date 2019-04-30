@@ -194,24 +194,20 @@ lda $0000
 clc
 adc #$02
 sta $0000
+ldx #$0842
+stx $0002
 jsr method_main
 infinite:
 jmp infinite
-method_func1:
-lda $0002
-ldx $0000
-sta 0,x
-txa
-sta $0002
-inc a
-inc a
-sta $0000
-ldx #$0a
-phx
-ldx #$00
-phx
+method_draw:
+ldx $0002
+lda $00, x
+pha
 ldx $0002
 lda $02, x
+pha
+ldx $0002
+lda $04, x
 pha
 pla
 plx
@@ -236,20 +232,131 @@ ply
 pla
 sta 0,x
 sty $0000
-method_func1_end:
-ldy $0002
-lda $0000, y
-sta $0002
-sty $0000
+method_draw_end:
+rts
+method_getVal:
+ldx $0002
+lda $00, x
+pha
+ldx $0002
+lda $02, x
+pha
+plx
+ply
+lda $0000
+pha
+stx $0000
+tya
+clc
+adc $0000
+plx
+stx $0000
+pha
+plx
+jmp method_getVal_end
+method_getVal_end:
+rts
+method_grabValAt:
+ldx $0002
+lda $02, x
+pha
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx $0002
+lda $00, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+plx
+jmp method_grabValAt_end
+method_grabValAt_end:
+rts
+method_changeVal:
+ldx #$00
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx $0002
+lda $00, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+plx
+inx
+phx
+ldx #$00
+phx
+;asn val
+plx
+ply
+lda $0000
+pha
+phy
+phx
+ldx $0002
+lda $00, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+pla
+sta $0000, x
+plx
+stx $0000
+ldx #$00
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx $0002
+lda $00, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+plx
+jmp method_changeVal_end
+method_changeVal_end:
 rts
 method_main:
-lda $0002
+ldx #$01
+phx
+pla
 ldx $0000
-sta 0,x
-txa
-sta $0002
-inc a
-inc a
+sta 0, x
+lda $0000
+clc
+adc #$02
 sta $0000
 ldx $0000
 txa
@@ -260,14 +367,18 @@ lda $0000
 clc
 adc #$16
 sta $0000
-ldx #$01
-phx
-pla
-ldx $0000
-sta 0, x
 lda $0000
 clc
 adc #$02
+sta $0000
+ldx $0000
+txa
+inc a
+inc a
+sta 0, x
+lda $0000
+clc
+adc #$04
 sta $0000
 ldy $0828
 phy
@@ -317,7 +428,7 @@ plx
 stx $0000
 while_0:
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ldx #$0a
 phx
@@ -344,7 +455,7 @@ whileS_0:
 ldx $0000
 phx
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ldx #$01
 phx
@@ -390,7 +501,7 @@ plx
 stx $0000
 pha
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ;asn val
 plx
@@ -412,7 +523,7 @@ sta $0000, x
 plx
 stx $0000
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ldx #$01
 phx
@@ -458,7 +569,7 @@ plx
 stx $0000
 pha
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ;asn val
 plx
@@ -480,14 +591,14 @@ sta $0000, x
 plx
 stx $0000
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 plx
 inx
 phx
 pla
 ldy $0002
-sta $18, y
+sta $00, y
 plx
 stx $0000
 jmp while_0
@@ -496,10 +607,10 @@ ldx #$00
 phx
 pla
 ldy $0002
-sta $18, y
+sta $00, y
 while_1:
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ldx #$0a
 phx
@@ -526,56 +637,22 @@ whileS_1:
 ldx $0000
 phx
 ldx $0002
-lda $18, x
+phx
+ldx $0002
+lda $00, x
 pha
+ldx $0000
+pla
+sta $00, x
 ldx #$00
 phx
-ldx $0002
-lda $18, x
-pha
-ldy $0828
-phy
-plx
-ply
-lda $0000
-pha
-stx $0000
-tya
-clc
-adc $0000
-plx
-stx $0000
-pha
+ldx $0000
 pla
-plx
-ply
-pha
-lda $0000
-pha
-tya
-.rept 6
-asl a
-.endr
-tay
-txa
-asl a
-sty $0000
-clc
-adc $0000
-clc
-adc #$0004
-tax
-ply
-pla
-sta 0,x
-sty $0000
+sta $02, x
 ldx $0002
-lda $18, x
-pha
-ldx #$01
 phx
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 ;getVal
 ply
@@ -594,36 +671,60 @@ lda $0000, x
 plx
 stx $0000
 pha
+ldx $0000
 pla
-plx
-ply
-pha
+sta $04, x
+ldx #$01
+phx
+ldx $0000
+pla
+sta $06, x
 lda $0000
-pha
-tya
-.rept 6
-asl a
-.endr
-tay
-txa
-asl a
-sty $0000
 clc
-adc $0000
+adc #$04
+sta $0002
+lda $0000
 clc
-adc #$0004
-tax
+adc #$08
+jsr method_getVal
+lda $0002
+
+sec
+sbc #$04
+sta $0000
 ply
+sty $0002
+phx
+ldx $0000
 pla
-sta 0,x
-sty $0000
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
 ldx $0002
-lda $18, x
-pha
-ldx #$02
 phx
 ldx $0002
-lda $18, x
+lda $00, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldx #$01
+phx
+ldx $0000
+pla
+sta $02, x
+ldx $0002
+phx
+ldx $0002
+lda $00, x
 pha
 ;getVal
 ply
@@ -642,96 +743,325 @@ lda $0000, x
 plx
 stx $0000
 pha
+ldx $0000
 pla
-plx
-ply
-pha
+sta $04, x
+ldx #$01
+phx
+ldx $0000
+pla
+sta $06, x
 lda $0000
-pha
-tya
-.rept 6
-asl a
-.endr
-tay
-txa
-asl a
-sty $0000
 clc
-adc $0000
+adc #$04
+sta $0002
+lda $0000
 clc
-adc #$0004
-tax
+adc #$08
+jsr method_getVal
+lda $0002
+
+sec
+sbc #$04
+sta $0000
 ply
+sty $0002
+phx
+ldx $0000
 pla
-sta 0,x
-sty $0000
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
 ldx $0002
-lda $18, x
+lda $00, x
 pha
 plx
 inx
 phx
 pla
 ldy $0002
-sta $18, y
+sta $00, y
 plx
 stx $0000
 jmp while_1
 elihw_1:
-lda $0002
-ldx $0000
-sta $0000,x
-stx $0002
-txa
-clc
-adc #$0002
-sta $0000
-ldy $0826
-phy
-ldx $0002
-pla
-sta $02, x
-inc $0000
-inc $0000
-lda $0002
-ldx $0000
-sta $0000,x
-stx $0002
-jsr method_func1
-ldx #$0b
-phx
 ldx #$00
 phx
-ldy $0840
-phy
 pla
+ldy $0002
+sta $00, y
+while_2:
+ldx $0002
+lda $00, x
+pha
+ldx #$0a
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare2
+lda #$0001
+jmp erapmoc2
+compare2:
+lda #$0000
+erapmoc2:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_2
+jmp whileS_2
+elihwb_2:
+jmp elihw_2
+whileS_2:
+ldx $0000
+phx
+ldx $0002
+phx
+ldx $0002
+lda $00, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldx #$02
+phx
+ldx $0000
+pla
+sta $02, x
+ldx $0002
+phx
+ldx $0002
+lda $02, x
+pha
+ldx $0000
+pla
+sta $04, x
+ldx $0002
+lda $00, x
+pha
+ldx $0000
+pla
+sta $06, x
+lda $0000
+clc
+adc #$04
+sta $0002
+lda $0000
+clc
+adc #$08
+jsr method_grabValAt
+lda $0002
+
+sec
+sbc #$04
+sta $0000
+ply
+sty $0002
+phx
+ldx #$01
+phx
 plx
 ply
-pha
 lda $0000
 pha
+stx $0000
 tya
-.rept 6
-asl a
-.endr
-tay
-txa
-asl a
-sty $0000
 clc
 adc $0000
-clc
-adc #$0004
-tax
-ply
+plx
+stx $0000
+pha
+ldx $0000
 pla
-sta 0,x
-sty $0000
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx $0002
+lda $00, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldx #$03
+phx
+ldx $0000
+pla
+sta $02, x
+ldx $0002
+phx
+ldy $0804
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0002
+lda $00, x
+pha
+ldx $0000
+pla
+sta $06, x
+lda $0000
+clc
+adc #$04
+sta $0002
+lda $0000
+clc
+adc #$08
+jsr method_grabValAt
+lda $0002
+
+sec
+sbc #$04
+sta $0000
+ply
+sty $0002
+phx
+ldx #$01
+phx
+plx
+ply
+lda $0000
+pha
+stx $0000
+tya
+clc
+adc $0000
+plx
+stx $0000
+pha
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+lda $00, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $00, y
+plx
+stx $0000
+jmp while_2
+elihw_2:
+ldy $0828
+phy
+ldx #$00
+phx
+;asn val
+plx
+ply
+lda $0000
+pha
+phy
+phx
+ldx $0002
+lda $1a, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+pla
+sta $0000, x
+plx
+stx $0000
+ldx $0002
+phx
+ldx $0002
+lda $1a, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$02
+jsr method_changeVal
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$0c
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$00
+phx
+ldx $0000
+pla
+sta $02, x
+ldx #$00
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx $0002
+lda $1a, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
 jsr SetTiles
 method_main_end:
-ldy $0002
-lda $0000, y
-sta $0002
-sty $0000
 rts
 .ENDS

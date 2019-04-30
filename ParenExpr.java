@@ -19,9 +19,9 @@ class ParenExpr extends Expr implements BG {
   {
   	return("(" + expression.toString(t) + ")");
   }
-    public void gen() throws Exception
+    public void gen(int extra) throws Exception
     {
-	expression.gen();
+	expression.gen(extra);
     }
 }
 

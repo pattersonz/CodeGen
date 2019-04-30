@@ -17,8 +17,16 @@ class VoidFuncStmt extends FuncStmt implements BG {
 
     public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
-	
-	writer.append("lda $0002\nldx $0000\nsta $0000,x\nstx $0002\njsr method_" + id + "\n");
+        //push current ar
+	writer.append( "ldx $0002\nphx\n");
+	//set top as current ar
+	writer.append("ldx $0000\nstx $0002\n");
+	//jmp
+	writer.append("jsr method_" + id + "\n" +
+		      //set old ar as top
+		      "lda $0002\nsta $0000\n"+
+		      //pull current ar
+		      "ply\nsty $0002\n");
     }
 }
 

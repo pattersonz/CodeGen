@@ -22,7 +22,7 @@ class TypeCastExpr extends ActionExpr implements BG {
   	return("((" + type.toString(t) + ")" + expression.toString(t) + ")");
   }
 
-    public void gen() throws Exception
+    public void gen(int extra) throws Exception
     {
 	return;
     }

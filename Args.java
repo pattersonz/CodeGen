@@ -43,11 +43,12 @@ class Args extends BaseGrammarTop implements BG {
 	       (arguments != null ? ", " + arguments.toString(t) : "") );
   }
 
-    public void gen(int offset) throws Exception
+    public int gen(int offset) throws Exception
     {
-	expression.gen();
-	writer.append("ldx $0002\npla\nsta $" + hex(offset) + ", x\ninc $0000\ninc $0000\n");
+	expression.gen(offset);
+	writer.append("ldx $0000\npla\nsta $" + hex(offset) + ", x\n");
 	if (arguments != null)
-	    arguments.gen(offset + 2);
+	    return arguments.gen(offset + 2);
+	return offset + 2;
     }
 }
