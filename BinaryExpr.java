@@ -102,9 +102,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
-				      Integer.toString(cc) + "\nlda #$0001\njmp erapmoc" +
-				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
-				      ":\nlda #$0000\nerapmoc" + Integer.toString(cc) +
+				      hex(cc) + "\nlda #$0001\njmp erapmoc" +
+				      hex(cc) + "\ncompare" + hex(cc) +
+				      ":\nlda #$0000\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
 		    }
 		else if (operator.equals(">"))
@@ -112,9 +112,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("pla\nply\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
-				      Integer.toString(cc) + "\nlda #$0001\njmp erapmoc" +
-				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
-				      ":\nlda #$0000\nerapmoc" + Integer.toString(cc) +
+				      hex(cc) + "\nlda #$0001\njmp erapmoc" +
+				      hex(cc) + "\ncompare" + hex(cc) +
+				      ":\nlda #$0000\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
 		    }
 		else if (operator.equals("<="))
@@ -122,9 +122,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("pla\nply\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
-				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
-				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
-				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      hex(cc) + "\nlda #$0000\njmp erapmoc" +
+				      hex(cc) + "\ncompare" + hex(cc) +
+				      ":\nlda #$0001\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
 		    }
 		else if (operator.equals(">="))
@@ -132,9 +132,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
-				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
-				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
-				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      hex(cc) + "\nlda #$0000\njmp erapmoc" +
+				      hex(cc) + "\ncompare" + hex(cc) +
+				      ":\nlda #$0001\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
 		    }
 		else if (operator.equals("=="))
@@ -142,9 +142,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbeq compare" +
-				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
-				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
-				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      hex(cc) + "\nlda #$0000\njmp erapmoc" +
+				      hex(cc) + "\ncompare" + hex(cc) +
+				      ":\nlda #$0001\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
 		    }
 		else if (operator.equals("<>"))
@@ -152,9 +152,9 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbne compare" +
-				      Integer.toString(cc) + "\nlda #$0000\njmp erapmoc" +
-				      Integer.toString(cc) + "\ncompare" + Integer.toString(cc) +
-				      ":\nlda #$0001\nerapmoc" + Integer.toString(cc) +
+				      hex(cc) + "\nlda #$0000\njmp erapmoc" +
+				      hex(cc) + "\ncompare" + hex(cc) +
+				      ":\nlda #$0001\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
 		    }
 	    }

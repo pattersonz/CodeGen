@@ -12,7 +12,20 @@ inc a
 sta 0, x
 lda TOP
 clc
-adc #$16
+adc #$14
+sta TOP
+lda TOP
+clc
+adc #$02
+sta TOP
+ldx #$01
+phx
+pla
+ldx $0000
+sta 0, x
+lda TOP
+clc
+adc #$02
 sta TOP
 ldx #$02
 phx
@@ -194,7 +207,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$084e
+ldx #$0850
 stx AR
 jsr method_main
 infinite:
@@ -234,8 +247,135 @@ sta 0,x
 sty TOP
 method_draw_end:
 rts
-method_main:
+method_isValid:
+ldx #$00
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare02
+lda #$0000
+jmp erapmoc02
+compare02:
+lda #$0001
+erapmoc02:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare01
 ldx #$01
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare03
+lda #$0000
+jmp erapmoc03
+compare03:
+lda #$0001
+erapmoc03:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare01
+ldx #$0001
+jmp erapmoc01
+compare01:
+ldx #$0000
+erapmoc01:
+phx
+plx
+cpx #$0000
+beq compare00
+ldx #$02
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare04
+lda #$0000
+jmp erapmoc04
+compare04:
+lda #$0001
+erapmoc04:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare00
+ldx #$0001
+jmp erapmoc00
+compare00:
+ldx #$0000
+erapmoc00:
 phx
 pla
 ldx $0000
@@ -245,19 +385,1506 @@ clc
 adc #$02
 sta $0000
 ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare05
+ldx #$03
 phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare08
+lda #$0000
+jmp erapmoc08
+compare08:
+lda #$0001
+erapmoc08:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare07
+ldx #$04
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare09
+lda #$0000
+jmp erapmoc09
+compare09:
+lda #$0001
+erapmoc09:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare07
+ldx #$0001
+jmp erapmoc07
+compare07:
+ldx #$0000
+erapmoc07:
+phx
+plx
+cpx #$0000
+beq compare06
+ldx #$05
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare0a
+lda #$0000
+jmp erapmoc0a
+compare0a:
+lda #$0001
+erapmoc0a:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare06
+ldx #$0001
+jmp erapmoc06
+compare06:
+ldx #$0000
+erapmoc06:
+phx
+plx
+cpx #$0000
+bne compare05
+ldx #$0000
+jmp erapmoc05
+compare05:
+ldx #$0001
+
+erapmoc05:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare0b
+ldx #$06
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare0e
+lda #$0000
+jmp erapmoc0e
+compare0e:
+lda #$0001
+erapmoc0e:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare0d
+ldx #$07
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare0f
+lda #$0000
+jmp erapmoc0f
+compare0f:
+lda #$0001
+erapmoc0f:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare0d
+ldx #$0001
+jmp erapmoc0d
+compare0d:
+ldx #$0000
+erapmoc0d:
+phx
+plx
+cpx #$0000
+beq compare0c
+ldx #$08
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare10
+lda #$0000
+jmp erapmoc10
+compare10:
+lda #$0001
+erapmoc10:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare0c
+ldx #$0001
+jmp erapmoc0c
+compare0c:
+ldx #$0000
+erapmoc0c:
+phx
+plx
+cpx #$0000
+bne compare0b
+ldx #$0000
+jmp erapmoc0b
+compare0b:
+ldx #$0001
+
+erapmoc0b:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare11
 ldx #$00
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare14
+lda #$0000
+jmp erapmoc14
+compare14:
+lda #$0001
+erapmoc14:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare13
+ldx #$03
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare15
+lda #$0000
+jmp erapmoc15
+compare15:
+lda #$0001
+erapmoc15:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare13
+ldx #$0001
+jmp erapmoc13
+compare13:
+ldx #$0000
+erapmoc13:
+phx
+plx
+cpx #$0000
+beq compare12
+ldx #$06
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare16
+lda #$0000
+jmp erapmoc16
+compare16:
+lda #$0001
+erapmoc16:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare12
+ldx #$0001
+jmp erapmoc12
+compare12:
+ldx #$0000
+erapmoc12:
+phx
+plx
+cpx #$0000
+bne compare11
+ldx #$0000
+jmp erapmoc11
+compare11:
+ldx #$0001
+
+erapmoc11:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare17
+ldx #$01
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare1a
+lda #$0000
+jmp erapmoc1a
+compare1a:
+lda #$0001
+erapmoc1a:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare19
+ldx #$04
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare1b
+lda #$0000
+jmp erapmoc1b
+compare1b:
+lda #$0001
+erapmoc1b:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare19
+ldx #$0001
+jmp erapmoc19
+compare19:
+ldx #$0000
+erapmoc19:
+phx
+plx
+cpx #$0000
+beq compare18
+ldx #$07
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare1c
+lda #$0000
+jmp erapmoc1c
+compare1c:
+lda #$0001
+erapmoc1c:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare18
+ldx #$0001
+jmp erapmoc18
+compare18:
+ldx #$0000
+erapmoc18:
+phx
+plx
+cpx #$0000
+bne compare17
+ldx #$0000
+jmp erapmoc17
+compare17:
+ldx #$0001
+
+erapmoc17:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare1d
+ldx #$02
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare20
+lda #$0000
+jmp erapmoc20
+compare20:
+lda #$0001
+erapmoc20:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare1f
+ldx #$05
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare21
+lda #$0000
+jmp erapmoc21
+compare21:
+lda #$0001
+erapmoc21:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare1f
+ldx #$0001
+jmp erapmoc1f
+compare1f:
+ldx #$0000
+erapmoc1f:
+phx
+plx
+cpx #$0000
+beq compare1e
+ldx #$08
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare22
+lda #$0000
+jmp erapmoc22
+compare22:
+lda #$0001
+erapmoc22:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare1e
+ldx #$0001
+jmp erapmoc1e
+compare1e:
+ldx #$0000
+erapmoc1e:
+phx
+plx
+cpx #$0000
+bne compare1d
+ldx #$0000
+jmp erapmoc1d
+compare1d:
+ldx #$0001
+
+erapmoc1d:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare23
+ldx #$00
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare26
+lda #$0000
+jmp erapmoc26
+compare26:
+lda #$0001
+erapmoc26:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare25
+ldx #$04
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare27
+lda #$0000
+jmp erapmoc27
+compare27:
+lda #$0001
+erapmoc27:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare25
+ldx #$0001
+jmp erapmoc25
+compare25:
+ldx #$0000
+erapmoc25:
+phx
+plx
+cpx #$0000
+beq compare24
+ldx #$08
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare28
+lda #$0000
+jmp erapmoc28
+compare28:
+lda #$0001
+erapmoc28:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare24
+ldx #$0001
+jmp erapmoc24
+compare24:
+ldx #$0000
+erapmoc24:
+phx
+plx
+cpx #$0000
+bne compare23
+ldx #$0000
+jmp erapmoc23
+compare23:
+ldx #$0001
+
+erapmoc23:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+cpx #$0000
+bne compare29
+ldx #$02
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare2c
+lda #$0000
+jmp erapmoc2c
+compare2c:
+lda #$0001
+erapmoc2c:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare2b
+ldx #$04
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare2d
+lda #$0000
+jmp erapmoc2d
+compare2d:
+lda #$0001
+erapmoc2d:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare2b
+ldx #$0001
+jmp erapmoc2b
+compare2b:
+ldx #$0000
+erapmoc2b:
+phx
+plx
+cpx #$0000
+beq compare2a
+ldx #$06
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare2e
+lda #$0000
+jmp erapmoc2e
+compare2e:
+lda #$0001
+erapmoc2e:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare2a
+ldx #$0001
+jmp erapmoc2a
+compare2a:
+ldx #$0000
+erapmoc2a:
+phx
+plx
+cpx #$0000
+bne compare29
+ldx #$0000
+jmp erapmoc29
+compare29:
+ldx #$0001
+
+erapmoc29:
+phx
+pla
+ldy $0002
+sta $02, y
+ldx $0002
+lda $02, x
+pha
+plx
+jmp method_isValid_end
+method_isValid_end:
+rts
+method_getWinner:
+ldy $0824
+phy
+plx
+inx
+phx
+plx
+stx $0824
+ldx $0002
+phx
+ldx #$01
 phx
 ldx $0000
 pla
 sta $00, x
-ldx #$00
+lda $0000
+clc
+adc #$00
+sta $0002
+lda $0000
+clc
+adc #$02
+jsr method_isValid
+lda $0002
+
+sec
+sbc #$00
+sta $0000
+ply
+sty $0002
+phx
+pla
+cmp #$0000
+beq elseb_0
+jmp ifS_0
+elseb_0:
+jmp else_0
+ifS_0:
+if_0:
+ldy $0832
+phy
+plx
+jmp method_getWinner_end
+jmp fi_0
+else_0:
+ldx $0002
+phx
+ldx #$02
 phx
 ldx $0000
 pla
-sta $02, x
-ldy $0834
+sta $00, x
+lda $0000
+clc
+adc #$00
+sta $0002
+lda $0000
+clc
+adc #$02
+jsr method_isValid
+lda $0002
+
+sec
+sbc #$00
+sta $0000
+ply
+sty $0002
+phx
+pla
+cmp #$0000
+beq elseb_1
+jmp ifS_1
+elseb_1:
+jmp else_1
+ifS_1:
+if_1:
+ldy $082e
 phy
+plx
+jmp method_getWinner_end
+jmp fi_1
+else_1:
+ldy $0824
+phy
+ldx #$09
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare2f
+lda #$0000
+jmp erapmoc2f
+compare2f:
+lda #$0001
+erapmoc2f:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_2
+jmp ifS_2
+elseb_2:
+jmp else_2
+ifS_2:
+if_2:
+ldy $0828
+phy
+plx
+jmp method_getWinner_end
+jmp fi_2
+else_2:
+fi_2:
+fi_1:
+fi_0:
+ldx #$00
+phx
+plx
+jmp method_getWinner_end
+method_getWinner_end:
+rts
+method_possibleSpot:
+ldx $0002
+lda $00, x
+pha
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare30
+lda #$0000
+jmp erapmoc30
+compare30:
+lda #$0001
+erapmoc30:
+stx $0000
+pha
+plx
+jmp method_possibleSpot_end
+method_possibleSpot_end:
+rts
+method_drawAt:
+ldx #$00
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+ldx #$02
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+ldx $0002
+lda $00, x
+pha
+ldx #$05
+phx
+pla
+ply
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare31
+lda #$0001
+jmp erapmoc31
+compare31:
+lda #$0000
+erapmoc31:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_3
+jmp ifS_3
+elseb_3:
+jmp else_3
+ifS_3:
+if_3:
+ldx #$04
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_3
+else_3:
+ldx $0002
+lda $00, x
+pha
+ldx #$02
+phx
+pla
+ply
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare32
+lda #$0001
+jmp erapmoc32
+compare32:
+lda #$0000
+erapmoc32:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_4
+jmp ifS_4
+elseb_4:
+jmp else_4
+ifS_4:
+if_4:
+ldx #$02
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_4
+else_4:
+fi_4:
+fi_3:
+ldx $0002
+lda $00, x
+pha
+ldx #$08
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare35
+lda #$0000
+jmp erapmoc35
+compare35:
+lda #$0001
+erapmoc35:
+stx $0000
+pha
+plx
+cpx #$0000
+bne compare34
+ldx $0002
+lda $00, x
+pha
+ldx #$05
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare36
+lda #$0000
+jmp erapmoc36
+compare36:
+lda #$0001
+erapmoc36:
+stx $0000
+pha
+plx
+cpx #$0000
+bne compare34
+ldx #$0000
+jmp erapmoc34
+compare34:
+ldx #$0001
+
+erapmoc34:
+phx
+plx
+cpx #$0000
+bne compare33
+ldx $0002
+lda $00, x
+pha
+ldx #$02
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare37
+lda #$0000
+jmp erapmoc37
+compare37:
+lda #$0001
+erapmoc37:
+stx $0000
+pha
+plx
+cpx #$0000
+bne compare33
+ldx #$0000
+jmp erapmoc33
+compare33:
+ldx #$0001
+
+erapmoc33:
+phx
+pla
+cmp #$0000
+beq elseb_5
+jmp ifS_5
+elseb_5:
+jmp else_5
+ifS_5:
+if_5:
+ldx #$06
+phx
+pla
+ldy $0002
+sta $06, y
+jmp fi_5
+else_5:
+ldx $0002
+lda $00, x
+pha
+ldx #$07
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare3a
+lda #$0000
+jmp erapmoc3a
+compare3a:
+lda #$0001
+erapmoc3a:
+stx $0000
+pha
+plx
+cpx #$0000
+bne compare39
+ldx $0002
+lda $00, x
+pha
+ldx #$04
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare3b
+lda #$0000
+jmp erapmoc3b
+compare3b:
+lda #$0001
+erapmoc3b:
+stx $0000
+pha
+plx
+cpx #$0000
+bne compare39
+ldx #$0000
+jmp erapmoc39
+compare39:
+ldx #$0001
+
+erapmoc39:
+phx
+plx
+cpx #$0000
+bne compare38
+ldx $0002
+lda $00, x
+pha
+ldx #$01
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare3c
+lda #$0000
+jmp erapmoc3c
+compare3c:
+lda #$0001
+erapmoc3c:
+stx $0000
+pha
+plx
+cpx #$0000
+bne compare38
+ldx #$0000
+jmp erapmoc38
+compare38:
+ldx #$0001
+
+erapmoc38:
+phx
+pla
+cmp #$0000
+beq elseb_6
+jmp ifS_6
+elseb_6:
+jmp else_6
+ifS_6:
+if_6:
+ldx #$04
+phx
+pla
+ldy $0002
+sta $06, y
+jmp fi_6
+else_6:
+fi_6:
+fi_5:
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldx $0002
+lda $06, x
+pha
+ldx $0000
+pla
+sta $02, x
+ldx $0002
+lda $02, x
+pha
 ldx $0000
 pla
 sta $04, x
@@ -271,6 +1898,9 @@ lda $0002
 sta $0000
 ply
 sty $0002
+method_drawAt_end:
+rts
+method_main:
 while_0:
 ldx #$01
 phx
@@ -283,8 +1913,1272 @@ jmp elihw_0
 whileS_0:
 ldx $0000
 phx
+ldx #$00
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+lda $0000
+clc
+adc #$02
+sta $0000
+while_1:
+ldx $0002
+lda $00, x
+pha
+ldx #$20
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare3d
+lda #$0001
+jmp erapmoc3d
+compare3d:
+lda #$0000
+erapmoc3d:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_1
+jmp whileS_1
+elihwb_1:
+jmp elihw_1
+whileS_1:
+ldx $0000
+phx
+ldx #$00
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+while_2:
+ldx $0002
+lda $04, x
+pha
+ldx #$20
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare3e
+lda #$0001
+jmp erapmoc3e
+compare3e:
+lda #$0000
+erapmoc3e:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_2
+jmp whileS_2
+elihwb_2:
+jmp elihw_2
+whileS_2:
+ldx $0000
+phx
+ldx $0002
+phx
+ldx $0002
+lda $00, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $02, x
+ldy $0826
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+lda $04, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $04, y
+plx
+stx $0000
+jmp while_2
+elihw_2:
+ldx $0002
+lda $00, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $00, y
+plx
+stx $0000
+jmp while_1
+elihw_1:
+ldx $0002
+phx
+ldx #$00
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$03
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $0834
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$00
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$05
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $0834
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$02
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$03
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $0834
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$02
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$05
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $0834
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$04
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$03
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $0834
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$04
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$05
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $0834
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$01
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$02
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084c
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$01
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$04
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084c
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$01
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$06
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084c
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$03
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$02
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084c
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$03
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$04
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084c
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$03
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$06
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084c
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$01
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$03
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084a
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$01
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$05
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084a
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$03
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$03
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084a
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx #$03
+phx
+ldx $0000
+pla
+sta $00, x
+ldx #$05
+phx
+ldx $0000
+pla
+sta $02, x
+ldy $084a
+phy
+ldx $0000
+pla
+sta $04, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$06
+jsr method_draw
+lda $0002
+sta $0000
+ply
+sty $0002
+jsr SetTiles
 wai
-lda Joy1Held
+ldx #$00
+phx
+pla
+ldy $0002
+sta $00, y
+while_3:
+ldx $0002
+lda $00, x
+pha
+ldx #$09
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare3f
+lda #$0001
+jmp erapmoc3f
+compare3f:
+lda #$0000
+erapmoc3f:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_3
+jmp whileS_3
+elihwb_3:
+jmp elihw_3
+whileS_3:
+ldx $0000
+phx
+ldx #$00
+phx
+ldx $0002
+lda $00, x
+pha
+;asn val
+plx
+ply
+lda $0000
+pha
+phy
+phx
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+pla
+sta $0000, x
+plx
+stx $0000
+ldx $0002
+lda $00, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $00, y
+plx
+stx $0000
+jmp while_3
+elihw_3:
+ldx #$00
+phx
+pla
+ldy $0002
+sta $02, y
+ldx #$00
+phx
+plx
+stx $0824
+while_4:
+ldx $0002
+lda $02, x
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare40
+lda #$0000
+jmp erapmoc40
+compare40:
+lda #$0001
+erapmoc40:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_4
+jmp whileS_4
+elihwb_4:
+jmp elihw_4
+whileS_4:
+ldx $0000
+phx
+ldx #$00
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+lda $0000
+clc
+adc #$02
+sta $0000
+ldx #$00
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+ldx #$01
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+while_5:
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+lda $0000
+clc
+adc #$00
+sta $0002
+lda $0000
+clc
+adc #$02
+jsr method_possibleSpot
+lda $0002
+
+sec
+sbc #$00
+sta $0000
+ply
+sty $0002
+phx
+plx
+cpx #$0000
+php
+sep #$20
+pla
+and #$02
+lsr a
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elihwb_5
+jmp whileS_5
+elihwb_5:
+jmp elihw_5
+whileS_5:
+ldx $0000
+phx
+ldx $0002
+lda $04, x
+pha
+ldx #$08
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare41
+lda #$0000
+jmp erapmoc41
+compare41:
+lda #$0001
+erapmoc41:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_7
+jmp ifS_7
+elseb_7:
+jmp else_7
+ifS_7:
+if_7:
+ldx #$00
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_7
+else_7:
+ldx $0002
+lda $04, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $04, y
+fi_7:
+plx
+stx $0000
+jmp while_5
+elihw_5:
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $084e
+phy
+ldx $0000
+pla
+sta $02, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$04
+jsr method_drawAt
+lda $0002
+sta $0000
+ply
+sty $0002
+jsr SetTiles
+wai
+while_6:
+ldx $0002
+lda $08, x
+pha
+plx
+cpx #$0000
+php
+sep #$20
+pla
+and #$02
+lsr a
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elihwb_6
+jmp whileS_6
+elihwb_6:
+jmp elihw_6
+whileS_6:
+ldx $0000
+phx
+wai
+lda Joy1Press
+and #$0100
+php
+sep #$20
+pla
+lsr a
+and #$01
+eor #$01
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elseb_8
+jmp ifS_8
+elseb_8:
+jmp else_8
+ifS_8:
+if_8:
+ldx $0000
+phx
+ldx $0002
+lda $04, x
+pha
+pla
+ldy $0002
+sta $06, y
+ldx $0002
+lda $04, x
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare42
+lda #$0000
+jmp erapmoc42
+compare42:
+lda #$0001
+erapmoc42:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_9
+jmp ifS_9
+elseb_9:
+jmp else_9
+ifS_9:
+if_9:
+ldx #$08
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_9
+else_9:
+ldx $0002
+lda $04, x
+pha
+plx
+dex
+phx
+pla
+ldy $0002
+sta $04, y
+fi_9:
+while_7:
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+lda $0000
+clc
+adc #$00
+sta $0002
+lda $0000
+clc
+adc #$02
+jsr method_possibleSpot
+lda $0002
+
+sec
+sbc #$00
+sta $0000
+ply
+sty $0002
+phx
+plx
+cpx #$0000
+php
+sep #$20
+pla
+and #$02
+lsr a
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elihwb_7
+jmp whileS_7
+elihwb_7:
+jmp elihw_7
+whileS_7:
+ldx $0002
+lda $04, x
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare43
+lda #$0000
+jmp erapmoc43
+compare43:
+lda #$0001
+erapmoc43:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_10
+jmp ifS_10
+elseb_10:
+jmp else_10
+ifS_10:
+if_10:
+ldx #$08
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_10
+else_10:
+ldx $0002
+lda $04, x
+pha
+plx
+dex
+phx
+pla
+ldy $0002
+sta $04, y
+fi_10:
+jmp while_7
+elihw_7:
+ldx $0002
+phx
+ldx $0002
+lda $06, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $0826
+phy
+ldx $0000
+pla
+sta $02, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$04
+jsr method_drawAt
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $084e
+phy
+ldx $0000
+pla
+sta $02, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$04
+jsr method_drawAt
+lda $0002
+sta $0000
+ply
+sty $0002
+jsr SetTiles
+wai
+plx
+stx $0000
+jmp fi_8
+else_8:
+wai
+lda Joy1Press
+and #$0010
+php
+sep #$20
+pla
+lsr a
+and #$01
+eor #$01
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elseb_11
+jmp ifS_11
+elseb_11:
+jmp else_11
+ifS_11:
+if_11:
+ldx $0000
+phx
+ldx $0002
+lda $04, x
+pha
+pla
+ldy $0002
+sta $06, y
+ldx $0002
+lda $04, x
+pha
+ldx #$08
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare44
+lda #$0000
+jmp erapmoc44
+compare44:
+lda #$0001
+erapmoc44:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_12
+jmp ifS_12
+elseb_12:
+jmp else_12
+ifS_12:
+if_12:
+ldx #$00
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_12
+else_12:
+ldx $0002
+lda $04, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $04, y
+fi_12:
+while_8:
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+lda $0000
+clc
+adc #$00
+sta $0002
+lda $0000
+clc
+adc #$02
+jsr method_possibleSpot
+lda $0002
+
+sec
+sbc #$00
+sta $0000
+ply
+sty $0002
+phx
+plx
+cpx #$0000
+php
+sep #$20
+pla
+and #$02
+lsr a
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elihwb_8
+jmp whileS_8
+elihwb_8:
+jmp elihw_8
+whileS_8:
+ldx $0002
+lda $04, x
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare45
+lda #$0000
+jmp erapmoc45
+compare45:
+lda #$0001
+erapmoc45:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_13
+jmp ifS_13
+elseb_13:
+jmp else_13
+ifS_13:
+if_13:
+ldx #$08
+phx
+pla
+ldy $0002
+sta $04, y
+jmp fi_13
+else_13:
+ldx $0002
+lda $04, x
+pha
+plx
+dex
+phx
+pla
+ldy $0002
+sta $04, y
+fi_13:
+jmp while_8
+elihw_8:
+ldx $0002
+phx
+ldx $0002
+lda $06, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $0826
+phy
+ldx $0000
+pla
+sta $02, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$04
+jsr method_drawAt
+lda $0002
+sta $0000
+ply
+sty $0002
+ldx $0002
+phx
+ldx $0002
+lda $04, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $084e
+phy
+ldx $0000
+pla
+sta $02, x
+ldx $0000
+stx $0002
+lda $0000
+clc
+adc #$04
+jsr method_drawAt
+lda $0002
+sta $0000
+ply
+sty $0002
+jsr SetTiles
+wai
+plx
+stx $0000
+jmp fi_11
+else_11:
+wai
+lda Joy1Press
 and #$0080
 php
 sep #$20
@@ -297,12 +3191,175 @@ rep #$20
 phx
 pla
 cmp #$0000
-beq elseb_0
-jmp ifS_0
-elseb_0:
-jmp else_0
-ifS_0:
-if_0:
+beq elseb_14
+jmp ifS_14
+elseb_14:
+jmp else_14
+ifS_14:
+if_14:
+ldx #$01
+phx
+pla
+ldy $0002
+sta $08, y
+jmp fi_14
+else_14:
+fi_14:
+fi_11:
+fi_8:
+plx
+stx $0000
+jmp while_6
+elihw_6:
+ldx $0002
+lda $0a, x
+pha
+ldx $0002
+lda $04, x
+pha
+;asn val
+plx
+ply
+lda $0000
+pha
+phy
+phx
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+pla
+sta $0000, x
+plx
+stx $0000
+ldx $0002
+lda $0a, x
+pha
+ldx #$01
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare46
+lda #$0000
+jmp erapmoc46
+compare46:
+lda #$0001
+erapmoc46:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elseb_15
+jmp ifS_15
+elseb_15:
+jmp else_15
+ifS_15:
+if_15:
+ldx #$02
+phx
+pla
+ldy $0002
+sta $0a, y
+jmp fi_15
+else_15:
+ldx #$01
+phx
+pla
+ldy $0002
+sta $0a, y
+fi_15:
+ldx $0002
+phx
+ldx $0000
+stx $0002
+jsr method_getWinner
+lda $0002
+sta $0000
+ply
+sty $0002
+phx
+pla
+ldy $0002
+sta $02, y
+plx
+stx $0000
+jmp while_4
+elihw_4:
+ldx #$00
+phx
+pla
+ldy $0002
+sta $00, y
+while_9:
+ldx $0002
+lda $00, x
+pha
+ldx #$20
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare47
+lda #$0001
+jmp erapmoc47
+compare47:
+lda #$0000
+erapmoc47:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_9
+jmp whileS_9
+elihwb_9:
+jmp elihw_9
+whileS_9:
+ldx $0000
+phx
+ldx #$00
+phx
+pla
+ldx $0000
+sta 0, x
+lda $0000
+clc
+adc #$02
+sta $0000
+while_10:
+ldx $0002
+lda $04, x
+pha
+ldx #$20
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+bpl compare48
+lda #$0001
+jmp erapmoc48
+compare48:
+lda #$0000
+erapmoc48:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_10
+jmp whileS_10
+elihwb_10:
+jmp elihw_10
+whileS_10:
 ldx $0000
 phx
 ldx $0002
@@ -314,26 +3371,13 @@ ldx $0000
 pla
 sta $00, x
 ldx $0002
-lda $00, x
+lda $04, x
 pha
 ldx $0000
 pla
 sta $02, x
-ldy $0834
-phy
 ldx $0002
-lda $00, x
-pha
-plx
-ply
-lda $0000
-pha
-stx $0000
-tya
-clc
-adc $0000
-plx
-stx $0000
+lda $02, x
 pha
 ldx $0000
 pla
@@ -349,6 +3393,19 @@ sta $0000
 ply
 sty $0002
 ldx $0002
+lda $04, x
+pha
+plx
+inx
+phx
+pla
+ldy $0002
+sta $04, y
+plx
+stx $0000
+jmp while_10
+elihw_10:
+ldx $0002
 lda $00, x
 pha
 plx
@@ -359,11 +3416,44 @@ ldy $0002
 sta $00, y
 plx
 stx $0000
-jmp fi_0
-else_0:
-fi_0:
-jsr SetTiles
+jmp while_9
+elihw_9:
+while_11:
 wai
+lda Joy1Press
+and #$0080
+php
+sep #$20
+pla
+lsr a
+and #$01
+eor #$01
+tax
+rep #$20
+phx
+plx
+cpx #$0000
+php
+sep #$20
+pla
+and #$02
+lsr a
+tax
+rep #$20
+phx
+pla
+cmp #$0000
+beq elihwb_11
+jmp whileS_11
+elihwb_11:
+jmp elihw_11
+whileS_11:
+ldx $0000
+phx
+plx
+stx $0000
+jmp while_11
+elihw_11:
 plx
 stx $0000
 jmp while_0
