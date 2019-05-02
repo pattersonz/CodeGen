@@ -78,7 +78,7 @@ class FieldsNMethods extends BaseGrammarTop implements BG
     {
 	if (methodDeclaration != null)
 	    {
-		writer.append("ldx #$" + hex(top) + "\nstx $0002\n");
+		writer.append("ldx #$" + hex(top) + "\nstx AR\n");
 		writer.append("jsr method_main\ninfinite:\njmp infinite\n");
 		methodDeclaration.gen();
 		if (methodDeclarations != null)
@@ -88,7 +88,7 @@ class FieldsNMethods extends BaseGrammarTop implements BG
 	    {
 		fieldDeclaration.gen(0, top);
 		int addition = fieldDeclaration.dataSize();
-		writer.append("lda $0000\nclc\nadc #$" + hex(addition) + "\nsta $0000\n");
+		writer.append("lda TOP\nclc\nadc #$" + hex(addition) + "\nsta TOP\n");
 		top += addition;
 		if (fieldsAndMethods != null)
 		    fieldsAndMethods.gen(top);

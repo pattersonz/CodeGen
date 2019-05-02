@@ -30,8 +30,8 @@ class Tile extends NonWhileStmt implements BG {
 	column.gen();
 	value.gen();
 	writer.append("pla\nplx\nply\npha\n" +
-		      "lda $0000\npha\ntya\n.rept 6\nasl a\n.endr\n" +
-		      "tay\ntxa\nasl a\nsty $0000\nclc\nadc $0000\n" +
-		      "clc\nadc #$0004\ntax\nply\npla\nsta 0,x\nsty $0000\n");
+		      "lda TOP\npha\ntya\n.rept 6\nasl a\n.endr\n" +
+		      "tay\ntxa\nasl a\nsty TOP\nclc\nadc TOP\n" +
+		      "clc\nadc #$0010\ntax\nply\npla\nsta 0,x\nsty TOP\n");
     }
 }

@@ -25,58 +25,24 @@ class testCodeGen
 	{
 		_tile( row, col, symbol);
 	}
-	int getVal(int a, int index)
-	{
-		return (a + index);
-	}
-	int grabValAt(int a[], int index)
-	{
-		return a[index];
-	}
-	int changeVal(int ptr[])
-	{
-		ptr[0]++
-		return ptr[0];
-	}
 	void main()
 	{
 		int i = 1;
-		int a[10];
-		int temp;
-		int ptr[1];
-		a[0] = zero;
-		b[0] = minus;
-		while((i < 10))
+		draw(0, 0, zero);
+		while(true)
 		{
 			{
-				a[i] = (a[(i - 1)] + 1);
-				b[i] = (b[(i - 1)] + 2);
-				i++
-			}
+				if (_button(1, Held, input))
+				{
+					{
+						draw(i, i, (zero + i));
+						i++
+					}
+				}
+				_display();
+ 			}
 		}
-		i = 0;
-		while((i < 10))
-		{
-			{
-				draw(i, 0, getVal(a[i], 1));
-				draw(i, 1, getVal(b[i], 1));
-				i++
-			}
-		}
-		i = 0;
-		while((i < 10))
-		{
-			{
-				draw(i, 2, (grabValAt(a, i) + 1));
-				draw(i, 3, (grabValAt(b, i) + 1));
-				i++
-			}
-		}
-		ptr[0] = zero;
-		changeVal(ptr);
-		draw(12, 0, ptr[0]);
-		_display();
- 	}
+	}
 }
 Analysis success
 Code generated!

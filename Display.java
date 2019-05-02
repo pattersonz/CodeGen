@@ -15,6 +15,6 @@ class Display extends NonWhileStmt implements BG {
     
     public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
-	writer.append("jsr SetTiles\n");
+	writer.append("jsr SetTiles\nwai\n");
     }
 }

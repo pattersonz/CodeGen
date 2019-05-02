@@ -21,11 +21,12 @@ class MemberDecls extends BaseGrammarTop implements BG {
 	if (fieldsAndMethods != null)
 	    {
 		//create stack top pointer at $0000
-		//tileMap adr at $0002
-		//tiles at $0004 through $0804 (2 * 32 * 32)
-		Integer top = 4 + (2*32*32);
+		//activation record at $0002
+		//joypad raws, helds, press
+		//tiles at $0010 through $0810 (2 * 32 * 32)
+		Integer top = 2 * (8) + (2*32*32);
 		writer.append("main:\nrep #$30\nlda #$0000\ntcd\n"+
-			      "lda #$" + hex(top) + "\nsta $0000\n");
+			      "lda #$" + hex(top) + "\nsta TOP\n");
 		fieldsAndMethods.gen(top);
 	    }
     }

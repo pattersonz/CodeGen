@@ -41,6 +41,23 @@ terminal FINAL;
 terminal VOID;
 terminal TRUE;
 terminal FALSE;
+terminal BUTTON;
+terminal PRESSED;
+terminal HELD;
+terminal A;
+terminal B;
+terminal X;
+terminal Y;
+terminal L;
+terminal R;
+terminal UP;
+terminal DOWN;
+terminal LEFT;
+terminal RIGHT;
+terminal START;
+terminal SELECT;
+terminal ONE;
+terminal TWO;
 terminal TILE;
 terminal DISPLAY;
 
@@ -97,6 +114,9 @@ non terminal ActionExpr 			actionExpression;
 non terminal TypeCastExpr 			typeCastExpression;
 non terminal TernaryExpr 			ternaryExpression;
 non terminal TypeLit				typeLit;
+non terminal InputMethod			inputMethod;
+non terminal ButtonInput			buttonInput;
+non terminal ControllerNum 			controllerNum;
 
 precedence left COMMA;
 precedence right ASSMNT;
@@ -396,7 +416,61 @@ expression ::= name:n
 		|
 		ternaryExpression:t
 		{: RESULT = t; :}
+		|
+		BUTTON LEFT_PAREN controllerNum:c COMMA inputMethod:a COMMA buttonInput:i RT_PAREN
+		{: RESULT = new ControllerInput(c, a, i); :}
 		;
+		
+controllerNum ::= ONE
+	   {: RESULT = new ControllerNum(1); :}
+	   |
+	   TWO
+	   {: RESULT = new ControllerNum(2); :}
+	   ;
+
+inputMethod ::= PRESSED
+       {: RESULT = new InputMethod('p'); :}
+       |
+       HELD
+       {: RESULT = new InputMethod('h'); :}
+       ;
+
+buttonInput ::= A
+      {: RESULT = new ButtonInput('a'); :}
+      |
+      B
+      {: RESULT = new ButtonInput('b'); :}
+      |
+      X
+      {: RESULT = new ButtonInput('x'); :}
+      |
+      Y
+      {: RESULT = new ButtonInput('y'); :}
+      |
+      L
+      {: RESULT = new ButtonInput('l'); :}
+      |
+      R
+      {: RESULT = new ButtonInput('r'); :}
+      |
+      UP
+      {: RESULT = new ButtonInput('u'); :}
+      |
+      DOWN
+      {: RESULT = new ButtonInput('d'); :}
+      |
+      LEFT
+      {: RESULT = new ButtonInput('e'); :}
+      |
+      RIGHT
+      {: RESULT = new ButtonInput('r'); :}
+      |
+      START
+      {: RESULT = new ButtonInput('s'); :}
+      |
+      SELECT
+      {: RESULT = new ButtonInput('t'); :}
+      ;
 
 actionExpression ::= NOT expression:e
 		{: RESULT = new UnaryExpr("~", e); :}

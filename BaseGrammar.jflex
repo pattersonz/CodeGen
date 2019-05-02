@@ -91,7 +91,7 @@ return		{ return newSym(sym.RETURN); }
 "+" 		{ return newSym(sym.PREFIXPLUS); }
 "++"		{ return newSym(sym.PLUSPLUS); }
 "-"             { return newSym(sym.MINUS); }
-"-"			{ return newSym(sym.PREFIXMINUS); }
+"-"		{ return newSym(sym.PREFIXMINUS); }
 "--"		{ return newSym(sym.MINUSMINUS); }
 "/"             { return newSym(sym.DIVIDE); }
 ";"             { return newSym(sym.SEMI); }
@@ -120,6 +120,23 @@ bool		{ return newSym(sym.BOOL); }
 char		{ return newSym(sym.CHAR); }
 true		{ return newSym(sym.TRUE); }
 false		{ return newSym(sym.FALSE); }
+_button		{ return newSym(sym.BUTTON); }
+_press		{ return newSym(sym.PRESSED); }
+_held		{ return newSym(sym.HELD); }
+_A		{ return newSym(sym.A); }
+_B		{ return newSym(sym.B); }
+_X		{ return newSym(sym.X); }
+_Y		{ return newSym(sym.Y); }
+_L		{ return newSym(sym.L); }
+_R		{ return newSym(sym.R); }
+_UP		{ return newSym(sym.UP); }
+_DOWN		{ return newSym(sym.DOWN); }
+_LEFT		{ return newSym(sym.LEFT); }
+_RIGHT		{ return newSym(sym.RIGHT); }
+_START		{ return newSym(sym.START); }
+_SELECT		{ return newSym(sym.SELECT); }
+_1		{ return newSym(sym.ONE); }
+_2		{ return newSym(sym.TWO); }
 _tile		{ return newSym(sym.TILE); }
 _display 	{ return newSym(sym.DISPLAY); }
 {id}    	{ return newSym(sym.ID, yytext()); }

@@ -47,6 +47,7 @@ FILE=	BaseGrammarLexer.java      parser.java    sym.java \
 		CharType.java BoolType.java NonTypeCastExpr.java ActionExpr.java \
 		Data.java DataList.java DataHash.java FullType.java VarData.java FunctionData.java\
 		StrType.java BaseGrammarException.java NameSingle.java Display.java Tile.java\
+		ControllerInput.java ControllerNum.java ButtonInput.java InputMethod.java\
 	BaseGrammarCompiler.java
 
 dump: parserD.java $(FILE:java=class)
