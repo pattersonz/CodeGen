@@ -39,7 +39,7 @@ class  ButtonInput extends BaseGrammarTop implements BG {
 	    val = "0800";
 	else if (action == 'd')
 	    val = "0400";
-	else if (action == 'l')
+	else if (action == 'e')
 	    val = "0200";
 	else
 	    val = "0100";

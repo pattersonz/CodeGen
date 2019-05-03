@@ -30,7 +30,7 @@ class FieldDeclArray extends FieldDecl implements BG {
     {
 	FullType ft = new FullType(fieldStart.type, true, false);
 	hash.insert(fieldStart.id, ft, scope, sizeBelow);
-	writer.append("ldx $0000\ntxa\ninc a\ninc a\nsta 0, x\n");	
+	writer.append("ldx $0000\ntxa\ninc a\ninc a\nsta $0000, x\n");	
     }
 
 }

@@ -6,7 +6,7 @@ class testCodeGen
 	final int plus = 2;
 	final int minus = 3;
 	final int equals = 4;
-	final int greenO = 5;
+	final int redCross = 5;
 	final int divide = 6;
 	final int redO = 7;
 	final int bar = 8;
@@ -29,15 +29,7 @@ class testCodeGen
 	}
 	bool isValid(int x)
 	{
-		bool ans = ((((spot[0] == x) && (spot[1] == x)) && (spot[2] == x)));
-		ans = (ans || ((((spot[3] == x) && (spot[4] == x)) && (spot[5] == x))));
-		ans = (ans || ((((spot[6] == x) && (spot[7] == x)) && (spot[8] == x))));
-		ans = (ans || ((((spot[0] == x) && (spot[3] == x)) && (spot[6] == x))));
-		ans = (ans || ((((spot[1] == x) && (spot[4] == x)) && (spot[7] == x))));
-		ans = (ans || ((((spot[2] == x) && (spot[5] == x)) && (spot[8] == x))));
-		ans = (ans || ((((spot[0] == x) && (spot[4] == x)) && (spot[8] == x))));
-		ans = (ans || ((((spot[2] == x) && (spot[4] == x)) && (spot[6] == x))));
-		return ans;
+		return (((((((((((spot[0] == x) && (spot[1] == x)) && (spot[2] == x))) || ((((spot[3] == x) && (spot[4] == x)) && (spot[5] == x)))) || ((((spot[6] == x) && (spot[7] == x)) && (spot[8] == x)))) || ((((spot[0] == x) && (spot[3] == x)) && (spot[6] == x)))) || ((((spot[1] == x) && (spot[4] == x)) && (spot[7] == x)))) || ((((spot[2] == x) && (spot[5] == x)) && (spot[8] == x)))) || ((((spot[0] == x) && (spot[4] == x)) && (spot[8] == x)))) || ((((spot[2] == x) && (spot[4] == x)) && (spot[6] == x))));
 	}
 	int getWinner()
 	{
@@ -50,7 +42,7 @@ class testCodeGen
 		{
 			if (isValid(2))
 			{
-				return greenO;
+				return redCross;
 			}
 			else
 			{
@@ -101,6 +93,8 @@ class testCodeGen
 			{
 				int i = 0;
 				int winner;
+				int player;
+				bool confirmed;
 				while((i < 32))
 				{
 					{
@@ -142,14 +136,14 @@ class testCodeGen
 				}
 				winner = 0;
 				filled = 0;
+				player = 1;
 				while((winner == 0))
 				{
 					{
 						int selecting = 0;
 						int prevSel;
-						bool confirmed = false;
-						int player = 1;
-						while((~possibleSpot(selecting)))
+						confirmed = false;
+						while((possibleSpot(selecting) == false))
 						{
 							{
 								if ((selecting == 8))
@@ -167,7 +161,7 @@ class testCodeGen
  						while((~confirmed))
 						{
 							{
-								if (_button(1, Press, input))
+								if (_button(1, Held, input))
 								{
 									{
 										prevSel = selecting;
@@ -179,7 +173,7 @@ class testCodeGen
 										{
 											selecting--
 										}
-										while((~possibleSpot(selecting)))
+										while((possibleSpot(selecting) == false))
 										{
 											if ((selecting == 0))
 											{
@@ -197,7 +191,7 @@ class testCodeGen
 								}
 								else
 								{
-									if (_button(1, Press, input))
+									if (_button(1, Held, input))
 									{
 										{
 											prevSel = selecting;
@@ -209,15 +203,15 @@ class testCodeGen
 											{
 												selecting++
 											}
-											while((~possibleSpot(selecting)))
+											while((possibleSpot(selecting) == false))
 											{
-												if ((selecting == 0))
+												if ((selecting == 8))
 												{
-													selecting = 8;
+													selecting = 0;
 												}
 												else
 												{
-													selecting--
+													selecting++
 												}
 											}
 											drawAt(prevSel, blank);
@@ -238,11 +232,17 @@ class testCodeGen
 						spot[selecting] = player;
 						if ((player == 1))
 						{
-							player = 2;
+							{
+								drawAt(selecting, redO);
+								player = 2;
+							}
 						}
 						else
 						{
-							player = 1;
+							{
+								drawAt(selecting, redCross);
+								player = 1;
+							}
 						}
 						winner = getWinner();
 					}
@@ -262,9 +262,15 @@ class testCodeGen
 						i++
 					}
 				}
-				while((~_button(1, Press, input)))
+				_display();
+ 				confirmed = false;
+				while((confirmed == false))
 				{
 					{
+						if (_button(1, Press, input))
+						{
+							confirmed = true;
+						}
 					}
 				}
 			}

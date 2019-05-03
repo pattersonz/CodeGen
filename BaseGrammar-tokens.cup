@@ -463,7 +463,7 @@ buttonInput ::= A
       {: RESULT = new ButtonInput('e'); :}
       |
       RIGHT
-      {: RESULT = new ButtonInput('r'); :}
+      {: RESULT = new ButtonInput('i'); :}
       |
       START
       {: RESULT = new ButtonInput('s'); :}

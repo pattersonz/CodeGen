@@ -25,18 +25,18 @@ class ArgFuncExpr extends FuncExpr implements BG {
     public void gen(int extra) throws Exception
     {
         //push current ar
-	writer.append( "ldx $0002\nphx\n");
+	writer.append( "ldx AR\nphx\n");
 	int count = arguments.gen(extra);
 	//set top + extra as current ar
-	writer.append("lda $0000\nclc\nadc #$" + hex(extra) + "\nsta $0002\n");
+	writer.append("lda TOP\nclc\nadc #$" + hex(extra) + "\nsta AR\n");
 	//increment top to be at the top of arg decls
-	writer.append("lda $0000\nclc\nadc #$" + hex(count) + "\n");
+	writer.append("lda TOP\nclc\nadc #$" + hex(count) + "\nsta TOP\n");
 	//jmp
 	writer.append("jsr method_" + id + "\n" +
 		      //set old ar as top minus the extra (to restore)
-		      "lda $0002\n\nsec\nsbc #$" + hex(extra) + "\nsta $0000\n"+
+		      "lda AR\n\nsec\nsbc #$" + hex(extra) + "\nsta TOP\n"+
 		      //pull current ar
-		      "ply\nsty $0002\n" +
+		      "ply\nsty AR\n" +
 		      //push x for val return
 		      "phx\n");
     }

@@ -65,9 +65,13 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 	    {
 		int cc = compareCount;
 		compareCount++;
+		//gen left
 		leftHandSide.gen(extra);
-		writer.append("plx\ncpx #$0000\nbne compare" + hex(cc) +"\n");
+		//if not zero its valid
+		writer.append("plx\ncpx #$0000\nbne isTrueB" + hex(cc) +"\njmp doRight" + hex(cc) + "\nisTrueB" + hex(cc) + ":\njmp compare" + hex(cc) + "\ndoRight" + hex(cc) + ":\n");
+		//else gen right
 		rightHandSide.gen(extra);
+		//either push 1 if valid or 0 if negative
 		writer.append("plx\ncpx #$0000\nbne compare" + hex(cc) +"\n");
 		writer.append("ldx #$0000\njmp erapmoc" + hex(cc) + "\ncompare" + hex(cc) +
 			      ":\nldx #$0001\n\nerapmoc" + hex(cc) + ":\nphx\n");	
@@ -78,7 +82,7 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 		int cc = compareCount;
 		compareCount++;
 		leftHandSide.gen(extra);
-		writer.append("plx\ncpx #$0000\nbeq compare" + hex(cc) +"\n");
+		writer.append("plx\ncpx #$0000\nbeq isFalseB" + hex(cc) +"\njmp doRight" + hex(cc) + "\nisFalseB" + hex(cc) + ":\njmp compare" + hex(cc) + "\ndoRight" + hex(cc) + ":\n");
 		rightHandSide.gen(extra);
 		writer.append("plx\ncpx #$0000\nbeq compare" + hex(cc) +"\n");
 		writer.append("ldx #$0001\njmp erapmoc" + hex(cc) + "\ncompare" + hex(cc) +

@@ -9,7 +9,7 @@ ldx $0000
 txa
 inc a
 inc a
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$14
@@ -22,7 +22,7 @@ ldx #$01
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -31,7 +31,7 @@ ldx #$02
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -40,7 +40,7 @@ ldx #$03
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -49,7 +49,7 @@ ldx #$04
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -58,7 +58,7 @@ ldx #$05
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -67,7 +67,7 @@ ldx #$06
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -76,7 +76,7 @@ ldx #$07
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -85,7 +85,7 @@ ldx #$08
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -94,7 +94,7 @@ ldx #$09
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -103,7 +103,7 @@ ldx #$0a
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -112,7 +112,7 @@ ldx #$0b
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -121,7 +121,7 @@ ldx #$0c
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -130,7 +130,7 @@ ldx #$0d
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -139,7 +139,7 @@ ldx #$0e
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -148,7 +148,7 @@ ldx #$0f
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -157,7 +157,7 @@ ldx #$10
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -166,7 +166,7 @@ ldx #$11
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -175,7 +175,7 @@ ldx #$12
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -184,7 +184,7 @@ ldx #$13
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -193,7 +193,7 @@ ldx #$14
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -202,7 +202,7 @@ ldx #$15
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda TOP
 clc
 adc #$02
@@ -275,186 +275,6 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare02
-lda #$0000
-jmp erapmoc02
-compare02:
-lda #$0001
-erapmoc02:
-stx $0000
-pha
-plx
-cpx #$0000
-beq compare01
-ldx #$01
-phx
-;getVal
-ply
-lda $0000
-pha
-phy
-ldx #$0000
-lda $0810, x
-sta $0000
-pla
-asl a
-clc
-adc $0000
-tax
-lda $0000, x
-plx
-stx $0000
-pha
-ldx $0002
-lda $00, x
-pha
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
-beq compare03
-lda #$0000
-jmp erapmoc03
-compare03:
-lda #$0001
-erapmoc03:
-stx $0000
-pha
-plx
-cpx #$0000
-beq compare01
-ldx #$0001
-jmp erapmoc01
-compare01:
-ldx #$0000
-erapmoc01:
-phx
-plx
-cpx #$0000
-beq compare00
-ldx #$02
-phx
-;getVal
-ply
-lda $0000
-pha
-phy
-ldx #$0000
-lda $0810, x
-sta $0000
-pla
-asl a
-clc
-adc $0000
-tax
-lda $0000, x
-plx
-stx $0000
-pha
-ldx $0002
-lda $00, x
-pha
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
-beq compare04
-lda #$0000
-jmp erapmoc04
-compare04:
-lda #$0001
-erapmoc04:
-stx $0000
-pha
-plx
-cpx #$0000
-beq compare00
-ldx #$0001
-jmp erapmoc00
-compare00:
-ldx #$0000
-erapmoc00:
-phx
-pla
-ldx $0000
-sta 0, x
-lda $0000
-clc
-adc #$02
-sta $0000
-ldx $0002
-lda $02, x
-pha
-plx
-cpx #$0000
-bne compare05
-ldx #$03
-phx
-;getVal
-ply
-lda $0000
-pha
-phy
-ldx #$0000
-lda $0810, x
-sta $0000
-pla
-asl a
-clc
-adc $0000
-tax
-lda $0000, x
-plx
-stx $0000
-pha
-ldx $0002
-lda $00, x
-pha
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
-beq compare08
-lda #$0000
-jmp erapmoc08
-compare08:
-lda #$0001
-erapmoc08:
-stx $0000
-pha
-plx
-cpx #$0000
-beq compare07
-ldx #$04
-phx
-;getVal
-ply
-lda $0000
-pha
-phy
-ldx #$0000
-lda $0810, x
-sta $0000
-pla
-asl a
-clc
-adc $0000
-tax
-lda $0000, x
-plx
-stx $0000
-pha
-ldx $0002
-lda $00, x
-pha
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
 beq compare09
 lda #$0000
 jmp erapmoc09
@@ -465,17 +285,12 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare07
-ldx #$0001
-jmp erapmoc07
-compare07:
-ldx #$0000
-erapmoc07:
-phx
-plx
-cpx #$0000
-beq compare06
-ldx #$05
+beq isFalseB08
+jmp doRight08
+isFalseB08:
+jmp compare08
+doRight08:
+ldx #$01
 phx
 ;getVal
 ply
@@ -512,33 +327,72 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare06
+beq compare08
 ldx #$0001
-jmp erapmoc06
-compare06:
+jmp erapmoc08
+compare08:
 ldx #$0000
-erapmoc06:
+erapmoc08:
 phx
 plx
 cpx #$0000
-bne compare05
-ldx #$0000
-jmp erapmoc05
-compare05:
-ldx #$0001
-
-erapmoc05:
+beq isFalseB07
+jmp doRight07
+isFalseB07:
+jmp compare07
+doRight07:
+ldx #$02
 phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
 pla
-ldy $0002
-sta $02, y
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
 ldx $0002
-lda $02, x
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare0b
+lda #$0000
+jmp erapmoc0b
+compare0b:
+lda #$0001
+erapmoc0b:
+stx $0000
 pha
 plx
 cpx #$0000
-bne compare0b
-ldx #$06
+beq compare07
+ldx #$0001
+jmp erapmoc07
+compare07:
+ldx #$0000
+erapmoc07:
+phx
+plx
+cpx #$0000
+bne isTrueB06
+jmp doRight06
+isTrueB06:
+jmp compare06
+doRight06:
+ldx #$03
 phx
 ;getVal
 ply
@@ -575,8 +429,12 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare0d
-ldx #$07
+beq isFalseB0d
+jmp doRight0d
+isFalseB0d:
+jmp compare0d
+doRight0d:
+ldx #$04
 phx
 ;getVal
 ply
@@ -622,8 +480,12 @@ erapmoc0d:
 phx
 plx
 cpx #$0000
-beq compare0c
-ldx #$08
+beq isFalseB0c
+jmp doRight0c
+isFalseB0c:
+jmp compare0c
+doRight0c:
+ldx #$05
 phx
 ;getVal
 ply
@@ -669,24 +531,64 @@ erapmoc0c:
 phx
 plx
 cpx #$0000
-bne compare0b
+bne compare06
 ldx #$0000
-jmp erapmoc0b
-compare0b:
+jmp erapmoc06
+compare06:
 ldx #$0001
 
-erapmoc0b:
+erapmoc06:
 phx
+plx
+cpx #$0000
+bne isTrueB05
+jmp doRight05
+isTrueB05:
+jmp compare05
+doRight05:
+ldx #$06
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
 pla
-ldy $0002
-sta $02, y
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
 ldx $0002
-lda $02, x
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare13
+lda #$0000
+jmp erapmoc13
+compare13:
+lda #$0001
+erapmoc13:
+stx $0000
 pha
 plx
 cpx #$0000
-bne compare11
-ldx #$00
+beq isFalseB12
+jmp doRight12
+isFalseB12:
+jmp compare12
+doRight12:
+ldx #$07
 phx
 ;getVal
 ply
@@ -723,8 +625,21 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare13
-ldx #$03
+beq compare12
+ldx #$0001
+jmp erapmoc12
+compare12:
+ldx #$0000
+erapmoc12:
+phx
+plx
+cpx #$0000
+beq isFalseB11
+jmp doRight11
+isFalseB11:
+jmp compare11
+doRight11:
+ldx #$08
 phx
 ;getVal
 ply
@@ -761,17 +676,31 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare13
+beq compare11
 ldx #$0001
-jmp erapmoc13
-compare13:
+jmp erapmoc11
+compare11:
 ldx #$0000
-erapmoc13:
+erapmoc11:
 phx
 plx
 cpx #$0000
-beq compare12
-ldx #$06
+bne compare05
+ldx #$0000
+jmp erapmoc05
+compare05:
+ldx #$0001
+
+erapmoc05:
+phx
+plx
+cpx #$0000
+bne isTrueB04
+jmp doRight04
+isTrueB04:
+jmp compare04
+doRight04:
+ldx #$00
 phx
 ;getVal
 ply
@@ -798,43 +727,73 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare16
+beq compare18
 lda #$0000
-jmp erapmoc16
-compare16:
+jmp erapmoc18
+compare18:
 lda #$0001
-erapmoc16:
+erapmoc18:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare12
-ldx #$0001
-jmp erapmoc12
-compare12:
-ldx #$0000
-erapmoc12:
+beq isFalseB17
+jmp doRight17
+isFalseB17:
+jmp compare17
+doRight17:
+ldx #$03
 phx
-plx
-cpx #$0000
-bne compare11
+;getVal
+ply
+lda $0000
+pha
+phy
 ldx #$0000
-jmp erapmoc11
-compare11:
-ldx #$0001
-
-erapmoc11:
-phx
+lda $0810, x
+sta $0000
 pla
-ldy $0002
-sta $02, y
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
 ldx $0002
-lda $02, x
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare19
+lda #$0000
+jmp erapmoc19
+compare19:
+lda #$0001
+erapmoc19:
+stx $0000
 pha
 plx
 cpx #$0000
-bne compare17
-ldx #$01
+beq compare17
+ldx #$0001
+jmp erapmoc17
+compare17:
+ldx #$0000
+erapmoc17:
+phx
+plx
+cpx #$0000
+beq isFalseB16
+jmp doRight16
+isFalseB16:
+jmp compare16
+doRight16:
+ldx #$06
 phx
 ;getVal
 ply
@@ -871,7 +830,72 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare19
+beq compare16
+ldx #$0001
+jmp erapmoc16
+compare16:
+ldx #$0000
+erapmoc16:
+phx
+plx
+cpx #$0000
+bne compare04
+ldx #$0000
+jmp erapmoc04
+compare04:
+ldx #$0001
+
+erapmoc04:
+phx
+plx
+cpx #$0000
+bne isTrueB03
+jmp doRight03
+isTrueB03:
+jmp compare03
+doRight03:
+ldx #$01
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare1d
+lda #$0000
+jmp erapmoc1d
+compare1d:
+lda #$0001
+erapmoc1d:
+stx $0000
+pha
+plx
+cpx #$0000
+beq isFalseB1c
+jmp doRight1c
+isFalseB1c:
+jmp compare1c
+doRight1c:
 ldx #$04
 phx
 ;getVal
@@ -899,26 +923,30 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare1b
+beq compare1e
 lda #$0000
-jmp erapmoc1b
-compare1b:
+jmp erapmoc1e
+compare1e:
 lda #$0001
-erapmoc1b:
+erapmoc1e:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare19
+beq compare1c
 ldx #$0001
-jmp erapmoc19
-compare19:
+jmp erapmoc1c
+compare1c:
 ldx #$0000
-erapmoc19:
+erapmoc1c:
 phx
 plx
 cpx #$0000
-beq compare18
+beq isFalseB1b
+jmp doRight1b
+isFalseB1b:
+jmp compare1b
+doRight1b:
 ldx #$07
 phx
 ;getVal
@@ -946,128 +974,41 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare1c
-lda #$0000
-jmp erapmoc1c
-compare1c:
-lda #$0001
-erapmoc1c:
-stx $0000
-pha
-plx
-cpx #$0000
-beq compare18
-ldx #$0001
-jmp erapmoc18
-compare18:
-ldx #$0000
-erapmoc18:
-phx
-plx
-cpx #$0000
-bne compare17
-ldx #$0000
-jmp erapmoc17
-compare17:
-ldx #$0001
-
-erapmoc17:
-phx
-pla
-ldy $0002
-sta $02, y
-ldx $0002
-lda $02, x
-pha
-plx
-cpx #$0000
-bne compare1d
-ldx #$02
-phx
-;getVal
-ply
-lda $0000
-pha
-phy
-ldx #$0000
-lda $0810, x
-sta $0000
-pla
-asl a
-clc
-adc $0000
-tax
-lda $0000, x
-plx
-stx $0000
-pha
-ldx $0002
-lda $00, x
-pha
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
-beq compare20
-lda #$0000
-jmp erapmoc20
-compare20:
-lda #$0001
-erapmoc20:
-stx $0000
-pha
-plx
-cpx #$0000
 beq compare1f
-ldx #$05
-phx
-;getVal
-ply
-lda $0000
-pha
-phy
-ldx #$0000
-lda $0810, x
-sta $0000
-pla
-asl a
-clc
-adc $0000
-tax
-lda $0000, x
-plx
-stx $0000
-pha
-ldx $0002
-lda $00, x
-pha
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
-beq compare21
 lda #$0000
-jmp erapmoc21
-compare21:
-lda #$0001
-erapmoc21:
-stx $0000
-pha
-plx
-cpx #$0000
-beq compare1f
-ldx #$0001
 jmp erapmoc1f
 compare1f:
-ldx #$0000
+lda #$0001
 erapmoc1f:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare1b
+ldx #$0001
+jmp erapmoc1b
+compare1b:
+ldx #$0000
+erapmoc1b:
 phx
 plx
 cpx #$0000
-beq compare1e
-ldx #$08
+bne compare03
+ldx #$0000
+jmp erapmoc03
+compare03:
+ldx #$0001
+
+erapmoc03:
+phx
+plx
+cpx #$0000
+bne isTrueB02
+jmp doRight02
+isTrueB02:
+jmp compare02
+doRight02:
+ldx #$02
 phx
 ;getVal
 ply
@@ -1104,33 +1045,12 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare1e
-ldx #$0001
-jmp erapmoc1e
-compare1e:
-ldx #$0000
-erapmoc1e:
-phx
-plx
-cpx #$0000
-bne compare1d
-ldx #$0000
-jmp erapmoc1d
-compare1d:
-ldx #$0001
-
-erapmoc1d:
-phx
-pla
-ldy $0002
-sta $02, y
-ldx $0002
-lda $02, x
-pha
-plx
-cpx #$0000
-bne compare23
-ldx #$00
+beq isFalseB21
+jmp doRight21
+isFalseB21:
+jmp compare21
+doRight21:
+ldx #$05
 phx
 ;getVal
 ply
@@ -1157,18 +1077,92 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare26
+beq compare23
 lda #$0000
-jmp erapmoc26
-compare26:
+jmp erapmoc23
+compare23:
 lda #$0001
-erapmoc26:
+erapmoc23:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare25
-ldx #$04
+beq compare21
+ldx #$0001
+jmp erapmoc21
+compare21:
+ldx #$0000
+erapmoc21:
+phx
+plx
+cpx #$0000
+beq isFalseB20
+jmp doRight20
+isFalseB20:
+jmp compare20
+doRight20:
+ldx #$08
+phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
+pla
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
+ldx $0002
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare24
+lda #$0000
+jmp erapmoc24
+compare24:
+lda #$0001
+erapmoc24:
+stx $0000
+pha
+plx
+cpx #$0000
+beq compare20
+ldx #$0001
+jmp erapmoc20
+compare20:
+ldx #$0000
+erapmoc20:
+phx
+plx
+cpx #$0000
+bne compare02
+ldx #$0000
+jmp erapmoc02
+compare02:
+ldx #$0001
+
+erapmoc02:
+phx
+plx
+cpx #$0000
+bne isTrueB01
+jmp doRight01
+isTrueB01:
+jmp compare01
+doRight01:
+ldx #$00
 phx
 ;getVal
 ply
@@ -1205,17 +1199,12 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare25
-ldx #$0001
-jmp erapmoc25
-compare25:
-ldx #$0000
-erapmoc25:
-phx
-plx
-cpx #$0000
-beq compare24
-ldx #$08
+beq isFalseB26
+jmp doRight26
+isFalseB26:
+jmp compare26
+doRight26:
+ldx #$04
 phx
 ;getVal
 ply
@@ -1252,32 +1241,81 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare24
+beq compare26
 ldx #$0001
-jmp erapmoc24
-compare24:
+jmp erapmoc26
+compare26:
 ldx #$0000
-erapmoc24:
+erapmoc26:
 phx
 plx
 cpx #$0000
-bne compare23
-ldx #$0000
-jmp erapmoc23
-compare23:
-ldx #$0001
-
-erapmoc23:
+beq isFalseB25
+jmp doRight25
+isFalseB25:
+jmp compare25
+doRight25:
+ldx #$08
 phx
+;getVal
+ply
+lda $0000
+pha
+phy
+ldx #$0000
+lda $0810, x
+sta $0000
 pla
-ldy $0002
-sta $02, y
+asl a
+clc
+adc $0000
+tax
+lda $0000, x
+plx
+stx $0000
+pha
 ldx $0002
-lda $02, x
+lda $00, x
+pha
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare29
+lda #$0000
+jmp erapmoc29
+compare29:
+lda #$0001
+erapmoc29:
+stx $0000
 pha
 plx
 cpx #$0000
-bne compare29
+beq compare25
+ldx #$0001
+jmp erapmoc25
+compare25:
+ldx #$0000
+erapmoc25:
+phx
+plx
+cpx #$0000
+bne compare01
+ldx #$0000
+jmp erapmoc01
+compare01:
+ldx #$0001
+
+erapmoc01:
+phx
+plx
+cpx #$0000
+bne isTrueB00
+jmp doRight00
+isTrueB00:
+jmp compare00
+doRight00:
 ldx #$02
 phx
 ;getVal
@@ -1315,7 +1353,11 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare2b
+beq isFalseB2b
+jmp doRight2b
+isFalseB2b:
+jmp compare2b
+doRight2b:
 ldx #$04
 phx
 ;getVal
@@ -1362,7 +1404,11 @@ erapmoc2b:
 phx
 plx
 cpx #$0000
-beq compare2a
+beq isFalseB2a
+jmp doRight2a
+isFalseB2a:
+jmp compare2a
+doRight2a:
 ldx #$06
 phx
 ;getVal
@@ -1409,20 +1455,14 @@ erapmoc2a:
 phx
 plx
 cpx #$0000
-bne compare29
+bne compare00
 ldx #$0000
-jmp erapmoc29
-compare29:
+jmp erapmoc00
+compare00:
 ldx #$0001
 
-erapmoc29:
+erapmoc00:
 phx
-pla
-ldy $0002
-sta $02, y
-ldx $0002
-lda $02, x
-pha
 plx
 jmp method_isValid_end
 method_isValid_end:
@@ -1435,28 +1475,29 @@ inx
 phx
 plx
 stx $0824
-ldx $0002
+ldx AR
 phx
 ldx #$01
 phx
 ldx $0000
 pla
 sta $00, x
-lda $0000
+lda TOP
 clc
 adc #$00
-sta $0002
-lda $0000
+sta AR
+lda TOP
 clc
 adc #$02
+sta TOP
 jsr method_isValid
-lda $0002
+lda AR
 
 sec
 sbc #$00
-sta $0000
+sta TOP
 ply
-sty $0002
+sty AR
 phx
 pla
 cmp #$0000
@@ -1472,28 +1513,29 @@ plx
 jmp method_getWinner_end
 jmp fi_0
 else_0:
-ldx $0002
+ldx AR
 phx
 ldx #$02
 phx
 ldx $0000
 pla
 sta $00, x
-lda $0000
+lda TOP
 clc
 adc #$00
-sta $0002
-lda $0000
+sta AR
+lda TOP
 clc
 adc #$02
+sta TOP
 jsr method_isValid
-lda $0002
+lda AR
 
 sec
 sbc #$00
-sta $0000
+sta TOP
 ply
-sty $0002
+sty AR
 phx
 pla
 cmp #$0000
@@ -1594,7 +1636,7 @@ ldx #$00
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda $0000
 clc
 adc #$02
@@ -1603,7 +1645,7 @@ ldx #$02
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda $0000
 clc
 adc #$02
@@ -1696,7 +1738,11 @@ stx $0000
 pha
 plx
 cpx #$0000
-bne compare34
+bne isTrueB34
+jmp doRight34
+isTrueB34:
+jmp compare34
+doRight34:
 ldx $0002
 lda $00, x
 pha
@@ -1727,7 +1773,11 @@ erapmoc34:
 phx
 plx
 cpx #$0000
-bne compare33
+bne isTrueB33
+jmp doRight33
+isTrueB33:
+jmp compare33
+doRight33:
 ldx $0002
 lda $00, x
 pha
@@ -1791,7 +1841,11 @@ stx $0000
 pha
 plx
 cpx #$0000
-bne compare39
+bne isTrueB39
+jmp doRight39
+isTrueB39:
+jmp compare39
+doRight39:
 ldx $0002
 lda $00, x
 pha
@@ -1822,7 +1876,11 @@ erapmoc39:
 phx
 plx
 cpx #$0000
-bne compare38
+bne isTrueB38
+jmp doRight38
+isTrueB38:
+jmp compare38
+doRight38:
 ldx $0002
 lda $00, x
 pha
@@ -1868,7 +1926,7 @@ jmp fi_6
 else_6:
 fi_6:
 fi_5:
-ldx $0002
+ldx AR
 phx
 ldx $0002
 lda $04, x
@@ -1888,16 +1946,17 @@ pha
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 method_drawAt_end:
 rts
 method_main:
@@ -1917,7 +1976,15 @@ ldx #$00
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
+lda $0000
+clc
+adc #$02
+sta $0000
+lda $0000
+clc
+adc #$02
+sta $0000
 lda $0000
 clc
 adc #$02
@@ -1958,14 +2025,14 @@ ldx #$00
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda $0000
 clc
 adc #$02
 sta $0000
 while_2:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx #$20
 phx
@@ -1991,7 +2058,7 @@ jmp elihw_2
 whileS_2:
 ldx $0000
 phx
-ldx $0002
+ldx AR
 phx
 ldx $0002
 lda $00, x
@@ -2000,7 +2067,7 @@ ldx $0000
 pla
 sta $00, x
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
@@ -2010,25 +2077,26 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 plx
 inx
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 plx
 stx $0000
 jmp while_2
@@ -2046,7 +2114,7 @@ plx
 stx $0000
 jmp while_1
 elihw_1:
-ldx $0002
+ldx AR
 phx
 ldx #$00
 phx
@@ -2063,17 +2131,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$00
 phx
@@ -2090,17 +2159,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$02
 phx
@@ -2117,17 +2187,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$02
 phx
@@ -2144,17 +2215,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$04
 phx
@@ -2171,17 +2243,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$04
 phx
@@ -2198,17 +2271,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$01
 phx
@@ -2225,17 +2299,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$01
 phx
@@ -2252,17 +2327,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$01
 phx
@@ -2279,17 +2355,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$03
 phx
@@ -2306,17 +2383,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$03
 phx
@@ -2333,17 +2411,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$03
 phx
@@ -2360,17 +2439,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$01
 phx
@@ -2387,17 +2467,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$01
 phx
@@ -2414,17 +2495,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$03
 phx
@@ -2441,17 +2523,18 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx #$03
 phx
@@ -2468,16 +2551,17 @@ phy
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 jsr SetTiles
 wai
 ldx #$00
@@ -2559,6 +2643,11 @@ ldx #$00
 phx
 plx
 stx $0824
+ldx #$01
+phx
+pla
+ldy $0002
+sta $04, y
 while_4:
 ldx $0002
 lda $02, x
@@ -2591,7 +2680,7 @@ ldx #$00
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda $0000
 clc
 adc #$02
@@ -2603,69 +2692,35 @@ sta $0000
 ldx #$00
 phx
 pla
-ldx $0000
-sta 0, x
-lda $0000
-clc
-adc #$02
-sta $0000
-ldx #$01
-phx
-pla
-ldx $0000
-sta 0, x
-lda $0000
-clc
-adc #$02
-sta $0000
+ldy $0002
+sta $06, y
 while_5:
-ldx $0002
+ldx AR
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
 sta $00, x
-lda $0000
+lda TOP
 clc
 adc #$00
-sta $0002
-lda $0000
+sta AR
+lda TOP
 clc
 adc #$02
+sta TOP
 jsr method_possibleSpot
-lda $0002
+lda AR
 
 sec
 sbc #$00
-sta $0000
+sta TOP
 ply
-sty $0002
+sty AR
 phx
-plx
-cpx #$0000
-php
-sep #$20
-pla
-and #$02
-lsr a
-tax
-rep #$20
-phx
-pla
-cmp #$0000
-beq elihwb_5
-jmp whileS_5
-elihwb_5:
-jmp elihw_5
-whileS_5:
-ldx $0000
-phx
-ldx $0002
-lda $04, x
-pha
-ldx #$08
+ldx #$00
 phx
 ply
 pla
@@ -2682,6 +2737,33 @@ stx $0000
 pha
 pla
 cmp #$0000
+beq elihwb_5
+jmp whileS_5
+elihwb_5:
+jmp elihw_5
+whileS_5:
+ldx $0000
+phx
+ldx $0002
+lda $08, x
+pha
+ldx #$08
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare42
+lda #$0000
+jmp erapmoc42
+compare42:
+lda #$0001
+erapmoc42:
+stx $0000
+pha
+pla
+cmp #$0000
 beq elseb_7
 jmp ifS_7
 elseb_7:
@@ -2692,27 +2774,27 @@ ldx #$00
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 jmp fi_7
 else_7:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 plx
 inx
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 fi_7:
 plx
 stx $0000
 jmp while_5
 elihw_5:
-ldx $0002
+ldx AR
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
@@ -2722,21 +2804,22 @@ phy
 ldx $0000
 pla
 sta $02, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$04
+sta TOP
 jsr method_drawAt
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 jsr SetTiles
 wai
 while_6:
 ldx $0002
-lda $08, x
+lda $06, x
 pha
 plx
 cpx #$0000
@@ -2758,8 +2841,8 @@ whileS_6:
 ldx $0000
 phx
 wai
-lda Joy1Press
-and #$0100
+lda Joy1Held
+and #$0200
 php
 sep #$20
 pla
@@ -2780,98 +2863,13 @@ if_8:
 ldx $0000
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 pla
 ldy $0002
-sta $06, y
+sta $0a, y
 ldx $0002
-lda $04, x
-pha
-ldx #$00
-phx
-ply
-pla
-ldx $0000
-sty $0000
-cmp $0000
-beq compare42
-lda #$0000
-jmp erapmoc42
-compare42:
-lda #$0001
-erapmoc42:
-stx $0000
-pha
-pla
-cmp #$0000
-beq elseb_9
-jmp ifS_9
-elseb_9:
-jmp else_9
-ifS_9:
-if_9:
-ldx #$08
-phx
-pla
-ldy $0002
-sta $04, y
-jmp fi_9
-else_9:
-ldx $0002
-lda $04, x
-pha
-plx
-dex
-phx
-pla
-ldy $0002
-sta $04, y
-fi_9:
-while_7:
-ldx $0002
-phx
-ldx $0002
-lda $04, x
-pha
-ldx $0000
-pla
-sta $00, x
-lda $0000
-clc
-adc #$00
-sta $0002
-lda $0000
-clc
-adc #$02
-jsr method_possibleSpot
-lda $0002
-
-sec
-sbc #$00
-sta $0000
-ply
-sty $0002
-phx
-plx
-cpx #$0000
-php
-sep #$20
-pla
-and #$02
-lsr a
-tax
-rep #$20
-phx
-pla
-cmp #$0000
-beq elihwb_7
-jmp whileS_7
-elihwb_7:
-jmp elihw_7
-whileS_7:
-ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx #$00
 phx
@@ -2890,6 +2888,97 @@ stx $0000
 pha
 pla
 cmp #$0000
+beq elseb_9
+jmp ifS_9
+elseb_9:
+jmp else_9
+ifS_9:
+if_9:
+ldx #$08
+phx
+pla
+ldy $0002
+sta $08, y
+jmp fi_9
+else_9:
+ldx $0002
+lda $08, x
+pha
+plx
+dex
+phx
+pla
+ldy $0002
+sta $08, y
+fi_9:
+while_7:
+ldx AR
+phx
+ldx $0002
+lda $08, x
+pha
+ldx $0000
+pla
+sta $00, x
+lda TOP
+clc
+adc #$00
+sta AR
+lda TOP
+clc
+adc #$02
+sta TOP
+jsr method_possibleSpot
+lda AR
+
+sec
+sbc #$00
+sta TOP
+ply
+sty AR
+phx
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare44
+lda #$0000
+jmp erapmoc44
+compare44:
+lda #$0001
+erapmoc44:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_7
+jmp whileS_7
+elihwb_7:
+jmp elihw_7
+whileS_7:
+ldx $0002
+lda $08, x
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare45
+lda #$0000
+jmp erapmoc45
+compare45:
+lda #$0001
+erapmoc45:
+stx $0000
+pha
+pla
+cmp #$0000
 beq elseb_10
 jmp ifS_10
 elseb_10:
@@ -2900,25 +2989,25 @@ ldx #$08
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 jmp fi_10
 else_10:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 plx
 dex
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 fi_10:
 jmp while_7
 elihw_7:
-ldx $0002
+ldx AR
 phx
 ldx $0002
-lda $06, x
+lda $0a, x
 pha
 ldx $0000
 pla
@@ -2928,20 +3017,21 @@ phy
 ldx $0000
 pla
 sta $02, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$04
+sta TOP
 jsr method_drawAt
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
@@ -2951,16 +3041,17 @@ phy
 ldx $0000
 pla
 sta $02, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$04
+sta TOP
 jsr method_drawAt
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 jsr SetTiles
 wai
 plx
@@ -2968,8 +3059,8 @@ stx $0000
 jmp fi_8
 else_8:
 wai
-lda Joy1Press
-and #$0010
+lda Joy1Held
+and #$0100
 php
 sep #$20
 pla
@@ -2990,13 +3081,13 @@ if_11:
 ldx $0000
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 pla
 ldy $0002
-sta $06, y
+sta $0a, y
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx #$08
 phx
@@ -3005,12 +3096,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare44
+beq compare46
 lda #$0000
-jmp erapmoc44
-compare44:
+jmp erapmoc46
+compare46:
 lda #$0001
-erapmoc44:
+erapmoc46:
 stx $0000
 pha
 pla
@@ -3025,54 +3116,60 @@ ldx #$00
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 jmp fi_12
 else_12:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 plx
 inx
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 fi_12:
 while_8:
-ldx $0002
+ldx AR
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
 sta $00, x
-lda $0000
+lda TOP
 clc
 adc #$00
-sta $0002
-lda $0000
+sta AR
+lda TOP
 clc
 adc #$02
+sta TOP
 jsr method_possibleSpot
-lda $0002
+lda AR
 
 sec
 sbc #$00
-sta $0000
+sta TOP
 ply
-sty $0002
+sty AR
 phx
-plx
-cpx #$0000
-php
-sep #$20
+ldx #$00
+phx
+ply
 pla
-and #$02
-lsr a
-tax
-rep #$20
-phx
+ldx $0000
+sty $0000
+cmp $0000
+beq compare47
+lda #$0000
+jmp erapmoc47
+compare47:
+lda #$0001
+erapmoc47:
+stx $0000
+pha
 pla
 cmp #$0000
 beq elihwb_8
@@ -3081,21 +3178,21 @@ elihwb_8:
 jmp elihw_8
 whileS_8:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
-ldx #$00
+ldx #$08
 phx
 ply
 pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare45
+beq compare48
 lda #$0000
-jmp erapmoc45
-compare45:
+jmp erapmoc48
+compare48:
 lda #$0001
-erapmoc45:
+erapmoc48:
 stx $0000
 pha
 pla
@@ -3106,29 +3203,29 @@ elseb_13:
 jmp else_13
 ifS_13:
 if_13:
-ldx #$08
+ldx #$00
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 jmp fi_13
 else_13:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 plx
-dex
+inx
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 fi_13:
 jmp while_8
 elihw_8:
-ldx $0002
+ldx AR
 phx
 ldx $0002
-lda $06, x
+lda $0a, x
 pha
 ldx $0000
 pla
@@ -3138,20 +3235,21 @@ phy
 ldx $0000
 pla
 sta $02, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$04
+sta TOP
 jsr method_drawAt
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
-ldx $0002
+sty AR
+ldx AR
 phx
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
@@ -3161,16 +3259,17 @@ phy
 ldx $0000
 pla
 sta $02, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$04
+sta TOP
 jsr method_drawAt
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 jsr SetTiles
 wai
 plx
@@ -3201,7 +3300,7 @@ ldx #$01
 phx
 pla
 ldy $0002
-sta $08, y
+sta $06, y
 jmp fi_14
 else_14:
 fi_14:
@@ -3212,10 +3311,10 @@ stx $0000
 jmp while_6
 elihw_6:
 ldx $0002
-lda $0a, x
+lda $04, x
 pha
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ;asn val
 plx
@@ -3237,7 +3336,7 @@ sta $0000, x
 plx
 stx $0000
 ldx $0002
-lda $0a, x
+lda $04, x
 pha
 ldx #$01
 phx
@@ -3246,12 +3345,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare46
+beq compare49
 lda #$0000
-jmp erapmoc46
-compare46:
+jmp erapmoc49
+compare49:
 lda #$0001
-erapmoc46:
+erapmoc49:
 stx $0000
 pha
 pla
@@ -3262,18 +3361,74 @@ elseb_15:
 jmp else_15
 ifS_15:
 if_15:
+ldx $0000
+phx
+ldx AR
+phx
+ldx $0002
+lda $08, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $0832
+phy
+ldx $0000
+pla
+sta $02, x
+ldx TOP
+stx AR
+lda TOP
+clc
+adc #$04
+sta TOP
+jsr method_drawAt
+lda AR
+sta TOP
+ply
+sty AR
 ldx #$02
 phx
 pla
 ldy $0002
-sta $0a, y
+sta $04, y
+plx
+stx $0000
 jmp fi_15
 else_15:
+ldx $0000
+phx
+ldx AR
+phx
+ldx $0002
+lda $08, x
+pha
+ldx $0000
+pla
+sta $00, x
+ldy $082e
+phy
+ldx $0000
+pla
+sta $02, x
+ldx TOP
+stx AR
+lda TOP
+clc
+adc #$04
+sta TOP
+jsr method_drawAt
+lda AR
+sta TOP
+ply
+sty AR
 ldx #$01
 phx
 pla
 ldy $0002
-sta $0a, y
+sta $04, y
+plx
+stx $0000
 fi_15:
 ldx $0002
 phx
@@ -3308,12 +3463,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare47
+bpl compare4a
 lda #$0001
-jmp erapmoc47
-compare47:
+jmp erapmoc4a
+compare4a:
 lda #$0000
-erapmoc47:
+erapmoc4a:
 stx $0000
 pha
 pla
@@ -3329,14 +3484,14 @@ ldx #$00
 phx
 pla
 ldx $0000
-sta 0, x
+sta $0000, x
 lda $0000
 clc
 adc #$02
 sta $0000
 while_10:
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx #$20
 phx
@@ -3345,12 +3500,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare48
+bpl compare4b
 lda #$0001
-jmp erapmoc48
-compare48:
+jmp erapmoc4b
+compare4b:
 lda #$0000
-erapmoc48:
+erapmoc4b:
 stx $0000
 pha
 pla
@@ -3362,7 +3517,7 @@ jmp elihw_10
 whileS_10:
 ldx $0000
 phx
-ldx $0002
+ldx AR
 phx
 ldx $0002
 lda $00, x
@@ -3371,7 +3526,7 @@ ldx $0000
 pla
 sta $00, x
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 ldx $0000
 pla
@@ -3382,25 +3537,26 @@ pha
 ldx $0000
 pla
 sta $04, x
-ldx $0000
-stx $0002
-lda $0000
+ldx TOP
+stx AR
+lda TOP
 clc
 adc #$06
+sta TOP
 jsr method_draw
-lda $0002
-sta $0000
+lda AR
+sta TOP
 ply
-sty $0002
+sty AR
 ldx $0002
-lda $04, x
+lda $08, x
 pha
 plx
 inx
 phx
 pla
 ldy $0002
-sta $04, y
+sta $08, y
 plx
 stx $0000
 jmp while_10
@@ -3418,7 +3574,41 @@ plx
 stx $0000
 jmp while_9
 elihw_9:
+jsr SetTiles
+wai
+ldx #$00
+phx
+pla
+ldy $0002
+sta $06, y
 while_11:
+ldx $0002
+lda $06, x
+pha
+ldx #$00
+phx
+ply
+pla
+ldx $0000
+sty $0000
+cmp $0000
+beq compare4c
+lda #$0000
+jmp erapmoc4c
+compare4c:
+lda #$0001
+erapmoc4c:
+stx $0000
+pha
+pla
+cmp #$0000
+beq elihwb_11
+jmp whileS_11
+elihwb_11:
+jmp elihw_11
+whileS_11:
+ldx $0000
+phx
 wai
 lda Joy1Press
 and #$0080
@@ -3431,25 +3621,22 @@ eor #$01
 tax
 rep #$20
 phx
-plx
-cpx #$0000
-php
-sep #$20
-pla
-and #$02
-lsr a
-tax
-rep #$20
-phx
 pla
 cmp #$0000
-beq elihwb_11
-jmp whileS_11
-elihwb_11:
-jmp elihw_11
-whileS_11:
-ldx $0000
+beq elseb_16
+jmp ifS_16
+elseb_16:
+jmp else_16
+ifS_16:
+if_16:
+ldx #$01
 phx
+pla
+ldy $0002
+sta $06, y
+jmp fi_16
+else_16:
+fi_16:
 plx
 stx $0000
 jmp while_11

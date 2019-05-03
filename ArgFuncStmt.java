@@ -21,18 +21,18 @@ class ArgFuncStmt extends FuncStmt implements BG {
     public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
         //push current ar
-	writer.append( "ldx $0002\nphx\n");
+	writer.append( "ldx AR\nphx\n");
 	int count = arguments.gen(0);
 	//set top as current ar
-	writer.append("ldx $0000\nstx $0002\n");
+	writer.append("ldx TOP\nstx AR\n");
 	//increment top to be at the top of arg decls
-	writer.append("lda $0000\nclc\nadc #$" + hex(count) + "\n");
+	writer.append("lda TOP\nclc\nadc #$" + hex(count) + "\nsta TOP\n");
 	//jmp
 	writer.append("jsr method_" + id + "\n" +
 		      //set old ar as top
-		      "lda $0002\nsta $0000\n"+
+		      "lda AR\nsta TOP\n"+
 		      //pull current ar
-		      "ply\nsty $0002\n");
+		      "ply\nsty AR\n");
     }
 }
 
