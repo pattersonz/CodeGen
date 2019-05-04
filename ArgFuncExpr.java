@@ -33,8 +33,10 @@ class ArgFuncExpr extends FuncExpr implements BG {
 	writer.append("lda TOP\nclc\nadc #$" + hex(count) + "\nsta TOP\n");
 	//jmp
 	writer.append("jsr method_" + id + "\n" +
+		      //get value at AR (return val) and store in x, then move AR to acc
+		      "ldy AR\nlda $0000, y\ntax\ntya\n" +
 		      //set old ar as top minus the extra (to restore)
-		      "lda AR\n\nsec\nsbc #$" + hex(extra) + "\nsta TOP\n"+
+		      "sec\nsbc #$" + hex(extra) + "\nsta TOP\n"+
 		      //pull current ar
 		      "ply\nsty AR\n" +
 		      //push x for val return

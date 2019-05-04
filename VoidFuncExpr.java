@@ -27,10 +27,12 @@ class VoidFuncExpr extends FuncExpr implements BG {
 	writer.append("ldx $0000\nstx $0002\n");
 	//jmp
 	writer.append("jsr method_" + id + "\n" +
+		      //get value at AR (return val) and store in x, then move AR to acc
+		      "ldy AR\nlda $0000, y\ntax\ntya\n" +
 		      //set old ar as top
-		      "lda $0002\nsta $0000\n"+
+		      "sta TOP\n"+
 		      //pull current ar
-		      "ply\nsty $0002\n" +
+		      "ply\nsty AR\n" +
 		      //push x for val return
 		      "phx\n");
     }

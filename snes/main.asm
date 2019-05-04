@@ -1463,7 +1463,9 @@ ldx #$0001
 
 erapmoc00:
 phx
-plx
+pla
+ldy AR
+sta $0000, y
 jmp method_isValid_end
 method_isValid_end:
 rts
@@ -1491,8 +1493,10 @@ clc
 adc #$02
 sta TOP
 jsr method_isValid
-lda AR
-
+ldy AR
+lda $0000, y
+tax
+tya
 sec
 sbc #$00
 sta TOP
@@ -1509,7 +1513,9 @@ ifS_0:
 if_0:
 ldy $0832
 phy
-plx
+pla
+ldy AR
+sta $0000, y
 jmp method_getWinner_end
 jmp fi_0
 else_0:
@@ -1529,8 +1535,10 @@ clc
 adc #$02
 sta TOP
 jsr method_isValid
-lda AR
-
+ldy AR
+lda $0000, y
+tax
+tya
 sec
 sbc #$00
 sta TOP
@@ -1547,7 +1555,9 @@ ifS_1:
 if_1:
 ldy $082e
 phy
-plx
+pla
+ldy AR
+sta $0000, y
 jmp method_getWinner_end
 jmp fi_1
 else_1:
@@ -1578,7 +1588,9 @@ ifS_2:
 if_2:
 ldy $0828
 phy
-plx
+pla
+ldy AR
+sta $0000, y
 jmp method_getWinner_end
 jmp fi_2
 else_2:
@@ -1587,7 +1599,9 @@ fi_1:
 fi_0:
 ldx #$00
 phx
-plx
+pla
+ldy AR
+sta $0000, y
 jmp method_getWinner_end
 method_getWinner_end:
 rts
@@ -1627,7 +1641,9 @@ lda #$0001
 erapmoc30:
 stx $0000
 pha
-plx
+pla
+ldy AR
+sta $0000, y
 jmp method_possibleSpot_end
 method_possibleSpot_end:
 rts
@@ -2712,8 +2728,10 @@ clc
 adc #$02
 sta TOP
 jsr method_possibleSpot
-lda AR
-
+ldy AR
+lda $0000, y
+tax
+tya
 sec
 sbc #$00
 sta TOP
@@ -2821,8 +2839,8 @@ while_6:
 ldx $0002
 lda $06, x
 pha
-plx
-cpx #$0000
+pla
+cmp #$0000
 php
 sep #$20
 pla
@@ -2929,8 +2947,10 @@ clc
 adc #$02
 sta TOP
 jsr method_possibleSpot
-lda AR
-
+ldy AR
+lda $0000, y
+tax
+tya
 sec
 sbc #$00
 sta TOP
@@ -3147,8 +3167,10 @@ clc
 adc #$02
 sta TOP
 jsr method_possibleSpot
-lda AR
-
+ldy AR
+lda $0000, y
+tax
+tya
 sec
 sbc #$00
 sta TOP
@@ -3435,10 +3457,13 @@ phx
 ldx $0000
 stx $0002
 jsr method_getWinner
-lda $0002
-sta $0000
+ldy AR
+lda $0000, y
+tax
+tya
+sta TOP
 ply
-sty $0002
+sty AR
 phx
 pla
 ldy $0002

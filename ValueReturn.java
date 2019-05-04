@@ -23,7 +23,7 @@ class ValueReturn extends NonWhileStmt implements BG {
     public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
 	expression.gen();
-	writer.append("plx\njmp method_" + method + "_end\n");
+	writer.append("pla\nldy AR\nsta $0000, y\njmp method_" + method + "_end\n");
     }
 }
 
