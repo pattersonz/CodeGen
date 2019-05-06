@@ -41,6 +41,25 @@ void main()
 		draw(0,1,redO);
 	else
 		draw(0,1,redCross);
+	if (2.5 + 3.0 == 5.5)
+	   draw(0,2,redO);
+	else
+		draw(0,2,redCross);
+		
+	if (2.5 - 3.0 > -0.6 && 2.5 - 3.0 < -0.4)
+	   draw(0,3,redO);
+	else
+		draw(0,3,redCross);
+		
+	if (2 * 6 == 12 && -3 * 4 == -12)
+	   draw(0,4,redO);
+	else
+		draw(0,4,redCross);
+
+	if (13 / 5 == 2 && 18 / 6 == 3)
+	   draw(0,5,redO);
+	else
+		draw(0,5,redCross);
 	draw(1,0,minus);
 	
 	_display();
