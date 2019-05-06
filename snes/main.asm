@@ -99,7 +99,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$0a
+ldx #$0A
 phx
 pla
 ldx $0000
@@ -108,7 +108,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$0b
+ldx #$0B
 phx
 pla
 ldx $0000
@@ -117,7 +117,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$0c
+ldx #$0C
 phx
 pla
 ldx $0000
@@ -126,7 +126,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$0d
+ldx #$0D
 phx
 pla
 ldx $0000
@@ -135,7 +135,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$0e
+ldx #$0E
 phx
 pla
 ldx $0000
@@ -144,7 +144,7 @@ lda TOP
 clc
 adc #$02
 sta TOP
-ldx #$0f
+ldx #$0F
 phx
 pla
 ldx $0000
@@ -317,12 +317,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare0a
+beq compare0A
 lda #$0000
-jmp erapmoc0a
-compare0a:
+jmp erapmoc0A
+compare0A:
 lda #$0001
-erapmoc0a:
+erapmoc0A:
 stx $0000
 pha
 plx
@@ -368,12 +368,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare0b
+beq compare0B
 lda #$0000
-jmp erapmoc0b
-compare0b:
+jmp erapmoc0B
+compare0B:
 lda #$0001
-erapmoc0b:
+erapmoc0B:
 stx $0000
 pha
 plx
@@ -419,21 +419,21 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare0e
+beq compare0E
 lda #$0000
-jmp erapmoc0e
-compare0e:
+jmp erapmoc0E
+compare0E:
 lda #$0001
-erapmoc0e:
+erapmoc0E:
 stx $0000
 pha
 plx
 cpx #$0000
-beq isFalseB0d
-jmp doRight0d
-isFalseB0d:
-jmp compare0d
-doRight0d:
+beq isFalseB0D
+jmp doRight0D
+isFalseB0D:
+jmp compare0D
+doRight0D:
 ldx #$04
 phx
 ;getVal
@@ -461,30 +461,30 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare0f
+beq compare0F
 lda #$0000
-jmp erapmoc0f
-compare0f:
+jmp erapmoc0F
+compare0F:
 lda #$0001
-erapmoc0f:
+erapmoc0F:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare0d
+beq compare0D
 ldx #$0001
-jmp erapmoc0d
-compare0d:
+jmp erapmoc0D
+compare0D:
 ldx #$0000
-erapmoc0d:
+erapmoc0D:
 phx
 plx
 cpx #$0000
-beq isFalseB0c
-jmp doRight0c
-isFalseB0c:
-jmp compare0c
-doRight0c:
+beq isFalseB0C
+jmp doRight0C
+isFalseB0C:
+jmp compare0C
+doRight0C:
 ldx #$05
 phx
 ;getVal
@@ -522,12 +522,12 @@ stx $0000
 pha
 plx
 cpx #$0000
-beq compare0c
+beq compare0C
 ldx #$0001
-jmp erapmoc0c
-compare0c:
+jmp erapmoc0C
+compare0C:
 ldx #$0000
-erapmoc0c:
+erapmoc0C:
 phx
 plx
 cpx #$0000
@@ -820,12 +820,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare1a
+beq compare1A
 lda #$0000
-jmp erapmoc1a
-compare1a:
+jmp erapmoc1A
+compare1A:
 lda #$0001
-erapmoc1a:
+erapmoc1A:
 stx $0000
 pha
 plx
@@ -881,21 +881,21 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare1d
+beq compare1D
 lda #$0000
-jmp erapmoc1d
-compare1d:
+jmp erapmoc1D
+compare1D:
 lda #$0001
-erapmoc1d:
+erapmoc1D:
 stx $0000
 pha
 plx
 cpx #$0000
-beq isFalseB1c
-jmp doRight1c
-isFalseB1c:
-jmp compare1c
-doRight1c:
+beq isFalseB1C
+jmp doRight1C
+isFalseB1C:
+jmp compare1C
+doRight1C:
 ldx #$04
 phx
 ;getVal
@@ -923,30 +923,30 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare1e
+beq compare1E
 lda #$0000
-jmp erapmoc1e
-compare1e:
+jmp erapmoc1E
+compare1E:
 lda #$0001
-erapmoc1e:
+erapmoc1E:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare1c
+beq compare1C
 ldx #$0001
-jmp erapmoc1c
-compare1c:
+jmp erapmoc1C
+compare1C:
 ldx #$0000
-erapmoc1c:
+erapmoc1C:
 phx
 plx
 cpx #$0000
-beq isFalseB1b
-jmp doRight1b
-isFalseB1b:
-jmp compare1b
-doRight1b:
+beq isFalseB1B
+jmp doRight1B
+isFalseB1B:
+jmp compare1B
+doRight1B:
 ldx #$07
 phx
 ;getVal
@@ -974,22 +974,22 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare1f
+beq compare1F
 lda #$0000
-jmp erapmoc1f
-compare1f:
+jmp erapmoc1F
+compare1F:
 lda #$0001
-erapmoc1f:
+erapmoc1F:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare1b
+beq compare1B
 ldx #$0001
-jmp erapmoc1b
-compare1b:
+jmp erapmoc1B
+compare1B:
 ldx #$0000
-erapmoc1b:
+erapmoc1B:
 phx
 plx
 cpx #$0000
@@ -1343,21 +1343,21 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare2c
+beq compare2C
 lda #$0000
-jmp erapmoc2c
-compare2c:
+jmp erapmoc2C
+compare2C:
 lda #$0001
-erapmoc2c:
+erapmoc2C:
 stx $0000
 pha
 plx
 cpx #$0000
-beq isFalseB2b
-jmp doRight2b
-isFalseB2b:
-jmp compare2b
-doRight2b:
+beq isFalseB2B
+jmp doRight2B
+isFalseB2B:
+jmp compare2B
+doRight2B:
 ldx #$04
 phx
 ;getVal
@@ -1385,30 +1385,30 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare2d
+beq compare2D
 lda #$0000
-jmp erapmoc2d
-compare2d:
+jmp erapmoc2D
+compare2D:
 lda #$0001
-erapmoc2d:
+erapmoc2D:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare2b
+beq compare2B
 ldx #$0001
-jmp erapmoc2b
-compare2b:
+jmp erapmoc2B
+compare2B:
 ldx #$0000
-erapmoc2b:
+erapmoc2B:
 phx
 plx
 cpx #$0000
-beq isFalseB2a
-jmp doRight2a
-isFalseB2a:
-jmp compare2a
-doRight2a:
+beq isFalseB2A
+jmp doRight2A
+isFalseB2A:
+jmp compare2A
+doRight2A:
 ldx #$06
 phx
 ;getVal
@@ -1436,22 +1436,22 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare2e
+beq compare2E
 lda #$0000
-jmp erapmoc2e
-compare2e:
+jmp erapmoc2E
+compare2E:
 lda #$0001
-erapmoc2e:
+erapmoc2E:
 stx $0000
 pha
 plx
 cpx #$0000
-beq compare2a
+beq compare2A
 ldx #$0001
-jmp erapmoc2a
-compare2a:
+jmp erapmoc2A
+compare2A:
 ldx #$0000
-erapmoc2a:
+erapmoc2A:
 phx
 plx
 cpx #$0000
@@ -1553,7 +1553,7 @@ elseb_1:
 jmp else_1
 ifS_1:
 if_1:
-ldy $082e
+ldy $082E
 phy
 pla
 ldy AR
@@ -1570,12 +1570,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare2f
+beq compare2F
 lda #$0000
-jmp erapmoc2f
-compare2f:
+jmp erapmoc2F
+compare2F:
 lda #$0001
-erapmoc2f:
+erapmoc2F:
 stx $0000
 pha
 pla
@@ -1847,12 +1847,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare3a
+beq compare3A
 lda #$0000
-jmp erapmoc3a
-compare3a:
+jmp erapmoc3A
+compare3A:
 lda #$0001
-erapmoc3a:
+erapmoc3A:
 stx $0000
 pha
 plx
@@ -1872,12 +1872,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare3b
+beq compare3B
 lda #$0000
-jmp erapmoc3b
-compare3b:
+jmp erapmoc3B
+compare3B:
 lda #$0001
-erapmoc3b:
+erapmoc3B:
 stx $0000
 pha
 plx
@@ -1907,12 +1907,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare3c
+beq compare3C
 lda #$0000
-jmp erapmoc3c
-compare3c:
+jmp erapmoc3C
+compare3C:
 lda #$0001
-erapmoc3c:
+erapmoc3C:
 stx $0000
 pha
 plx
@@ -2020,12 +2020,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare3d
+bpl compare3D
 lda #$0001
-jmp erapmoc3d
-compare3d:
+jmp erapmoc3D
+compare3D:
 lda #$0000
-erapmoc3d:
+erapmoc3D:
 stx $0000
 pha
 pla
@@ -2057,12 +2057,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare3e
+bpl compare3E
 lda #$0001
-jmp erapmoc3e
-compare3e:
+jmp erapmoc3E
+compare3E:
 lda #$0000
-erapmoc3e:
+erapmoc3E:
 stx $0000
 pha
 pla
@@ -2310,7 +2310,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084c
+ldy $084C
 phy
 ldx $0000
 pla
@@ -2338,7 +2338,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084c
+ldy $084C
 phy
 ldx $0000
 pla
@@ -2366,7 +2366,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084c
+ldy $084C
 phy
 ldx $0000
 pla
@@ -2394,7 +2394,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084c
+ldy $084C
 phy
 ldx $0000
 pla
@@ -2422,7 +2422,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084c
+ldy $084C
 phy
 ldx $0000
 pla
@@ -2450,7 +2450,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084c
+ldy $084C
 phy
 ldx $0000
 pla
@@ -2478,7 +2478,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084a
+ldy $084A
 phy
 ldx $0000
 pla
@@ -2506,7 +2506,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084a
+ldy $084A
 phy
 ldx $0000
 pla
@@ -2534,7 +2534,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084a
+ldy $084A
 phy
 ldx $0000
 pla
@@ -2562,7 +2562,7 @@ phx
 ldx $0000
 pla
 sta $02, x
-ldy $084a
+ldy $084A
 phy
 ldx $0000
 pla
@@ -2596,12 +2596,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare3f
+bpl compare3F
 lda #$0001
-jmp erapmoc3f
-compare3f:
+jmp erapmoc3F
+compare3F:
 lda #$0000
-erapmoc3f:
+erapmoc3F:
 stx $0000
 pha
 pla
@@ -2817,7 +2817,7 @@ pha
 ldx $0000
 pla
 sta $00, x
-ldy $084e
+ldy $084E
 phy
 ldx $0000
 pla
@@ -2885,7 +2885,7 @@ lda $08, x
 pha
 pla
 ldy $0002
-sta $0a, y
+sta $0A, y
 ldx $0002
 lda $08, x
 pha
@@ -3027,7 +3027,7 @@ elihw_7:
 ldx AR
 phx
 ldx $0002
-lda $0a, x
+lda $0A, x
 pha
 ldx $0000
 pla
@@ -3056,7 +3056,7 @@ pha
 ldx $0000
 pla
 sta $00, x
-ldy $084e
+ldy $084E
 phy
 ldx $0000
 pla
@@ -3105,7 +3105,7 @@ lda $08, x
 pha
 pla
 ldy $0002
-sta $0a, y
+sta $0A, y
 ldx $0002
 lda $08, x
 pha
@@ -3247,7 +3247,7 @@ elihw_8:
 ldx AR
 phx
 ldx $0002
-lda $0a, x
+lda $0A, x
 pha
 ldx $0000
 pla
@@ -3276,7 +3276,7 @@ pha
 ldx $0000
 pla
 sta $00, x
-ldy $084e
+ldy $084E
 phy
 ldx $0000
 pla
@@ -3428,7 +3428,7 @@ pha
 ldx $0000
 pla
 sta $00, x
-ldy $082e
+ldy $082E
 phy
 ldx $0000
 pla
@@ -3488,12 +3488,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare4a
+bpl compare4A
 lda #$0001
-jmp erapmoc4a
-compare4a:
+jmp erapmoc4A
+compare4A:
 lda #$0000
-erapmoc4a:
+erapmoc4A:
 stx $0000
 pha
 pla
@@ -3525,12 +3525,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-bpl compare4b
+bpl compare4B
 lda #$0001
-jmp erapmoc4b
-compare4b:
+jmp erapmoc4B
+compare4B:
 lda #$0000
-erapmoc4b:
+erapmoc4B:
 stx $0000
 pha
 pla
@@ -3617,12 +3617,12 @@ pla
 ldx $0000
 sty $0000
 cmp $0000
-beq compare4c
+beq compare4C
 lda #$0000
-jmp erapmoc4c
-compare4c:
+jmp erapmoc4C
+compare4C:
 lda #$0001
-erapmoc4c:
+erapmoc4C:
 stx $0000
 pha
 pla

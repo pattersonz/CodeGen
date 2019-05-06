@@ -23,4 +23,9 @@ class OptionalExpr extends BaseGrammarTop implements BG {
 	expression.gen();
     }
 
+    public Expr getExp()
+    {
+	return expression;
+    }
+
 }

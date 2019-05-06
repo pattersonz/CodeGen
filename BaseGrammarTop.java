@@ -36,7 +36,27 @@ abstract class BaseGrammarTop implements BG{
 	String output = Integer.toHexString(val);
 	if (output.length() % 2 == 1)
 	    output = "0" + output;
-	return output;
+	return output.toUpperCase();
+    }
+
+    public String bin(int val, int bits)
+    {
+	String binary = "";
+	for(int i = 0; i < bits; i++)
+	    {
+		if (val >= Math.pow(2, bits - i - 1))
+		    {
+			binary += "1";
+			val -= Math.pow(2, bits - i - 1);
+		    }
+		else
+		    {
+			binary += "0";
+		    }
+	    }
+	System.out.println(binary);
+	return binary;
+	
     }
 
 }

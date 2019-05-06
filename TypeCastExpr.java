@@ -24,7 +24,22 @@ class TypeCastExpr extends ActionExpr implements BG {
 
     public void gen(int extra) throws Exception
     {
-	return;
+	expression.gen(extra);
+	FullType i = new FullType(new IntType(), false, false), f = new FullType(new FloatType(), false, false);
+	if (!expression.getType().equals(f))
+	    {
+		if (type.toString(0).equals("float"))
+		    {
+			writer.append("plx\njsr IntToFloat\nphx\n");
+		    }
+	    }
+	else if (expression.getType().equals(f))
+	    {
+		if (!type.toString(0).equals("float"))
+		    {
+			writer.append("plx\njsr FloatToInt\nphx\n");
+		    }
+	    }
     }
 }
 

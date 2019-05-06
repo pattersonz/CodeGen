@@ -71,7 +71,10 @@ class MethodDecl extends BaseGrammarTop implements BG{
 	FullType[] argTypes = null;
 	writer.append("method_" + methodStart.id + ":\n");
 
-  
+	if (argumentDeclarations != null) {
+	    argTypes = argumentDeclarations.getTypes();
+	}
+
 	hash.insert(methodStart.id, methodStart.returnType, argTypes, 0);
 	Integer sizeBelow = 0;
 	

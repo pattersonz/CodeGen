@@ -90,19 +90,79 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 	    }
 	else
 	    {
-		leftHandSide.gen(extra);
-		rightHandSide.gen(extra);
+		//coerc if needed
+		FullType l = leftHandSide.getType(), r = rightHandSide.getType(),
+		    i = new FullType(new IntType(), false, false),f = new FullType(new FloatType(), false, false);
+		if (l.equals(f) || r.equals(f))
+		    {
+			if (l.equals(f))
+			    leftHandSide.gen(extra);
+			else
+			    {
+				TypeCastExpr tc = new TypeCastExpr(new FloatType(), leftHandSide);
+				tc.gen(extra);
+			    }
+			if (r.equals(f))
+			    rightHandSide.gen(extra);
+			else
+			    {
+				TypeCastExpr tc = new TypeCastExpr(new FloatType(), rightHandSide);
+				tc.gen(extra);
+			    }
+		    }
+		else
+		    {
+			leftHandSide.gen(extra);
+			rightHandSide.gen(extra);
+		    }
+		
 		//these always will
 		if (operator.equals("+"))
-		    writer.append("plx\nply\nlda $0000\npha\nstx $0000\ntya\nclc\nadc $0000\nplx\nstx $0000\npha\n");
+		    {
+			if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("ply\nplx\njsr FloatAdd\nphx\n");
+			    }
+			else
+			    {
+				writer.append("plx\nply\nlda $0000\npha\nstx $0000\ntya\nclc\nadc $0000\nplx\nstx $0000\npha\n");
+			    }
+		    }
 		else if (operator.equals("-"))
+		    if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("pla\nplx\neor #$8000\ntay\njsr FloatAdd\nphx\n");
+			    }
+			else
+			    {
 		   writer.append("ply\nplx\nlda $0000\npha\nsty $0000\ntxa\nsec\nsbc $0000\nplx\nstx $0000\npha\n");
+			    }
 		else if (operator.equals("*"))
-		    writer.append("plx\nply\nlda $0000\npha\nstx $0000\ntya\nclc\nadc $0000\nplx\nstx $0000\npha\n");
+		    if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("ply\nplx\njsr FloatMult\nphx\n");
+			    }
+			else
+			    { 
+				writer.append("ply\nplx\njsr Multiply\nphx\n");
+			    }
 		else if (operator.equals("/"))
-		   writer.append("plx\nply\nlda $0000\npha\nsty $0000\ntxa\nsec\nsbc $0000\nplx\nstx $0000\npha\n");
+		    if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("ply\nplx\njsr FloatDiv\nphx\n");
+			    }
+			else
+			    { 
+				writer.append("ply\nplx\njsr Divide\nphx\n");
+			    }
 		else if (operator.equals("<"))
 		    {
+			if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("plx\nply\njsr FloatGtr\nphx\n");
+			    }
+			else
+			    {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
@@ -110,9 +170,16 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 				      hex(cc) + "\ncompare" + hex(cc) +
 				      ":\nlda #$0000\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
+			    }
 		    }
 		else if (operator.equals(">"))
 		    {
+			if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("ply\nplx\njsr FloatGtr\nphx\n");
+			    }
+			else
+			    {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("pla\nply\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
@@ -120,9 +187,16 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 				      hex(cc) + "\ncompare" + hex(cc) +
 				      ":\nlda #$0000\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
+			    }
 		    }
 		else if (operator.equals("<="))
 		    {
+			if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("ply\nplx\njsr FloatGtr\ntxa\neor #$0001\npha\n");
+			    }
+			else
+			    {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("pla\nply\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
@@ -130,9 +204,16 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 				      hex(cc) + "\ncompare" + hex(cc) +
 				      ":\nlda #$0001\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
+			    }
 		    }
 		else if (operator.equals(">="))
 		    {
+			if (l.equals(f) || r.equals(f))
+			    {
+				writer.append("plx\nply\njsr FloatGtr\ntxa\neor #$0001\npha\n");
+			    }
+			else
+			    {
 			int cc = compareCount;
 			compareCount++;
 			writer.append("ply\npla\nldx $0000\nsty $0000\ncmp $0000\nbpl compare" +
@@ -140,6 +221,7 @@ class BinaryExpr extends NonTypeCastExpr implements BG {
 				      hex(cc) + "\ncompare" + hex(cc) +
 				      ":\nlda #$0001\nerapmoc" + hex(cc) +
 				      ":\nstx $0000\npha\n");
+			    }
 		    }
 		else if (operator.equals("=="))
 		    {

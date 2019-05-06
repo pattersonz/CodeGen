@@ -35,11 +35,21 @@ class UnaryExpr extends NonTypeCastExpr implements BG {
     public void gen(int extra) throws Exception
     {
 	expression.gen(extra);
+	FullType t = expression.getType(), i = new FullType(new IntType(), false, false);
 	if (operator.equals("~"))
 	    {
 		//pull the value, compare with zero, move processor to ac and mask all but zero flag push value
 		writer.append("pla\ncmp #$0000\nphp\nsep #$20\npla\nand #$02\nlsr a\ntax\nrep #$20\nphx\n");
 	    }
+	else if (operator.equals("-"))
+	    {
+		if (t.equals(i))
+		//this works with the concept of 2s compliment. value is flipped bits, then adding 1
+		    writer.append("pla\neor #$FFFF\ninc a\npha\n");
+		else
+		    writer.append("pla\neor #$8000\npha\n");
+	    }
+	//"+" this character doesn't actually do anything...
     }
 }
 

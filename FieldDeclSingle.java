@@ -50,7 +50,20 @@ class FieldDeclSingle extends FieldDecl implements BG {
 	hash.insert(fieldStart.id, ft, scope, sizeBelow);
 	if (expression != null)
 	    {
-		expression.gen();
+		Expr expr = expression.getExp();
+		FullType e = expr.getType(),  f = new FullType(new FloatType(), false, false);
+		if (ft.equals(f))
+		    {
+			if (e.equals(f))
+			    expr.gen(0);
+			else
+			    {
+				TypeCastExpr tc = new TypeCastExpr(new FloatType(), expr);
+				tc.gen(0);
+			    }
+		    }
+		else
+		    expr.gen(0);
 		writer.append("pla\nldx $0000\nsta $0000, x\n");
 		
 	    }	    

@@ -30,7 +30,19 @@ class AssmntStmt extends NonWhileStmt implements BG {
     
     public void gen(int scope, Integer sizeBelow, String method) throws Exception
     {
-	expression.gen();
+	FullType l = name.getType(), r = expression.getType(),  f = new FullType(new FloatType(), false, false);
+		if (l.equals(f))
+		    {
+			if (r.equals(f))
+			    expression.gen(0);
+			else
+			    {
+				TypeCastExpr tc = new TypeCastExpr(new FloatType(), expression);
+				tc.gen(0);
+			    }
+		    }
+		else
+		    expression.gen(0);
 	name.asnValue();
     }
 }
